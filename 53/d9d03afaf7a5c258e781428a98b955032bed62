@@ -1,0 +1,25 @@
+.gitignore
+  h_94c24d9d37904f 167
+  s_dcf8bfc16663fb::t_570846ae2c7069 168
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.13",
+  "base_commit_sha": "53d9d03afaf7a5c258e781428a98b955032bed62",
+  "prompts": {},
+  "humans": {
+    "h_94c24d9d37904f": {
+      "author": "DiscoverBox <pczhuling@gmail.com>"
+    }
+  },
+  "sessions": {
+    "s_dcf8bfc16663fb": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "019f5ade-3f5b-7d71-8830-3cedce6fdfb7",
+        "model": "gpt-5.6-sol"
+      },
+      "human_author": "DiscoverBox <pczhuling@gmail.com>"
+    }
+  }
+}
