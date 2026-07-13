@@ -1,0 +1,36 @@
+.github/workflows/update-readme-metadata.yml
+  s_2485c8c7c86f50::t_c5e814e1cf8bc6 1-45
+README.md
+  s_2485c8c7c86f50::t_dfa05a0d4a8fdd 89,100,103-104,123-124,129,157
+  s_2485c8c7c86f50::t_c866c13daeb125 87-88,90-91,98-99,101-102,110-112,120-122,125-128,137-145,153-156,158-159
+  s_2485c8c7c86f50::t_935351afda5825 92
+scripts/update_readme_metadata.py
+  s_2485c8c7c86f50::t_039c66d6ff2172 13,47,89-90,101,271-273,278-285,287-288
+  s_2485c8c7c86f50::t_ed78a704451d74 7,12,57-58,60-72,75-88,270,286
+  s_2485c8c7c86f50::t_4879c8a2f45782 1-6,8-11,14-18,20-33,37,39-46,48-56,59,91-100,112-115,119-269,274-277,289-304
+  s_2485c8c7c86f50::t_8b4fd52e0991c4 19,34-36,38,73-74,102-111,116-118
+tests/test_update_readme_metadata.py
+  s_2485c8c7c86f50::t_8b4fd52e0991c4 6,106-114
+  s_2485c8c7c86f50::t_c5e814e1cf8bc6 1-5,7-105,115-121
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.11",
+  "base_commit_sha": "2de831e0c7a2c439338f766b302e64699f01f367",
+  "prompts": {},
+  "humans": {
+    "h_dd1cb0f59c551b": {
+      "author": "DiscoverBox <pczhuling@gmail.com>"
+    }
+  },
+  "sessions": {
+    "s_2485c8c7c86f50": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "019f5a87-c79c-7fe3-8db5-782570661d94",
+        "model": "gpt-5.6-sol"
+      },
+      "human_author": "DiscoverBox <pczhuling@gmail.com>"
+    }
+  }
+}

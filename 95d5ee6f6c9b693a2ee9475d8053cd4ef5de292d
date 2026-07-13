@@ -1,0 +1,12 @@
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.11",
+  "base_commit_sha": "95d5ee6f6c9b693a2ee9475d8053cd4ef5de292d",
+  "prompts": {},
+  "humans": {
+    "h_dd1cb0f59c551b": {
+      "author": "DiscoverBox <pczhuling@gmail.com>"
+    }
+  }
+}

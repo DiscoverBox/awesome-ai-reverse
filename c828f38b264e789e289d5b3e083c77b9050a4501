@@ -1,0 +1,27 @@
+.gitignore
+  h_dd1cb0f59c551b 1-164
+  s_bb85657c7e27e3::t_6b50878d805e8e 165-170
+CLAUDE.md
+  s_bb85657c7e27e3::t_c746b7dd90bfca 1-6
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.11",
+  "base_commit_sha": "c828f38b264e789e289d5b3e083c77b9050a4501",
+  "prompts": {},
+  "humans": {
+    "h_dd1cb0f59c551b": {
+      "author": "DiscoverBox <pczhuling@gmail.com>"
+    }
+  },
+  "sessions": {
+    "s_bb85657c7e27e3": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "307eab02-188d-4c90-b7d5-542600ed9b25",
+        "model": "glm-5.2"
+      },
+      "human_author": "DiscoverBox <pczhuling@gmail.com>"
+    }
+  }
+}

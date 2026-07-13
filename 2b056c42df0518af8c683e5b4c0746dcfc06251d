@@ -1,0 +1,24 @@
+README.md
+  s_bb85657c7e27e3::t_e0bb1db3e7e904 19-21
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.11",
+  "base_commit_sha": "2b056c42df0518af8c683e5b4c0746dcfc06251d",
+  "prompts": {},
+  "humans": {
+    "h_dd1cb0f59c551b": {
+      "author": "DiscoverBox <pczhuling@gmail.com>"
+    }
+  },
+  "sessions": {
+    "s_bb85657c7e27e3": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "307eab02-188d-4c90-b7d5-542600ed9b25",
+        "model": "glm-5.2"
+      },
+      "human_author": "DiscoverBox <pczhuling@gmail.com>"
+    }
+  }
+}
