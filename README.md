@@ -49,6 +49,7 @@ Awesome AI Reverse Engineering 收集 AI 辅助逆向工具，覆盖 JavaScript 
 | 综合型 JS、WASM、AST 和网络分析           | [jshookmcp](https://github.com/vmoranv/jshookmcp)                         |
 | Worker、Webpack、JSVMP 等高级 Web 逆向 | [reverse-skill](https://github.com/715494637/reverse-skill/)                     |
 | 将浏览器加密函数封装成接口                   | [js-reverse-automation--skill](https://github.com/Fausto-404/js-reverse-automation--skill)      |
+| 将网站流量转换为可复用 API 客户端              | [reverse-api-engineer](https://github.com/kalil0321/reverse-api-engineer)              |
 | 强调证据沉淀和本地复现                     | [JSReverser-MCP](https://github.com/NoOne-hub/JSReverser-MCP)                    |
 | 反检测浏览器环境                        | [Camoufox MCP Server](https://github.com/whit3rabbit/camoufox-mcp)               |
 | 微信小程序运行时分析                      | [MiniApp CDP MCP](https://github.com/zhizhuodemao/miniapp-cdp-mcp)                   |
@@ -57,6 +58,7 @@ Awesome AI Reverse Engineering 收集 AI 辅助逆向工具，覆盖 JavaScript 
 | 无头 IDA 服务                       | [ida-mcp-rs](https://github.com/blacktop/ida-mcp-rs)                        |
 | Ghidra AI 集成                    | [GhidraMCP](https://github.com/LaurieWired/GhidraMCP)                         |
 | Binary Ninja AI 集成              | [Binary Ninja MCP](https://github.com/fosdickio/binary_ninja_mcp)                  |
+| x64dbg / x32dbg 动态调试           | [x64dbg-mcp](https://github.com/SetsunaYukiOvO/x64dbg-mcp)                  |
 | 多工具二进制自动化平台                     | [revula](https://github.com/president-xd/revula)                            |
 | Android API 提取和调用链分析            | [Android Reverse Engineering Skill](https://github.com/SimoneAvogadro/android-reverse-engineering-skill) |
 | JADX 内交互式 AI 分析                 | [JADX-AI-MCP](https://github.com/zinja-coder/jadx-ai-mcp)                       |
@@ -107,6 +109,7 @@ Awesome AI Reverse Engineering 收集 AI 辅助逆向工具，覆盖 JavaScript 
 | [ida-mcp-rs](https://github.com/blacktop/ida-mcp-rs) | MCP | Rust 实现的无头 IDA 服务 | 服务端部署、自动化流水线 | Headless IDA Pro MCP Server | 是 · 2026-07-09 | [v9.3.26](https://github.com/blacktop/ida-mcp-rs/releases/tag/v9.3.26) · 2026-07-08 |
 | [GhidraMCP](https://github.com/LaurieWired/GhidraMCP) | Ghidra 插件 / MCP | Ghidra 与 AI 客户端连接 | 反编译、函数分析和符号整理 | MCP Server for Ghidra | 否 · 2025-06-23 | [1.4](https://github.com/LaurieWired/GhidraMCP/releases/tag/1.4) · 2025-06-23 |
 | [Binary Ninja MCP](https://github.com/fosdickio/binary_ninja_mcp) | 插件 / MCP | Binary Ninja AI 桥接 | 多目标二进制实时分析 | A Binary Ninja plugin containing an MCP server that enables seamless integration with your favorite LLM/MCP client. | 否 · 2026-04-05 | [v1.2.1](https://github.com/fosdickio/binary_ninja_mcp/releases/tag/v1.2.1) · 2026-03-22 |
+| [x64dbg-mcp](https://github.com/SetsunaYukiOvO/x64dbg-mcp) | 插件 / MCP | 通过 MCP 远程控制 x64dbg 与 x32dbg | 执行控制、断点、内存、寄存器、反汇编和动态调试自动化 | MCP server plugin for x64dbg debugger - enables AI agents and external tools to control debugging via JSON-RPC 2.0 over HTTP/SSE | 是 · 2026-07-13 | [v1.0.9](https://github.com/SetsunaYukiOvO/x64dbg-mcp/releases/tag/v1.0.9) · 2026-07-13 |
 | [revula](https://github.com/president-xd/revula) | MCP 平台 | 通用逆向工程自动化后端 | 静态分析、动态调试、恶意软件和批量处理 | A fully functional and production-grade reverse engineering MCP Server | 是 · 2026-07-10 | 暂无 |
 | [Rikugan](https://github.com/buzzer-re/Rikugan) | Agent / 插件 | 嵌入 IDA 和 Binary Ninja 的 AI Agent | 在逆向界面中进行连续对话式分析 | A reverse-engineering agent for IDA Pro and Binary Ninja | 是 · 2026-06-15 | [v1.3.2](https://github.com/buzzer-re/Rikugan/releases/tag/v1.3.2) · 2026-06-15 |
 | [reverse-skill](https://github.com/zhaoxuya520/reverse-skill) | Skill / Router | 安全任务和工具链路由 | 多工具编排、CTF、安全研究和报告生成 | Reverse Engineering / Authorized Penetration Testing / Security Research Skill Router Pack AI-powered routing + On-demand toolchain bootstrapping + Self-evolving knowledge base Supports Claude Code, Kiro, Cursor, Cline, and other AI coding clients 逆向/渗透/安全技能路由包 - AI 自动路由 + 按需自举工具链 + 自动进化经验库 &#124; 支持 Claude Code / Kiro / Cursor / Cline 等代码 AI 客户端 | 是 · 2026-07-10 | 暂无 |
@@ -132,6 +135,7 @@ Awesome AI Reverse Engineering 收集 AI 辅助逆向工具，覆盖 JavaScript 
 | 项目 | 形态 | 核心定位 | 适用场景 | GitHub 简介 | 最近更新 | 最新 Release |
 | --- | --- | --- | --- | --- | --- | --- |
 | [DrissionPage MCP](https://github.com/wxhzhwxhzh/DrissionPageMCP) | MCP | 通用浏览器自动化 | 页面操作、DOM 读取、登录和数据采集 | 基于DrissionPage和FastMCP的浏览器自动化MCP服务器，提供丰富的浏览器操作API供AI调用 | 否 · 2026-02-12 | 暂无 |
+| [reverse-api-engineer](https://github.com/kalil0321/reverse-api-engineer) | Agent / CLI | 将网站实际调用的端点生成类型化 API 客户端 | 浏览器流量捕获、接口发现、HAR 分析和 Python/JS/TS 客户端生成 | The agent that turns websites into APIs! | 是 · 2026-07-05 | [v0.10.0](https://github.com/kalil0321/reverse-api-engineer/releases/tag/v0.10.0) · 2026-06-01 |
 | [Camoufox MCP Server](https://github.com/whit3rabbit/camoufox-mcp) | MCP | 反检测和隐私浏览器自动化 | 指纹控制、代理、多会话隔离和真实浏览器环境 | 暂无简介 | 是 · 2026-07-07 | [v2.3.0](https://github.com/whit3rabbit/camoufox-mcp/releases/tag/v2.3.0) · 2026-07-06 |
 | [Charles MCP Server](https://github.com/heizaheiza/Charles-mcp) | MCP | Charles Proxy AI 接入 | 实时流量、历史 Session 和请求分析 | Charles Proxy MCP server for AI agents with live capture, structured traffic analysis, and agent-friendly tool contracts | 是 · 2026-06-23 | [v3.0.3](https://github.com/heizaheiza/Charles-mcp/releases/tag/v3.0.3) · 2026-04-21 |
 | [Anything Analyzer](https://github.com/Mouseww/anything-analyzer) | 桌面工作站 | 一体化协议和逆向分析 | 浏览器、代理、Hook、AI 和 MCP 集成 | 全能协议分析工具：浏览器抓包 + MITM 代理 + 指纹伪装 + AI 分析 + MCP Server 无缝对接 AI Agent/IDE &#124; All-in-one protocol analysis toolkit — built-in browser capture, MITM proxy, JS hooks, fingerprint spoofing, AI analysis & MCP server for agent integration | 是 · 2026-07-13 | [v3.6.52](https://github.com/Mouseww/anything-analyzer/releases/tag/v3.6.52) · 2026-07-13 |
