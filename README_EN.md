@@ -54,6 +54,8 @@ The list includes MCP servers, skills, plugins for IDA Pro, Ghidra, Binary Ninja
 | Turn website traffic into reusable API clients | [reverse-api-engineer](https://github.com/kalil0321/reverse-api-engineer) |
 | Preserve evidence and reproduce algorithms locally | [JSReverser-MCP](https://github.com/NoOne-hub/JSReverser-MCP) |
 | Use an anti-detection browser environment | [Camoufox MCP Server](https://github.com/whit3rabbit/camoufox-mcp) |
+| Decrypt WeChat Mini Program packages and recover source trees | [wxapkg](https://github.com/wux1an/wxapkg) |
+| Enable F12 debugging for Windows WeChat Mini Programs | [zhong-wechat-wmpf-debugger](https://github.com/netz888/zhong-wechat-wmpf-debugger) |
 | Analyze WeChat Mini Program runtimes | [MiniApp CDP MCP](https://github.com/zhizhuodemao/miniapp-cdp-mcp) |
 | Perform real-time AI analysis in IDA Pro | [IDA Pro MCP](https://github.com/mrexodia/ida-pro-mcp) |
 | Export IDA data for analysis by an AI coding tool | [IDA-NO-MCP](https://github.com/P4nda0s/IDA-NO-MCP) |
@@ -82,6 +84,13 @@ The list includes MCP servers, skills, plugins for IDA Pro, Ghidra, Binary Ninja
 | [jshookmcp](https://github.com/vmoranv/jshookmcp) | MCP | Comprehensive AI-assisted JavaScript security analysis | Browser automation, CDP, network monitoring, JS hooking, WASM, source maps, and AST transformations | js hook toolkit that all you need | Yes · 2026-07-13 | None |
 | [JS Reverse MCP](https://github.com/zhizhuodemao/js-reverse-mcp) | MCP | JavaScript debugging in real browser runtimes | Request parameters, dynamic cookies, WebSockets, call chains, and key function tracing | AI Agent-first JS 逆向 MCP Server：有头 Chrome 调试、断点、网络/WebSocket 分析、Patchright 反检测，可选 CloakBrowser。 | Yes · 2026-07-10 | [v4.0.1](https://github.com/zhizhuodemao/js-reverse-mcp/releases/tag/v4.0.1) · 2026-07-10 |
 | [JSReverser-MCP](https://github.com/NoOne-hub/JSReverser-MCP) | MCP / Workflow | Standardized Web reverse engineering workflow | Page inspection, runtime sampling, local reproduction, environment emulation, and evidence preservation | JSReverser-MCP 是一个面向 JavaScript 逆向分析的 MCP 工具，专门用于帮助开发者在真实浏览器环境中高效定位前端核心逻辑。它 将脚本检索、断点调试、函数 Hook、网络请求追踪、调用链分析、混淆还原和风险评估整合为统一能力，可直接接入 Claude、 Codex、Cursor 等支持 MCP 的客户端。你可以连接已开启的 Chrome，在登录态页面下持续采样请求参数与返回数据，快速定位签名、 加密、鉴权和关键业务流程。工具同时支持自动化页面操作与结构化报告导出，适合用于接口分析、安全研究、前端调试与工程排障等 场景 | Yes · 2026-05-31 | [v2.0.4](https://github.com/NoOne-hub/JSReverser-MCP/releases/tag/v2.0.4) · 2026-05-31 |
+
+### WeChat Mini Program Reverse Engineering
+
+| Project | Type | Core Focus | Best For | GitHub Description | Recently Updated | Latest Release |
+| --- | --- | --- | --- | --- | --- | --- |
+| [wxapkg](https://github.com/wux1an/wxapkg) | Desktop Tool | WeChat Mini Program package decryption and unpacking | `.wxapkg` scanning, decryption, unpacking, and source-tree recovery | 跨平台微信小程序反编译 GUI 工具，.wxapkg 文件扫描 + 解密 + 解包工具 | Yes · 2026-04-28 | [v2.0.0](https://github.com/wux1an/wxapkg/releases/tag/v2.0.0) · 2026-04-16 |
+| [zhong-wechat-wmpf-debugger](https://github.com/netz888/zhong-wechat-wmpf-debugger) | Debugging Tool | F12 debugging for Windows WeChat Mini Programs | WMPF version detection, CDP/DevTools bridging, and legacy or modern runtime debugging | WeChatOpenDevTool 微信小程序强制开启开发者工具 | Yes · 2026-07-08 | [v1.2.3](https://github.com/netz888/zhong-wechat-wmpf-debugger/releases/tag/v1.2.3) · 2026-07-08 |
 | [MiniApp CDP MCP](https://github.com/zhizhuodemao/miniapp-cdp-mcp) | MCP | CDP debugging for WeChat Mini Programs | WeChat DevTools, desktop WeChat Mini Programs, runtime code, and request analysis | 微信小程序逆向工程 MCP 服务器，让你的 AI 编码助手（如 Claude、Cursor、Antigravity）能够直接通过 Chrome DevTools Protocol (CDP) 调试和分析微信小程序（包括微信开发者工具或 PC 端微信小程序）中的 JavaScript 代码。 | Yes · 2026-04-22 | None |
 
 ### JavaScript Reverse Engineering Skills
