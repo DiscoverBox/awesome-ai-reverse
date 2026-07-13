@@ -1,11 +1,16 @@
 import unittest
 from datetime import date
+from pathlib import Path
+from tempfile import TemporaryDirectory
+from types import SimpleNamespace
 from unittest.mock import patch
 
 from scripts.update_readme_metadata import (
+    EN_LOCALE,
     GitHubAPIError,
     RepositoryMetadata,
     fetch_repository_metadata,
+    main,
     metadata_cells,
     repositories_in_managed_tables,
     update_readme,
@@ -99,6 +104,83 @@ Outro stays unchanged.
 | [Tool](https://github.com/example/tool/) | MCP | 定位 | 场景 |
 """
         self.assertEqual(repositories_in_managed_tables(content), [("example", "tool")])
+
+    def test_updates_english_project_tables_with_english_statuses(self):
+        original = """| Project | Type | Core Focus | Best For |
+| --- | --- | --- | --- |
+| [Tool](https://github.com/example/tool) | MCP | Analysis | Debugging |
+"""
+        updated, table_count, repository_count = update_readme(
+            original,
+            {("example", "tool"): self.metadata},
+            today=date(2026, 7, 13),
+        )
+
+        self.assertEqual(table_count, 1)
+        self.assertEqual(repository_count, 1)
+        self.assertIn(
+            "| Project | Type | Core Focus | Best For | GitHub Description | Recently Updated | Latest Release |",
+            updated,
+        )
+        self.assertIn("Yes · 2026-06-01", updated)
+
+    def test_english_empty_metadata_values_are_localized(self):
+        metadata = RepositoryMetadata(
+            description="",
+            pushed_at="2026-07-01T00:00:00Z",
+            release_tag=None,
+            release_published_at=None,
+            release_url=None,
+        )
+        description, _, release = metadata_cells(metadata, date(2026, 7, 13), EN_LOCALE)
+        self.assertEqual(description, "No description")
+        self.assertEqual(release, "None")
+
+
+class MultiReadmeUpdateTests(unittest.TestCase):
+    @patch("scripts.update_readme_metadata.fetch_repository_metadata")
+    @patch("scripts.update_readme_metadata.parse_args")
+    def test_main_updates_multiple_readmes_and_fetches_each_repository_once(
+        self, parse_args_mock, fetch_metadata_mock
+    ):
+        fetch_metadata_mock.return_value = RepositoryMetadata(
+            description="Description",
+            pushed_at="2026-07-01T00:00:00Z",
+            release_tag=None,
+            release_published_at=None,
+            release_url=None,
+        )
+
+        with TemporaryDirectory() as directory:
+            chinese_readme = Path(directory) / "README.md"
+            english_readme = Path(directory) / "README_EN.md"
+            chinese_readme.write_text(
+                """| 项目 | 形态 | 核心定位 | 适用场景 |
+| --- | --- | --- | --- |
+| [Shared](https://github.com/example/shared) | MCP | 定位 | 场景 |
+| [Chinese](https://github.com/example/chinese) | MCP | 定位 | 场景 |
+""",
+                encoding="utf-8",
+            )
+            english_readme.write_text(
+                """| Project | Type | Core Focus | Best For |
+| --- | --- | --- | --- |
+| [Shared](https://github.com/example/shared) | MCP | Focus | Usage |
+| [English](https://github.com/example/english) | MCP | Focus | Usage |
+""",
+                encoding="utf-8",
+            )
+            parse_args_mock.return_value = SimpleNamespace(
+                readmes=[chinese_readme, english_readme],
+                api_base="https://api.github.com",
+                today=date(2026, 7, 13),
+            )
+
+            self.assertEqual(main(), 0)
+
+            self.assertEqual(fetch_metadata_mock.call_count, 3)
+            self.assertIn("是 · 2026-07-01", chinese_readme.read_text(encoding="utf-8"))
+            self.assertIn("Yes · 2026-07-01", english_readme.read_text(encoding="utf-8"))
 
 
 class GitHubFetchTests(unittest.TestCase):

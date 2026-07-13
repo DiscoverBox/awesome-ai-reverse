@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Update GitHub repository metadata in the curated README tables."""
+"""Update GitHub repository metadata in the Chinese and English README tables."""
 
 from __future__ import annotations
 
@@ -20,8 +20,36 @@ from urllib.parse import quote
 from urllib.request import Request, urlopen
 
 
-BASE_HEADERS = ("项目", "形态", "核心定位", "适用场景")
-METADATA_HEADERS = ("GitHub 简介", "最近更新", "最新 Release")
+@dataclass(frozen=True)
+class TableLocale:
+    base_headers: tuple[str, ...]
+    metadata_headers: tuple[str, ...]
+    active: str
+    inactive: str
+    no_description: str
+    no_release: str
+    fetch_failed: str
+
+
+ZH_LOCALE = TableLocale(
+    base_headers=("项目", "形态", "核心定位", "适用场景"),
+    metadata_headers=("GitHub 简介", "最近更新", "最新 Release"),
+    active="是",
+    inactive="否",
+    no_description="暂无简介",
+    no_release="暂无",
+    fetch_failed="获取失败",
+)
+EN_LOCALE = TableLocale(
+    base_headers=("Project", "Type", "Core Focus", "Best For"),
+    metadata_headers=("GitHub Description", "Recently Updated", "Latest Release"),
+    active="Yes",
+    inactive="No",
+    no_description="No description",
+    no_release="None",
+    fetch_failed="Fetch failed",
+)
+TABLE_LOCALES = (ZH_LOCALE, EN_LOCALE)
 ACTIVE_DAYS = 90
 GITHUB_REPOSITORY_RE = re.compile(
     r"https://github\.com/(?P<owner>[A-Za-z0-9_.-]+)/(?P<repo>[A-Za-z0-9_.-]+?)(?:/)?(?=[)#\s|]|$)"
@@ -111,7 +139,7 @@ def fetch_repository_metadata(
         release = None
 
     return RepositoryMetadata(
-        description=repository.get("description") or "暂无简介",
+        description=repository.get("description") or "",
         pushed_at=repository["pushed_at"],
         release_tag=release.get("tag_name") if release else None,
         release_published_at=release.get("published_at") if release else None,
@@ -145,20 +173,32 @@ def iso_date(timestamp: str) -> date:
     return datetime.fromisoformat(timestamp.replace("Z", "+00:00")).astimezone(timezone.utc).date()
 
 
-def metadata_cells(metadata: RepositoryMetadata, today: date) -> tuple[str, str, str]:
+def table_locale(cells: list[str]) -> TableLocale | None:
+    for locale in TABLE_LOCALES:
+        if tuple(cells[: len(locale.base_headers)]) == locale.base_headers:
+            return locale
+    return None
+
+
+def metadata_cells(
+    metadata: RepositoryMetadata,
+    today: date,
+    locale: TableLocale = ZH_LOCALE,
+) -> tuple[str, str, str]:
     pushed_on = iso_date(metadata.pushed_at)
     age = (today - pushed_on).days
     recently_updated = age <= ACTIVE_DAYS
-    activity = f"{'是' if recently_updated else '否'} · {pushed_on.isoformat()}"
+    activity = f"{locale.active if recently_updated else locale.inactive} · {pushed_on.isoformat()}"
 
     if metadata.release_tag and metadata.release_url and metadata.release_published_at:
         tag = sanitize_cell(metadata.release_tag)
         release_on = iso_date(metadata.release_published_at).isoformat()
         release = f"[{tag}]({metadata.release_url}) · {release_on}"
     else:
-        release = "暂无"
+        release = locale.no_release
 
-    return sanitize_cell(metadata.description), activity, release
+    description = metadata.description or locale.no_description
+    return sanitize_cell(description), activity, release
 
 
 def update_readme(
@@ -169,7 +209,7 @@ def update_readme(
 ) -> tuple[str, int, int]:
     lines = content.splitlines(keepends=True)
     output: list[str] = []
-    in_managed_table = False
+    current_locale: TableLocale | None = None
     expect_separator = False
     table_count = 0
     repository_count = 0
@@ -179,45 +219,56 @@ def update_readme(
         line = original_line.rstrip("\r\n")
         cells = parse_markdown_row(line)
 
-        if cells and tuple(cells[: len(BASE_HEADERS)]) == BASE_HEADERS:
-            if len(cells) not in (len(BASE_HEADERS), len(BASE_HEADERS) + len(METADATA_HEADERS)):
+        locale = table_locale(cells) if cells else None
+        if locale:
+            base_count = len(locale.base_headers)
+            metadata_count = len(locale.metadata_headers)
+            if len(cells) not in (base_count, base_count + metadata_count):
                 raise ValueError(f"Unexpected project table header: {line}")
-            output.append(render_markdown_row((*BASE_HEADERS, *METADATA_HEADERS)) + newline)
-            in_managed_table = True
+            output.append(
+                render_markdown_row((*locale.base_headers, *locale.metadata_headers)) + newline
+            )
+            current_locale = locale
             expect_separator = True
             table_count += 1
             continue
 
-        if in_managed_table and expect_separator:
+        if current_locale and expect_separator:
+            base_count = len(current_locale.base_headers)
+            metadata_count = len(current_locale.metadata_headers)
             if not cells or len(cells) not in (
-                len(BASE_HEADERS),
-                len(BASE_HEADERS) + len(METADATA_HEADERS),
+                base_count,
+                base_count + metadata_count,
             ):
                 raise ValueError("Project table header is not followed by a valid separator row")
-            output.append(render_markdown_row(["---"] * (len(BASE_HEADERS) + len(METADATA_HEADERS))) + newline)
+            output.append(
+                render_markdown_row(["---"] * (base_count + metadata_count)) + newline
+            )
             expect_separator = False
             continue
 
-        if in_managed_table:
+        if current_locale:
             if not cells:
-                in_managed_table = False
+                current_locale = None
             else:
+                base_count = len(current_locale.base_headers)
+                metadata_count = len(current_locale.metadata_headers)
                 repository = parse_github_repository(line)
                 if repository:
                     if len(cells) not in (
-                        len(BASE_HEADERS),
-                        len(BASE_HEADERS) + len(METADATA_HEADERS),
+                        base_count,
+                        base_count + metadata_count,
                     ):
                         raise ValueError(f"Unexpected project table row: {line}")
                     metadata = metadata_by_repository.get(repository)
                     if metadata:
-                        managed_cells = metadata_cells(metadata, today)
-                    elif len(cells) == len(BASE_HEADERS) + len(METADATA_HEADERS):
-                        managed_cells = tuple(cells[-len(METADATA_HEADERS) :])
+                        managed_cells = metadata_cells(metadata, today, current_locale)
+                    elif len(cells) == base_count + metadata_count:
+                        managed_cells = tuple(cells[-metadata_count:])
                     else:
-                        managed_cells = ("获取失败", "获取失败", "获取失败")
+                        managed_cells = (current_locale.fetch_failed,) * metadata_count
                     output.append(
-                        render_markdown_row([*cells[: len(BASE_HEADERS)], *managed_cells]) + newline
+                        render_markdown_row([*cells[:base_count], *managed_cells]) + newline
                     )
                     repository_count += 1
                     continue
@@ -233,7 +284,7 @@ def repositories_in_managed_tables(content: str) -> list[tuple[str, str]]:
 
     for line in content.splitlines():
         cells = parse_markdown_row(line)
-        if cells and tuple(cells[: len(BASE_HEADERS)]) == BASE_HEADERS:
+        if cells and table_locale(cells):
             in_managed_table = True
             continue
         if in_managed_table and not cells:
@@ -248,9 +299,14 @@ def repositories_in_managed_tables(content: str) -> list[tuple[str, str]]:
 
 
 def parse_args() -> argparse.Namespace:
-    root = Path(__file__).resolve().parents[1]
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--readme", type=Path, default=root / "README.md")
+    parser.add_argument(
+        "--readme",
+        dest="readmes",
+        action="append",
+        type=Path,
+        help="README to update; repeat for multiple files (defaults to README.md and README_EN.md)",
+    )
     parser.add_argument("--api-base", default="https://api.github.com")
     parser.add_argument("--today", type=date.fromisoformat, default=date.today())
     return parser.parse_args()
@@ -258,8 +314,14 @@ def parse_args() -> argparse.Namespace:
 
 def main() -> int:
     args = parse_args()
-    content = args.readme.read_text(encoding="utf-8")
-    repositories = repositories_in_managed_tables(content)
+    root = Path(__file__).resolve().parents[1]
+    readmes = args.readmes or [root / "README.md", root / "README_EN.md"]
+    contents = {readme: readme.read_text(encoding="utf-8") for readme in readmes}
+    repositories: list[tuple[str, str]] = []
+    for content in contents.values():
+        for repository in repositories_in_managed_tables(content):
+            if repository not in repositories:
+                repositories.append(repository)
     if not repositories:
         print("No GitHub repositories found in managed project tables", file=sys.stderr)
         return 1
@@ -287,13 +349,23 @@ def main() -> int:
                 failures.append(f"{owner}/{repo}: {error}")
                 print(f"Warning: {failures[-1]}", file=sys.stderr, flush=True)
 
-    updated, table_count, repository_count = update_readme(
-        content,
-        metadata_by_repository,
-        today=args.today,
+    total_table_count = 0
+    total_repository_count = 0
+    for readme, content in contents.items():
+        updated, table_count, repository_count = update_readme(
+            content,
+            metadata_by_repository,
+            today=args.today,
+        )
+        readme.write_text(updated, encoding="utf-8")
+        total_table_count += table_count
+        total_repository_count += repository_count
+        print(f"Updated {readme}: {repository_count} rows across {table_count} tables")
+
+    print(
+        f"Updated {total_repository_count} rows across {total_table_count} tables "
+        f"in {len(readmes)} README files"
     )
-    args.readme.write_text(updated, encoding="utf-8")
-    print(f"Updated {repository_count} rows across {table_count} tables")
 
     if failures:
         print(f"Completed with {len(failures)} repository fetch failure(s)", file=sys.stderr)

@@ -4,6 +4,8 @@
 
 AI 辅助逆向工程工具、MCP、Skill 与 Agent 清单
 
+简体中文 | [English](README_EN.md)
+
 [![Awesome](https://awesome.re/badge.svg)](https://awesome.re)
 ![License](https://img.shields.io/badge/license-MIT-blue.svg)
 
