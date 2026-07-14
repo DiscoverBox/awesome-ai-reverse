@@ -1,0 +1,36 @@
+tests/test_update_readme_metadata.py
+  s_acf9dfc6509da7::t_3720b8479a6783 862-884
+  s_acf9dfc6509da7::t_fe3b1bd276c9fd 364-365
+  s_acf9dfc6509da7::t_0edb4df0fc2584 546-861,885-926
+scripts/update_readme_metadata.py
+  s_acf9dfc6509da7::t_12d0240cb7854b 239-271,273-281
+  s_acf9dfc6509da7::t_89fd8c0feadb6f 654-659
+  s_acf9dfc6509da7::t_c5add35f9ec363 338,348-350,354,359-360,362,364-367,372,374,376-378
+  s_acf9dfc6509da7::t_5ddecf925be71c 403,411,424,433-435
+  s_acf9dfc6509da7::t_3695ec19712593 574-576,585,588-590
+  s_acf9dfc6509da7::t_4f8c46b2663b9b 474,479-536
+  s_acf9dfc6509da7::t_d28e153204ac61 446
+  s_acf9dfc6509da7::t_a38a155644f5a4 475-478
+  s_acf9dfc6509da7::t_5ce2f505cfef01 436
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.13",
+  "base_commit_sha": "e7f7cd7435d22ddc81950fba44d72c18bb3156d8",
+  "prompts": {},
+  "humans": {
+    "h_94c24d9d37904f": {
+      "author": "DiscoverBox <pczhuling@gmail.com>"
+    }
+  },
+  "sessions": {
+    "s_acf9dfc6509da7": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "4f4dc4b8-b2f5-431f-9402-c52ccfc6206e",
+        "model": "glm-5.2"
+      },
+      "human_author": "DiscoverBox <pczhuling@gmail.com>"
+    }
+  }
+}
