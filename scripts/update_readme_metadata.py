@@ -236,10 +236,49 @@ def iso_date(timestamp: str) -> date:
     return datetime.fromisoformat(timestamp.replace("Z", "+00:00")).astimezone(timezone.utc).date()
 
 
-def table_locale(cells: list[str]) -> TableLocale | None:
+SEPARATOR_CELL_RE = re.compile(r"^:?-+:?$")
+
+
+def is_separator_row(cells: list[str], expected_count: int) -> bool:
+    """True if *cells* is a valid GFM separator row of *expected_count* columns."""
+    return bool(cells) and len(cells) == expected_count and all(
+        SEPARATOR_CELL_RE.fullmatch(cell) for cell in cells
+    )
+
+
+@dataclass(frozen=True)
+class ManagedTableHeader:
+    """A recognized managed-table header and its input column count.
+
+    source_column_count is the count of the *input* header row (4 for a base
+    header being extended, 7 for an already-extended full header). The
+    separator that follows must match this count.
+    """
+
+    locale: TableLocale
+    source_column_count: int
+
+
+def parse_managed_table_header(
+    cells: list[str],
+) -> ManagedTableHeader | None:
+    """Recognize a managed project-table header.
+
+    Returns a header for an exact base (4-col) or full (7-col) match, None for
+    a non-managed table, and raises ValueError when the base columns match but
+    the trailing columns are not the managed metadata columns (a schema
+    conflict that must not be silently rewritten).
+    """
     for locale in TABLE_LOCALES:
-        if tuple(cells[: len(locale.base_headers)]) == locale.base_headers:
-            return locale
+        base = locale.base_headers
+        if len(cells) < len(base) or tuple(cells[: len(base)]) != base:
+            continue
+        full = (*base, *locale.metadata_headers)
+        if tuple(cells) == base:
+            return ManagedTableHeader(locale, len(base))
+        if tuple(cells) == full:
+            return ManagedTableHeader(locale, len(full))
+        raise ValueError("Unexpected columns in managed project table header")
     return None
 
 
@@ -296,7 +335,7 @@ def update_readme(
 ) -> tuple[str, int, int]:
     lines = content.splitlines(keepends=True)
     output: list[str] = []
-    current_locale: TableLocale | None = None
+    current_header: ManagedTableHeader | None = None
     expect_separator = False
     table_count = 0
     repository_count = 0
@@ -306,40 +345,37 @@ def update_readme(
         line = original_line.rstrip("\r\n")
         cells = parse_markdown_row(line)
 
-        locale = table_locale(cells) if cells else None
-        if locale:
-            base_count = len(locale.base_headers)
-            metadata_count = len(locale.metadata_headers)
-            if len(cells) not in (base_count, base_count + metadata_count):
-                raise ValueError(f"Unexpected project table header: {line}")
+        header = parse_managed_table_header(cells) if cells else None
+        if header:
+            locale = header.locale
             output.append(
                 render_markdown_row((*locale.base_headers, *locale.metadata_headers)) + newline
             )
-            current_locale = locale
+            current_header = header
             expect_separator = True
             table_count += 1
             continue
 
-        if current_locale and expect_separator:
-            base_count = len(current_locale.base_headers)
-            metadata_count = len(current_locale.metadata_headers)
-            if not cells or len(cells) not in (
-                base_count,
-                base_count + metadata_count,
-            ):
+        if current_header and expect_separator:
+            if not is_separator_row(cells, current_header.source_column_count):
                 raise ValueError("Project table header is not followed by a valid separator row")
+            locale = current_header.locale
             output.append(
-                render_markdown_row(["---"] * (base_count + metadata_count)) + newline
+                render_markdown_row(
+                    ["---"] * (len(locale.base_headers) + len(locale.metadata_headers))
+                )
+                + newline
             )
             expect_separator = False
             continue
 
-        if current_locale:
+        if current_header:
             if not cells:
-                current_locale = None
+                current_header = None
             else:
-                base_count = len(current_locale.base_headers)
-                metadata_count = len(current_locale.metadata_headers)
+                locale = current_header.locale
+                base_count = len(locale.base_headers)
+                metadata_count = len(locale.metadata_headers)
                 repository = parse_github_repository(line)
                 if repository:
                     if len(cells) not in (
@@ -364,7 +400,7 @@ def update_readme(
                         RepositoryStatus.ARCHIVED,
                         RepositoryStatus.REMOVED,
                     ):
-                        managed_cells = deprecated_cells(current_locale)
+                        managed_cells = deprecated_cells(locale)
                     elif metadata:
                         previous_release = (
                             cells[-1]
@@ -372,7 +408,7 @@ def update_readme(
                             else None
                         )
                         managed_cells = metadata_cells(
-                            metadata, today, current_locale, previous_release
+                            metadata, today, locale, previous_release
                         )
                     elif len(cells) == base_count + metadata_count:
                         # Transient fetch failure (rate limit / network / 5xx):
@@ -385,7 +421,7 @@ def update_readme(
                             previous[0] = "⚠️ " + previous[0]
                         managed_cells = tuple(previous)
                     else:
-                        managed_cells = (current_locale.fetch_failed,) * metadata_count
+                        managed_cells = (locale.fetch_failed,) * metadata_count
                     output.append(
                         render_markdown_row([*base_cells, *managed_cells]) + newline
                     )
@@ -393,6 +429,10 @@ def update_readme(
                     continue
 
         output.append(original_line)
+
+    if expect_separator:
+        # The file ended right after a header with no separator row.
+        raise ValueError("Project table header is not followed by a valid separator row")
 
     return "".join(output), table_count, repository_count
 
@@ -403,7 +443,7 @@ def repositories_in_managed_tables(content: str) -> list[tuple[str, str]]:
 
     for line in content.splitlines():
         cells = parse_markdown_row(line)
-        if cells and table_locale(cells):
+        if cells and parse_managed_table_header(cells):
             in_managed_table = True
             continue
         if in_managed_table and not cells:
@@ -429,6 +469,69 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--api-base", default="https://api.github.com")
     parser.add_argument("--today", type=date.fromisoformat, default=date.today())
     return parser.parse_args()
+
+
+def _sanitize_summary_text(value: str) -> str:
+    """Collapse newlines and replace backticks so a message survives being
+    wrapped in a Markdown inline-code span (backslash escapes do not work
+    inside code spans, so backticks are replaced with single quotes)."""
+    return value.replace("\r", " ").replace("\n", " ").replace("`", "'")
+
+
+def write_step_summary(
+    *,
+    moved_repos: list[tuple[str, str]],
+    failures: list[str],
+    release_failed_repos: list[tuple[str, str]],
+    deprecated_repos: list[tuple[tuple[str, str], "RepositoryMetadata"]],
+) -> None:
+    """Append a structured run summary to GITHUB_STEP_SUMMARY.
+
+    No-op when nothing happened or no summary path is configured. Write errors
+    are surfaced as a warning and never raise — the README update result must
+    not depend on summary writability.
+    """
+    summary_path = os.environ.get("GITHUB_STEP_SUMMARY")
+    if not summary_path:
+        return
+    if not (moved_repos or failures or release_failed_repos or deprecated_repos):
+        return
+
+    sections: list[str] = ["### README repository metadata update", ""]
+    if failures:
+        sections.append("#### Repository fetch failures")
+        for failure in failures:
+            slug, _, message = failure.partition(": ")
+            sections.append(
+                f"- `{_sanitize_summary_text(slug)}` — `{_sanitize_summary_text(message)}`"
+            )
+        sections.append("")
+    if release_failed_repos:
+        sections.append("#### Release fetch failures")
+        for owner, repo in release_failed_repos:
+            sections.append(f"- `{owner}/{repo}` — previous release retained")
+        sections.append("")
+    if moved_repos:
+        sections.append("#### Moved repositories")
+        for owner, repo in moved_repos:
+            sections.append(f"- `{owner}/{repo}` — repository URL rewritten")
+        sections.append("")
+    if deprecated_repos:
+        sections.append("#### Deprecated repositories")
+        for (owner, repo), metadata in deprecated_repos:
+            label = (
+                "archived"
+                if metadata.status is RepositoryStatus.ARCHIVED
+                else "removed"
+            )
+            sections.append(f"- `{owner}/{repo}` — {label}")
+        sections.append("")
+
+    try:
+        with Path(summary_path).open("a", encoding="utf-8") as summary:
+            summary.write("\n".join(sections) + "\n")
+    except OSError as error:
+        print(f"Warning: could not write step summary: {error}", file=sys.stderr)
 
 
 def main() -> int:
@@ -468,6 +571,9 @@ def main() -> int:
                 failures.append(f"{owner}/{repo}: {error}")
                 print(f"Warning: {failures[-1]}", file=sys.stderr, flush=True)
 
+    # Generate every README before writing any of them, so a validation
+    # failure in one file cannot leave another already written to disk.
+    pending_updates: dict[Path, tuple[str, int, int]] = {}
     total_table_count = 0
     total_repository_count = 0
     for readme, content in contents.items():
@@ -476,9 +582,12 @@ def main() -> int:
             metadata_by_repository,
             today=args.today,
         )
-        readme.write_text(updated, encoding="utf-8")
+        pending_updates[readme] = (updated, table_count, repository_count)
         total_table_count += table_count
         total_repository_count += repository_count
+
+    for readme, (updated, table_count, repository_count) in pending_updates.items():
+        readme.write_text(updated, encoding="utf-8")
         print(f"Updated {readme}: {repository_count} rows across {table_count} tables")
 
     print(
@@ -542,23 +651,12 @@ def main() -> int:
             )
             print(f"  - {owner}/{repo} ({label})", file=sys.stderr)
 
-        summary_path = os.environ.get("GITHUB_STEP_SUMMARY")
-        if summary_path:
-            lines = ["### Deprecated repositories detected", ""]
-            for (owner, repo), metadata in deprecated_repos:
-                label = (
-                    "archived"
-                    if metadata.status is RepositoryStatus.ARCHIVED
-                    else "removed"
-                )
-                lines.append(f"- `{owner}/{repo}` — {label}")
-            lines.append("")
-            lines.append(
-                "Rows are marked with 🗄️ in the README. Review and prune as needed."
-            )
-            Path(summary_path).write_text(
-                "\n".join(lines) + "\n", encoding="utf-8"
-            )
+    write_step_summary(
+        moved_repos=moved_repos,
+        failures=failures,
+        release_failed_repos=release_failed_repos,
+        deprecated_repos=deprecated_repos,
+    )
 
     return 0
 
