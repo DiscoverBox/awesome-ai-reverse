@@ -1,0 +1,32 @@
+scripts/update_readme_metadata.py
+  s_9ed9aeaaf129b9::t_aed83d3d57f399 89-93
+  s_9ed9aeaaf129b9::t_94578b5c3f5478 499-503,522-529
+  s_9ed9aeaaf129b9::t_0e0854eb480e9e 369-376
+  s_9ed9aeaaf129b9::t_fe8fb26f9275aa 177-200,209
+  s_9ed9aeaaf129b9::t_0bc32cbca4812b 250,257-262
+  s_9ed9aeaaf129b9::t_3bf6eb0b134df6 530
+tests/test_update_readme_metadata.py
+  s_9ed9aeaaf129b9::t_744e5c420ed0ff 519-522
+  s_9ed9aeaaf129b9::t_2bb3a93c18b4c5 421-423,436-438,455-518,523-542
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.13",
+  "base_commit_sha": "ba14849afcc7e4e27060d1ef0d365de3a9d229dd",
+  "prompts": {},
+  "humans": {
+    "h_94c24d9d37904f": {
+      "author": "DiscoverBox <pczhuling@gmail.com>"
+    }
+  },
+  "sessions": {
+    "s_9ed9aeaaf129b9": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "011e7919-b6e9-4a44-9415-e4f2b3ab86de",
+        "model": "glm-5.2"
+      },
+      "human_author": "DiscoverBox <pczhuling@gmail.com>"
+    }
+  }
+}
