@@ -30,6 +30,7 @@ class ReadmeUpdateTests(unittest.TestCase):
             release_tag="v1.2.3",
             release_published_at="2026-05-20T08:30:00Z",
             release_url="https://github.com/example/tool/releases/tag/v1.2.3",
+            stargazers_count=1234,
         )
 
     def test_updates_only_project_tables(self):
@@ -57,12 +58,13 @@ Outro stays unchanged.
         self.assertIn("Outro stays unchanged.", updated)
         self.assertIn("| Test | Tool |", updated)
         self.assertIn(
-            "| 项目 | 形态 | 核心定位 | 适用场景 | GitHub 简介 | 最近更新 | 最新 Release |",
+            "| 项目 | 形态 | 核心定位 | 适用场景 | GitHub 简介 | 最近更新 | 最新 Release | Stars |",
             updated,
         )
         self.assertIn("A tool &#124; for reverse engineering", updated)
         self.assertIn("是 · 2026-06-01", updated)
         self.assertIn("[v1.2.3](https://github.com/example/tool/releases/tag/v1.2.3) · 2026-05-20", updated)
+        self.assertIn("| 1234 |", updated)
 
     def test_second_update_is_idempotent(self):
         original = """| 项目 | 形态 | 核心定位 | 适用场景 |
@@ -91,6 +93,7 @@ Outro stays unchanged.
         # flags the description cell with a warning prefix.
         self.assertIn("⚠️ Old description", updated)
         self.assertIn("否 · 2020-01-01", updated)
+        self.assertIn("| 暂无 | 获取失败 |", updated)
 
     def test_transfetch_failure_prefix_does_not_accumulate(self):
         # Running the updater twice on a transiently-failing row must not stack
@@ -120,9 +123,10 @@ Outro stays unchanged.
             release_published_at=None,
             release_url=None,
         )
-        _, activity, release = metadata_cells(metadata, date(2026, 7, 13))
+        _, activity, release, stars = metadata_cells(metadata, date(2026, 7, 13))
         self.assertEqual(activity, "否 · 2026-04-13")
         self.assertEqual(release, "暂无")
+        self.assertEqual(stars, "获取失败")
 
     def test_discovers_only_repositories_in_project_tables(self):
         content = """[Outside](https://github.com/outside/repo)
@@ -147,10 +151,11 @@ Outro stays unchanged.
         self.assertEqual(table_count, 1)
         self.assertEqual(repository_count, 1)
         self.assertIn(
-            "| Project | Type | Core Focus | Best For | GitHub Description | Recently Updated | Latest Release |",
+            "| Project | Type | Core Focus | Best For | GitHub Description | Recently Updated | Latest Release | Stars |",
             updated,
         )
         self.assertIn("Yes · 2026-06-01", updated)
+        self.assertIn("| 1234 |", updated)
 
     def test_english_empty_metadata_values_are_localized(self):
         metadata = RepositoryMetadata(
@@ -160,9 +165,25 @@ Outro stays unchanged.
             release_published_at=None,
             release_url=None,
         )
-        description, _, release = metadata_cells(metadata, date(2026, 7, 13), EN_LOCALE)
+        description, _, release, stars = metadata_cells(
+            metadata, date(2026, 7, 13), EN_LOCALE
+        )
         self.assertEqual(description, "No description")
         self.assertEqual(release, "None")
+        self.assertEqual(stars, "Fetch failed")
+
+    def test_legacy_metadata_table_is_migrated_with_star_count(self):
+        original = """| 项目 | 形态 | 核心定位 | 适用场景 | GitHub 简介 | 最近更新 | 最新 Release |
+| --- | --- | --- | --- | --- | --- | --- |
+| [Tool](https://github.com/example/tool) | MCP | 人工定位 | 人工场景 | Old description | 否 · 2020-01-01 | 暂无 |
+"""
+        updated, _, _ = update_readme(
+            original, {("example", "tool"): self.metadata}, today=date(2026, 7, 13)
+        )
+
+        self.assertIn("最新 Release | Stars |", updated)
+        self.assertIn("| 1234 |", updated)
+        self.assertEqual(updated.count("Stars"), 1)
 
     def test_archived_repository_is_marked_deprecated(self):
         metadata = RepositoryMetadata(
@@ -375,12 +396,14 @@ class GitHubFetchTests(unittest.TestCase):
                 "description": "Tool",
                 "full_name": "example/tool",
                 "pushed_at": "2026-07-01T00:00:00Z",
+                "stargazers_count": 321,
             },
             GitHubAPIError("Not Found", status=404),
         ]
         metadata = fetch_repository_metadata("example", "tool")
         self.assertEqual(metadata.description, "Tool")
         self.assertIsNone(metadata.release_tag)
+        self.assertEqual(metadata.stargazers_count, 321)
 
     @patch("scripts.update_readme_metadata.github_request")
     def test_missing_repository_is_reported_as_removed(self, request):

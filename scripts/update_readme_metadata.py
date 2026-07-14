@@ -34,6 +34,7 @@ class RepositoryStatus(Enum):
 class TableLocale:
     base_headers: tuple[str, ...]
     metadata_headers: tuple[str, ...]
+    legacy_metadata_headers: tuple[str, ...]
     active: str
     inactive: str
     no_description: str
@@ -44,7 +45,8 @@ class TableLocale:
 
 ZH_LOCALE = TableLocale(
     base_headers=("项目", "形态", "核心定位", "适用场景"),
-    metadata_headers=("GitHub 简介", "最近更新", "最新 Release"),
+    metadata_headers=("GitHub 简介", "最近更新", "最新 Release", "Stars"),
+    legacy_metadata_headers=("GitHub 简介", "最近更新", "最新 Release"),
     active="是",
     inactive="否",
     no_description="暂无简介",
@@ -54,7 +56,8 @@ ZH_LOCALE = TableLocale(
 )
 EN_LOCALE = TableLocale(
     base_headers=("Project", "Type", "Core Focus", "Best For"),
-    metadata_headers=("GitHub Description", "Recently Updated", "Latest Release"),
+    metadata_headers=("GitHub Description", "Recently Updated", "Latest Release", "Stars"),
+    legacy_metadata_headers=("GitHub Description", "Recently Updated", "Latest Release"),
     active="Yes",
     inactive="No",
     no_description="No description",
@@ -84,6 +87,7 @@ class RepositoryMetadata:
     release_tag: str | None
     release_published_at: str | None
     release_url: str | None
+    stargazers_count: int | None = None
     status: RepositoryStatus = RepositoryStatus.ACTIVE
     new_full_name: str | None = None
     # True when the release endpoint failed transiently (5xx / rate limit /
@@ -204,6 +208,7 @@ def fetch_repository_metadata(
         release_tag=release.get("tag_name") if release else None,
         release_published_at=release.get("published_at") if release else None,
         release_url=release.get("html_url") if release else None,
+        stargazers_count=repository.get("stargazers_count"),
         status=status,
         new_full_name=full_name if moved else None,
         release_fetch_failed=release_fetch_failed,
@@ -251,8 +256,8 @@ class ManagedTableHeader:
     """A recognized managed-table header and its input column count.
 
     source_column_count is the count of the *input* header row (4 for a base
-    header being extended, 7 for an already-extended full header). The
-    separator that follows must match this count.
+    header being extended, 7 for the legacy metadata schema, or 8 for the
+    current schema). The separator that follows must match this count.
     """
 
     locale: TableLocale
@@ -264,9 +269,9 @@ def parse_managed_table_header(
 ) -> ManagedTableHeader | None:
     """Recognize a managed project-table header.
 
-    Returns a header for an exact base (4-col) or full (7-col) match, None for
-    a non-managed table, and raises ValueError when the base columns match but
-    the trailing columns are not the managed metadata columns (a schema
+    Returns a header for an exact base, legacy, or current schema match, None
+    for a non-managed table, and raises ValueError when the base columns match
+    but the trailing columns are not managed metadata columns (a schema
     conflict that must not be silently rewritten).
     """
     for locale in TABLE_LOCALES:
@@ -274,10 +279,13 @@ def parse_managed_table_header(
         if len(cells) < len(base) or tuple(cells[: len(base)]) != base:
             continue
         full = (*base, *locale.metadata_headers)
+        legacy_full = (*base, *locale.legacy_metadata_headers)
         if tuple(cells) == base:
             return ManagedTableHeader(locale, len(base))
         if tuple(cells) == full:
             return ManagedTableHeader(locale, len(full))
+        if tuple(cells) == legacy_full:
+            return ManagedTableHeader(locale, len(legacy_full))
         raise ValueError("Unexpected columns in managed project table header")
     return None
 
@@ -287,7 +295,7 @@ def metadata_cells(
     today: date,
     locale: TableLocale = ZH_LOCALE,
     previous_release: str | None = None,
-) -> tuple[str, str, str]:
+) -> tuple[str, str, str, str]:
     pushed_on = iso_date(metadata.pushed_at)
     age = (today - pushed_on).days
     recently_updated = age <= ACTIVE_DAYS
@@ -306,17 +314,30 @@ def metadata_cells(
         release = locale.no_release
 
     description = metadata.description or locale.no_description
-    return sanitize_cell(description), activity, release
+    stars = (
+        str(metadata.stargazers_count)
+        if metadata.stargazers_count is not None
+        else locale.fetch_failed
+    )
+    return sanitize_cell(description), activity, release, stars
 
 
-def deprecated_cells(locale: TableLocale = ZH_LOCALE) -> tuple[str, str, str]:
+def deprecated_cells(
+    metadata: RepositoryMetadata,
+    locale: TableLocale = ZH_LOCALE,
+) -> tuple[str, str, str, str]:
     """Render cells for a repository that is archived or removed (hard-deprecated).
 
     Old metadata is intentionally cleared so reviewers are forced to re-check the
     entry instead of trusting possibly-stale values.
     """
     marker = f"🗄️ {locale.deprecated}"
-    return marker, locale.deprecated, locale.no_release
+    stars = (
+        str(metadata.stargazers_count)
+        if metadata.stargazers_count is not None
+        else "—"
+    )
+    return marker, locale.deprecated, locale.no_release, stars
 
 
 def replace_repository_url(cell: str, old: tuple[str, str], new_full_name: str) -> str:
@@ -376,11 +397,12 @@ def update_readme(
                 locale = current_header.locale
                 base_count = len(locale.base_headers)
                 metadata_count = len(locale.metadata_headers)
+                source_metadata_count = current_header.source_column_count - base_count
                 repository = parse_github_repository(line)
                 if repository:
                     if len(cells) not in (
                         base_count,
-                        base_count + metadata_count,
+                        current_header.source_column_count,
                     ):
                         raise ValueError(f"Unexpected project table row: {line}")
                     metadata = metadata_by_repository.get(repository)
@@ -400,25 +422,27 @@ def update_readme(
                         RepositoryStatus.ARCHIVED,
                         RepositoryStatus.REMOVED,
                     ):
-                        managed_cells = deprecated_cells(locale)
+                        managed_cells = deprecated_cells(metadata, locale)
                     elif metadata:
                         previous_release = (
-                            cells[-1]
-                            if len(cells) == base_count + metadata_count
+                            cells[base_count + 2]
+                            if len(cells) > base_count and source_metadata_count >= 3
                             else None
                         )
                         managed_cells = metadata_cells(
                             metadata, today, locale, previous_release
                         )
-                    elif len(cells) == base_count + metadata_count:
+                    elif len(cells) > base_count:
                         # Transient fetch failure (rate limit / network / 5xx):
                         # keep the last good values but flag with a warning prefix
                         # so it does not read as fresh data. Skip the prefix if the
                         # previous run already added one, otherwise repeated runs
                         # accumulate "⚠️ ⚠️ ..." prefixes.
-                        previous = list(cells[-metadata_count:])
+                        previous = list(cells[base_count:])
                         if not previous[0].lstrip().startswith("⚠️"):
                             previous[0] = "⚠️ " + previous[0]
+                        if len(previous) == len(locale.legacy_metadata_headers):
+                            previous.append(locale.fetch_failed)
                         managed_cells = tuple(previous)
                     else:
                         managed_cells = (locale.fetch_failed,) * metadata_count
