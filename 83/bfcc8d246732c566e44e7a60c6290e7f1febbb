@@ -1,0 +1,19 @@
+LICENSE
+  s_ea7af4a392822a::t_f84141ae9d2328 1-21
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.13",
+  "base_commit_sha": "83bfcc8d246732c566e44e7a60c6290e7f1febbb",
+  "prompts": {},
+  "sessions": {
+    "s_ea7af4a392822a": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "019f5eb7-4441-7d00-9aea-81adc1277cd5",
+        "model": "gpt-5.6-sol"
+      },
+      "human_author": "DiscoverBox <pczhuling@gmail.com>"
+    }
+  }
+}
