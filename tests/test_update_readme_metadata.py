@@ -418,8 +418,9 @@ class GitHubFetchTests(unittest.TestCase):
 
     @patch("scripts.update_readme_metadata.github_request")
     def test_release_failure_keeps_archived_status(self, request):
-        # A 5xx on the release endpoint must not discard the archived status
-        # already determined from the repository response.
+        # Archived repos skip the release endpoint entirely (the deprecated
+        # row renders "暂无" regardless), so a 5xx there must not even be
+        # requested and must not pollute the archived status.
         request.side_effect = [
             {
                 "description": "Tool",
@@ -432,6 +433,9 @@ class GitHubFetchTests(unittest.TestCase):
         metadata = fetch_repository_metadata("example", "tool")
         self.assertEqual(metadata.status, RepositoryStatus.ARCHIVED)
         self.assertIsNone(metadata.release_tag)
+        self.assertFalse(metadata.release_fetch_failed)
+        # release endpoint never queried for archived repos.
+        self.assertEqual(request.call_count, 1)
 
     @patch("scripts.update_readme_metadata.github_request")
     def test_release_failure_keeps_moved_status(self, request):
@@ -448,6 +452,94 @@ class GitHubFetchTests(unittest.TestCase):
         self.assertEqual(metadata.status, RepositoryStatus.MOVED)
         self.assertEqual(metadata.new_full_name, "newowner/tool")
         self.assertIsNone(metadata.release_tag)
+        self.assertTrue(metadata.release_fetch_failed)
+
+    @patch("scripts.update_readme_metadata.github_request")
+    def test_release_404_is_not_marked_fetch_failed(self, request):
+        request.side_effect = [
+            {
+                "description": "Tool",
+                "full_name": "example/tool",
+                "pushed_at": "2026-07-01T00:00:00Z",
+                "archived": False,
+            },
+            GitHubAPIError("Not Found", status=404),
+        ]
+        metadata = fetch_repository_metadata("example", "tool")
+        self.assertEqual(metadata.status, RepositoryStatus.ACTIVE)
+        self.assertIsNone(metadata.release_tag)
+        self.assertFalse(metadata.release_fetch_failed)
+
+    def test_release_transient_failure_preserves_previous_release(self):
+        metadata = RepositoryMetadata(
+            description="Tool",
+            pushed_at="2026-06-01T12:00:00Z",
+            release_tag=None,
+            release_published_at=None,
+            release_url=None,
+            release_fetch_failed=True,
+        )
+        original = """| 项目 | 形态 | 核心定位 | 适用场景 | GitHub 简介 | 最近更新 | 最新 Release |
+| --- | --- | --- | --- | --- | --- | --- |
+| [Tool](https://github.com/example/tool) | MCP | 人工定位 | 人工场景 | Old description | 否 · 2020-01-01 | [v1.2.3](https://github.com/example/tool/releases/tag/v1.2.3) · 2020-05-20 |
+"""
+        updated, _, _ = update_readme(
+            original, {("example", "tool"): metadata}, today=date(2026, 7, 13)
+        )
+        # Previous release value is retained verbatim, not wiped to 暂无.
+        self.assertIn(
+            "[v1.2.3](https://github.com/example/tool/releases/tag/v1.2.3) · 2020-05-20",
+            updated,
+        )
+        self.assertNotIn("| 暂无 |", updated)
+
+    def test_release_transient_failure_preserves_previous_release_idempotent(self):
+        metadata = RepositoryMetadata(
+            description="Tool",
+            pushed_at="2026-06-01T12:00:00Z",
+            release_tag=None,
+            release_published_at=None,
+            release_url=None,
+            release_fetch_failed=True,
+        )
+        row = (
+            "| [Tool](https://github.com/example/tool) | MCP | 人工定位 | 人工场景 | "
+            "Old description | 否 · 2020-01-01 | "
+            "[v1.2.3](https://github.com/example/tool/releases/tag/v1.2.3) · 2020-05-20 |"
+        )
+        once = (
+            "| 项目 | 形态 | 核心定位 | 适用场景 | GitHub 简介 | 最近更新 | 最新 Release |\n"
+            "| --- | --- | --- | --- | --- | --- | --- |\n"
+            f"{row}\n"
+        )
+        first, _, _ = update_readme(once, {("example", "tool"): metadata}, today=date(2026, 7, 13))
+        second, _, _ = update_readme(first, {("example", "tool"): metadata}, today=date(2026, 7, 13))
+        # Repeated runs must not duplicate or drift the retained release cell.
+        self.assertEqual(first, second)
+        release_cell = (
+            "[v1.2.3](https://github.com/example/tool/releases/tag/v1.2.3) · 2020-05-20"
+        )
+        self.assertEqual(second.count(release_cell), 1)
+
+    def test_release_404_clears_previous_release(self):
+        metadata = RepositoryMetadata(
+            description="Tool",
+            pushed_at="2026-06-01T12:00:00Z",
+            release_tag=None,
+            release_published_at=None,
+            release_url=None,
+            release_fetch_failed=False,
+        )
+        original = """| 项目 | 形态 | 核心定位 | 适用场景 | GitHub 简介 | 最近更新 | 最新 Release |
+| --- | --- | --- | --- | --- | --- | --- |
+| [Tool](https://github.com/example/tool) | MCP | 人工定位 | 人工场景 | Old description | 否 · 2020-01-01 | [v1.2.3](https://github.com/example/tool/releases/tag/v1.2.3) · 2020-05-20 |
+"""
+        updated, _, _ = update_readme(
+            original, {("example", "tool"): metadata}, today=date(2026, 7, 13)
+        )
+        # A genuine 404 (no release) clears the stale release value.
+        self.assertIn("| 暂无 |", updated)
+        self.assertNotIn("v1.2.3", updated)
 
 
 if __name__ == "__main__":

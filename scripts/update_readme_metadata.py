@@ -86,6 +86,11 @@ class RepositoryMetadata:
     release_url: str | None
     status: RepositoryStatus = RepositoryStatus.ACTIVE
     new_full_name: str | None = None
+    # True when the release endpoint failed transiently (5xx / rate limit /
+    # network). Distinct from a 404 (definitely no release): a transient
+    # failure must preserve the README's previous release value instead of
+    # wiping it to "暂无".
+    release_fetch_failed: bool = False
 
 
 def github_request(url: str, token: str | None = None) -> Any:
@@ -160,19 +165,6 @@ def fetch_repository_metadata(
     archived = bool(repository.get("archived"))
     moved = full_name.lower() != f"{owner}/{repo}".lower()
 
-    release_slug = "/".join(quote(part, safe="") for part in full_name.split("/", 1))
-    try:
-        release = github_request(
-            f"{api_base}/repos/{release_slug}/releases/latest",
-            token,
-        )
-    except GitHubAPIError:
-        # The release endpoint is auxiliary. A 404 means the repo has no
-        # published release; any other error (5xx / rate limit / network after
-        # retries) is transient. In both cases degrade to "no release" rather
-        # than discarding the archived/moved status already determined above.
-        release = None
-
     # Archived takes precedence over moved: a redirected-then-archived repo
     # is surfaced as deprecated, not silently rewritten.
     if archived:
@@ -182,6 +174,30 @@ def fetch_repository_metadata(
     else:
         status = RepositoryStatus.ACTIVE
 
+    release = None
+    release_fetch_failed = False
+    # Archived repos render the deprecated row (release column is always
+    # "暂无"), so the release endpoint is not queried — saves an API call and
+    # avoids a transient release failure polluting an archived entry.
+    if not archived:
+        release_slug = "/".join(quote(part, safe="") for part in full_name.split("/", 1))
+        try:
+            release = github_request(
+                f"{api_base}/repos/{release_slug}/releases/latest",
+                token,
+            )
+        except GitHubAPIError as error:
+            if error.status == 404:
+                # The repo genuinely has no published release.
+                release = None
+            else:
+                # Transient (5xx / rate limit / network). Preserve the
+                # already-determined archived/moved status and flag the
+                # release as fetch-failed so the README keeps its previous
+                # release value instead of being wiped to "暂无".
+                release = None
+                release_fetch_failed = True
+
     return RepositoryMetadata(
         description=repository.get("description") or "",
         pushed_at=repository["pushed_at"],
@@ -190,6 +206,7 @@ def fetch_repository_metadata(
         release_url=release.get("html_url") if release else None,
         status=status,
         new_full_name=full_name if moved else None,
+        release_fetch_failed=release_fetch_failed,
     )
 
 
@@ -230,13 +247,19 @@ def metadata_cells(
     metadata: RepositoryMetadata,
     today: date,
     locale: TableLocale = ZH_LOCALE,
+    previous_release: str | None = None,
 ) -> tuple[str, str, str]:
     pushed_on = iso_date(metadata.pushed_at)
     age = (today - pushed_on).days
     recently_updated = age <= ACTIVE_DAYS
     activity = f"{locale.active if recently_updated else locale.inactive} · {pushed_on.isoformat()}"
 
-    if metadata.release_tag and metadata.release_url and metadata.release_published_at:
+    if metadata.release_fetch_failed:
+        # Transient release failure: keep the README's previous release value
+        # verbatim (no prefix) so the cell stays idempotent across runs; the
+        # failure is surfaced in stderr + step summary by main() instead.
+        release = previous_release if previous_release else locale.no_release
+    elif metadata.release_tag and metadata.release_url and metadata.release_published_at:
         tag = sanitize_cell(metadata.release_tag)
         release_on = iso_date(metadata.release_published_at).isoformat()
         release = f"[{tag}]({metadata.release_url}) · {release_on}"
@@ -343,7 +366,14 @@ def update_readme(
                     ):
                         managed_cells = deprecated_cells(current_locale)
                     elif metadata:
-                        managed_cells = metadata_cells(metadata, today, current_locale)
+                        previous_release = (
+                            cells[-1]
+                            if len(cells) == base_count + metadata_count
+                            else None
+                        )
+                        managed_cells = metadata_cells(
+                            metadata, today, current_locale, previous_release
+                        )
                     elif len(cells) == base_count + metadata_count:
                         # Transient fetch failure (rate limit / network / 5xx):
                         # keep the last good values but flag with a warning prefix
@@ -466,6 +496,11 @@ def main() -> int:
         for slug, metadata in metadata_by_repository.items()
         if metadata.status in (RepositoryStatus.ARCHIVED, RepositoryStatus.REMOVED)
     ]
+    release_failed_repos = [
+        slug
+        for slug, metadata in metadata_by_repository.items()
+        if metadata.release_fetch_failed
+    ]
 
     # Always return 0: deprecated markers must be written AND committed so
     # reviewers see them in the README. Surfacing happens via stderr + the
@@ -483,6 +518,15 @@ def main() -> int:
         )
         for failure in failures:
             print(f"  - {failure}", file=sys.stderr)
+
+    if release_failed_repos:
+        print(
+            f"{len(release_failed_repos)} repository(ies) had transient release "
+            "fetch failures; previous release values retained:",
+            file=sys.stderr,
+        )
+        for owner, repo in release_failed_repos:
+            print(f"  - {owner}/{repo}", file=sys.stderr)
 
     if deprecated_repos:
         print(
