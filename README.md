@@ -17,6 +17,8 @@ Awesome AI Reverse Engineering 收集 AI 辅助逆向工具，覆盖 JavaScript 
 
 收录内容包括 MCP 服务器、Skill、IDA Pro/Ghidra/Binary Ninja/JADX 插件、Agent 和桌面工作站。
 
+> **使用范围：**仅用于自有系统、明确授权的安全测试、数字取证、教育培训和防御性安全研究。
+
 ## 工具形态说明
 
 | 形态              | 作用                                          |

@@ -17,6 +17,8 @@ Awesome AI Reverse Engineering collects AI-assisted reverse engineering tools fo
 
 The list includes MCP servers, skills, plugins for IDA Pro, Ghidra, Binary Ninja, and JADX, as well as agents and desktop workstations.
 
+> **Scope of use:** For owned systems, explicitly authorized security testing, digital forensics, education and training, and defensive security research only.
+
 > The GitHub Description column is synchronized verbatim from each upstream repository and may not be in English.
 
 ## Tool Types
