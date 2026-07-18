@@ -1,0 +1,21 @@
+README.md
+  s_7dc3e9772501cb::t_5731adc390d9e8 20-21
+README_EN.md
+  s_7dc3e9772501cb::t_5731adc390d9e8 20-21
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.14",
+  "base_commit_sha": "2fa13d39e45db5f27f3b26d37039a3b367c5a928",
+  "prompts": {},
+  "sessions": {
+    "s_7dc3e9772501cb": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "019f73d6-ab53-73e2-8600-8dd73eaf6f45",
+        "model": "gpt-5.6-sol"
+      },
+      "human_author": "DiscoverBox <pczhuling@gmail.com>"
+    }
+  }
+}
