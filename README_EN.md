@@ -68,9 +68,6 @@ The list includes MCP servers, skills, plugins for IDA Pro, Ghidra, Binary Ninja
 | Automate binary analysis across multiple tools | [revula](https://github.com/president-xd/revula) |
 | Extract Android APIs and analyze call chains | [Android Reverse Engineering Skill](https://github.com/SimoneAvogadro/android-reverse-engineering-skill) |
 | Perform interactive AI analysis in JADX | [JADX-AI-MCP](https://github.com/zinja-coder/jadx-ai-mcp) |
-| Dynamically hook Android applications | [Frida MCP Server](https://github.com/zhizhuodemao/frida-mcp) |
-| Automate Android devices | [ADB MCP Server](https://github.com/zhizhuodemao/adb-mcp) |
-| Capture and query Android traffic | [Android Proxy MCP](https://github.com/zhizhuodemao/android_proxy_mcp) |
 | Connect Charles traffic to AI systems | [Charles MCP Server](https://github.com/heizaheiza/Charles-mcp) |
 | Use an all-in-one protocol analysis workstation | [Anything Analyzer](https://github.com/Mouseww/anything-analyzer) |
 | Trace JS, JSVMP, and WASM at the engine level | [Firefox-Reverse](https://github.com/WhiteNightShadow/firefox-reverse) |
@@ -101,7 +98,6 @@ The list includes MCP servers, skills, plugins for IDA Pro, Ghidra, Binary Ninja
 | --- | --- | --- | --- | --- | --- | --- | --- |
 | [hello_js_reverse_skill](https://github.com/WhiteNightShadow/hello_js_reverse_skill) | Skill | End-to-end JavaScript reversing with anti-detection browsers | Network capture, source tracing, hooking, algorithm recovery, and local reproduction | 🔧 AI-powered JS逆向工程 Skill —— 覆盖加密还原、混淆分析、动态Cookie、WASM逆向、协议对抗等全链路场景，通过 Node.js 实现算法还原与模拟请求。适配 Claude Code / Claude.ai / 其他AI编码工具 | No · 2026-04-23 | [v3.2.0](https://github.com/WhiteNightShadow/hello_js_reverse_skill/releases/tag/v3.2.0) · 2026-04-18 | 921 |
 | [js-reverse-automation--skill](https://github.com/Fausto-404/js-reverse-automation--skill) | Skill | Exposing JavaScript reversing results as services | JSRPC, Flask, autoDecoder, request encryption, and response decryption | 结合chrome-devtools-mcp的能力并加上Skill的规范，实现JSRPC+Flask+autoDecoder方案的前端JS逆向自动化分析，提升JS逆向的效率 | Yes · 2026-06-02 | [v2.0](https://github.com/Fausto-404/js-reverse-automation--skill/releases/tag/v2.0) · 2026-05-31 | 530 |
-| [JSHook Reverse Tool](https://github.com/wuji66dde/jshook-skill) | Skill / Tool | Code collection, deobfuscation, and hooking support | Large-script collection, cryptography detection, CDP, and incremental analysis | AI-powered JS reverse engineering: deobfuscation, crypto detection, CDP debugging, hook injection, anti-detection &#124; AI驱动JS逆向：反混淆、加密识别、CDP调试、Hook注入、反检测 | No · 2026-02-11 | None | 250 |
 | [reverse-skill](https://github.com/715494637/reverse-skill/) | Skill | Advanced Web reverse engineering methods | JSVMP, workers, WASM, Webpack, AST, and protocol analysis | 面向 Web JS 逆向分析的技能仓库，覆盖请求链定位、运行时诊断、AST 混淆恢复、JSVMP、worker、WASM、webpack/runtime 与协议语义分析。 | Yes · 2026-05-02 | [jsr-skills-15-a3e116e](https://github.com/715494637/reverse-skill/releases/tag/jsr-skills-15-a3e116e) · 2026-05-02 | 313 |
 | [xbsReverseSkill](https://github.com/lwjjike/xbsReverseSkill) | Skill Suite | Modular Web reverse engineering capabilities | AST analysis, standalone algorithms, protocol analysis, and browser environment emulation | Ai逆向的skill目录 | Yes · 2026-07-21 | [v1.0.0](https://github.com/lwjjike/xbsReverseSkill/releases/tag/v1.0.0) · 2026-03-28 | 317 |
 
@@ -135,11 +131,7 @@ The list includes MCP servers, skills, plugins for IDA Pro, Ghidra, Binary Ninja
 | --- | --- | --- | --- | --- | --- | --- | --- |
 | [Android Reverse Engineering Skill](https://github.com/SimoneAvogadro/android-reverse-engineering-skill) | Skill | Android static analysis and API extraction | APK, XAPK, JAR, AAR, Retrofit, OkHttp, and call-chain analysis | Claude Code skill to support Android app's reverse engineering | Yes · 2026-06-10 | [v1.1.0](https://github.com/SimoneAvogadro/android-reverse-engineering-skill/releases/tag/v1.1.0) · 2026-04-27 | 6510 |
 | [JADX-AI-MCP](https://github.com/zinja-coder/jadx-ai-mcp) | JADX Plugin / MCP | Real-time AI analysis in JADX | APK code review, vulnerability analysis, and contextual inspection | Plugin for JADX to integrate MCP server | Yes · 2026-05-28 | [v6.4.0](https://github.com/zinja-coder/jadx-ai-mcp/releases/tag/v6.4.0) · 2026-05-28 | 2528 |
-| [Frida MCP Server](https://github.com/zhizhuodemao/frida-mcp) | MCP | Dynamic Android instrumentation | Java and native hooking, plus argument and return-value collection | 一个用于frida动态调试的mcp工具，支持自定义frida路径和名称端口,自动管理frida | No · 2025-11-04 | None | 105 |
-| [Android Proxy MCP](https://github.com/zhizhuodemao/android_proxy_mcp) | MCP | Android traffic capture and querying | Filtering, searching, and analyzing HTTP and HTTPS requests | 基于 MCP 的 Android 抓包服务，让 AI 助手通过自然语言分析网络请求。 | No · 2026-02-09 | None | 200 |
-| [ADB MCP Server](https://github.com/zhizhuodemao/adb-mcp) | MCP | Android device automation | Installation, launching, screenshots, recordings, files, and Logcat | 安卓adb的mcp命令 | No · 2025-08-25 | None | 62 |
 | [iOS MCP](https://github.com/witchan/ios-mcp) | MCP | Control of jailbroken iOS devices | Applications, files, logs, HID, and accessibility operations | iOS MCP: MCP management tool for jailbroken iPhones, enabling developers and AI agents to inspect and control devices. | Yes · 2026-07-09 | [v1.2.2](https://github.com/witchan/ios-mcp/releases/tag/v1.2.2) · 2026-07-09 | 570 |
-| [android-h1](https://github.com/s7safe/android-h1) | Skill / Knowledge Base | Mobile security vulnerability case library | Learning Android and iOS testing methods and vulnerability patterns | 移动安全漏洞挖掘专家SKILL，基于 HackerOne 真实报告的移动安全漏洞挖掘知识库，提供 Android 和 iOS 应用的漏洞挖掘手法、技术细节和代码模式分析。 | No · 2026-04-19 | None | 184 |
 
 ## Browser Automation and Traffic Analysis
 
@@ -147,7 +139,6 @@ The list includes MCP servers, skills, plugins for IDA Pro, Ghidra, Binary Ninja
 
 | Project | Type | Core Focus | Best For | GitHub Description | Recently Updated | Latest Release | Stars |
 | --- | --- | --- | --- | --- | --- | --- | --- |
-| [DrissionPage MCP](https://github.com/wxhzhwxhzh/DrissionPageMCP) | MCP | General-purpose browser automation | Page interaction, DOM inspection, authentication, and data collection | 基于DrissionPage和FastMCP的浏览器自动化MCP服务器，提供丰富的浏览器操作API供AI调用 | No · 2026-02-12 | None | 235 |
 | [reverse-api-engineer](https://github.com/kalil0321/reverse-api-engineer) | Agent / CLI | Generating typed API clients from endpoints used by websites | Browser traffic capture, endpoint discovery, HAR analysis, and Python/JS/TS client generation | The agent that turns websites into APIs! | Yes · 2026-07-22 | [v0.12.0](https://github.com/kalil0321/reverse-api-engineer/releases/tag/v0.12.0) · 2026-07-22 | 891 |
 | [Camoufox MCP Server](https://github.com/whit3rabbit/camoufox-mcp) | MCP | Anti-detection and privacy-focused browser automation | Fingerprint controls, proxies, session isolation, and realistic browser environments | No description | Yes · 2026-07-21 | [v2.3.0](https://github.com/whit3rabbit/camoufox-mcp/releases/tag/v2.3.0) · 2026-07-06 | 36 |
 | [Charles MCP Server](https://github.com/heizaheiza/Charles-mcp) | MCP | AI integration for Charles Proxy | Live traffic, historical sessions, and request analysis | Charles Proxy MCP server for AI agents with live capture, structured traffic analysis, and agent-friendly tool contracts | Yes · 2026-06-23 | [v3.0.3](https://github.com/heizaheiza/Charles-mcp/releases/tag/v3.0.3) · 2026-04-21 | 280 |

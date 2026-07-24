@@ -66,9 +66,6 @@ Awesome AI Reverse Engineering 收集 AI 辅助逆向工具，覆盖 JavaScript 
 | 多工具二进制自动化平台                     | [revula](https://github.com/president-xd/revula)                            |
 | Android API 提取和调用链分析            | [Android Reverse Engineering Skill](https://github.com/SimoneAvogadro/android-reverse-engineering-skill) |
 | JADX 内交互式 AI 分析                 | [JADX-AI-MCP](https://github.com/zinja-coder/jadx-ai-mcp)                       |
-| Android 动态 Hook                 | [Frida MCP Server](https://github.com/zhizhuodemao/frida-mcp)                  |
-| Android 设备自动化                   | [ADB MCP Server](https://github.com/zhizhuodemao/adb-mcp)                    |
-| Android 抓包与流量查询                 | [Android Proxy MCP](https://github.com/zhizhuodemao/android_proxy_mcp)                 |
 | Charles 流量接入 AI                 | [Charles MCP Server](https://github.com/heizaheiza/Charles-mcp)                |
 | 一体化协议分析工作站                      | [Anything Analyzer](https://github.com/Mouseww/anything-analyzer)                 |
 | 引擎级 JS、JSVMP、WASM 追踪            | [Firefox-Reverse](https://github.com/WhiteNightShadow/firefox-reverse)                   |
@@ -99,7 +96,6 @@ Awesome AI Reverse Engineering 收集 AI 辅助逆向工具，覆盖 JavaScript 
 | --- | --- | --- | --- | --- | --- | --- | --- |
 | [hello_js_reverse_skill](https://github.com/WhiteNightShadow/hello_js_reverse_skill) | Skill | 基于反检测浏览器的完整 JS 逆向流程 | 网络捕获、源码定位、Hook、算法还原和本地复现 | 🔧 AI-powered JS逆向工程 Skill —— 覆盖加密还原、混淆分析、动态Cookie、WASM逆向、协议对抗等全链路场景，通过 Node.js 实现算法还原与模拟请求。适配 Claude Code / Claude.ai / 其他AI编码工具 | 否 · 2026-04-23 | [v3.2.0](https://github.com/WhiteNightShadow/hello_js_reverse_skill/releases/tag/v3.2.0) · 2026-04-18 | 921 |
 | [js-reverse-automation--skill](https://github.com/Fausto-404/js-reverse-automation--skill) | Skill | JS 逆向成果服务化 | JSRPC、Flask、autoDecoder、请求加密和响应解密 | 结合chrome-devtools-mcp的能力并加上Skill的规范，实现JSRPC+Flask+autoDecoder方案的前端JS逆向自动化分析，提升JS逆向的效率 | 是 · 2026-06-02 | [v2.0](https://github.com/Fausto-404/js-reverse-automation--skill/releases/tag/v2.0) · 2026-05-31 | 530 |
-| [JSHook Reverse Tool](https://github.com/wuji66dde/jshook-skill) | Skill / 工具 | 代码采集、反混淆和 Hook 辅助 | 大型脚本采集、加密检测、CDP 和增量分析 | AI-powered JS reverse engineering: deobfuscation, crypto detection, CDP debugging, hook injection, anti-detection &#124; AI驱动JS逆向：反混淆、加密识别、CDP调试、Hook注入、反检测 | 否 · 2026-02-11 | 暂无 | 250 |
 | [reverse-skill](https://github.com/715494637/reverse-skill/) | Skill | 高级 Web 逆向方法库 | JSVMP、Worker、WASM、Webpack、AST 和协议分析 | 面向 Web JS 逆向分析的技能仓库，覆盖请求链定位、运行时诊断、AST 混淆恢复、JSVMP、worker、WASM、webpack/runtime 与协议语义分析。 | 是 · 2026-05-02 | [jsr-skills-15-a3e116e](https://github.com/715494637/reverse-skill/releases/tag/jsr-skills-15-a3e116e) · 2026-05-02 | 313 |
 | [xbsReverseSkill](https://github.com/lwjjike/xbsReverseSkill) | Skill 套件 | 模块化 Web 逆向能力 | AST、纯算法、协议分析、浏览器补环境 | Ai逆向的skill目录 | 是 · 2026-07-21 | [v1.0.0](https://github.com/lwjjike/xbsReverseSkill/releases/tag/v1.0.0) · 2026-03-28 | 317 |
 
@@ -133,11 +129,7 @@ Awesome AI Reverse Engineering 收集 AI 辅助逆向工具，覆盖 JavaScript 
 | --- | --- | --- | --- | --- | --- | --- | --- |
 | [Android Reverse Engineering Skill](https://github.com/SimoneAvogadro/android-reverse-engineering-skill) | Skill | Android 静态分析与 API 提取 | APK、XAPK、JAR、AAR、Retrofit、OkHttp 和调用链分析 | Claude Code skill to support Android app's reverse engineering | 是 · 2026-06-10 | [v1.1.0](https://github.com/SimoneAvogadro/android-reverse-engineering-skill/releases/tag/v1.1.0) · 2026-04-27 | 6510 |
 | [JADX-AI-MCP](https://github.com/zinja-coder/jadx-ai-mcp) | JADX 插件 / MCP | JADX 内实时 AI 分析 | APK 代码阅读、漏洞分析和上下文审查 | Plugin for JADX to integrate MCP server | 是 · 2026-05-28 | [v6.4.0](https://github.com/zinja-coder/jadx-ai-mcp/releases/tag/v6.4.0) · 2026-05-28 | 2528 |
-| [Frida MCP Server](https://github.com/zhizhuodemao/frida-mcp) | MCP | Android 动态插桩 | Java、Native Hook、参数和返回值采集 | 一个用于frida动态调试的mcp工具，支持自定义frida路径和名称端口,自动管理frida | 否 · 2025-11-04 | 暂无 | 105 |
-| [Android Proxy MCP](https://github.com/zhizhuodemao/android_proxy_mcp) | MCP | Android 流量采集和查询 | HTTP、HTTPS 请求筛选、搜索和内容分析 | 基于 MCP 的 Android 抓包服务，让 AI 助手通过自然语言分析网络请求。 | 否 · 2026-02-09 | 暂无 | 200 |
-| [ADB MCP Server](https://github.com/zhizhuodemao/adb-mcp) | MCP | Android 设备自动化 | 安装、启动、截图、录屏、文件和 Logcat | 安卓adb的mcp命令 | 否 · 2025-08-25 | 暂无 | 62 |
 | [iOS MCP](https://github.com/witchan/ios-mcp) | MCP | 越狱 iOS 设备控制 | 应用、文件、日志、HID 和辅助功能操作 | iOS MCP: MCP management tool for jailbroken iPhones, enabling developers and AI agents to inspect and control devices. | 是 · 2026-07-09 | [v1.2.2](https://github.com/witchan/ios-mcp/releases/tag/v1.2.2) · 2026-07-09 | 570 |
-| [android-h1](https://github.com/s7safe/android-h1) | Skill / 知识库 | 移动安全漏洞案例库 | Android、iOS 测试方法和漏洞模式学习 | 移动安全漏洞挖掘专家SKILL，基于 HackerOne 真实报告的移动安全漏洞挖掘知识库，提供 Android 和 iOS 应用的漏洞挖掘手法、技术细节和代码模式分析。 | 否 · 2026-04-19 | 暂无 | 184 |
 
 ## 浏览器自动化与流量分析
 
@@ -145,7 +137,6 @@ Awesome AI Reverse Engineering 收集 AI 辅助逆向工具，覆盖 JavaScript 
 
 | 项目 | 形态 | 核心定位 | 适用场景 | GitHub 简介 | 最近更新 | 最新 Release | Stars |
 | --- | --- | --- | --- | --- | --- | --- | --- |
-| [DrissionPage MCP](https://github.com/wxhzhwxhzh/DrissionPageMCP) | MCP | 通用浏览器自动化 | 页面操作、DOM 读取、登录和数据采集 | 基于DrissionPage和FastMCP的浏览器自动化MCP服务器，提供丰富的浏览器操作API供AI调用 | 否 · 2026-02-12 | 暂无 | 235 |
 | [reverse-api-engineer](https://github.com/kalil0321/reverse-api-engineer) | Agent / CLI | 将网站实际调用的端点生成类型化 API 客户端 | 浏览器流量捕获、接口发现、HAR 分析和 Python/JS/TS 客户端生成 | The agent that turns websites into APIs! | 是 · 2026-07-22 | [v0.12.0](https://github.com/kalil0321/reverse-api-engineer/releases/tag/v0.12.0) · 2026-07-22 | 891 |
 | [Camoufox MCP Server](https://github.com/whit3rabbit/camoufox-mcp) | MCP | 反检测和隐私浏览器自动化 | 指纹控制、代理、多会话隔离和真实浏览器环境 | 暂无简介 | 是 · 2026-07-21 | [v2.3.0](https://github.com/whit3rabbit/camoufox-mcp/releases/tag/v2.3.0) · 2026-07-06 | 36 |
 | [Charles MCP Server](https://github.com/heizaheiza/Charles-mcp) | MCP | Charles Proxy AI 接入 | 实时流量、历史 Session 和请求分析 | Charles Proxy MCP server for AI agents with live capture, structured traffic analysis, and agent-friendly tool contracts | 是 · 2026-06-23 | [v3.0.3](https://github.com/heizaheiza/Charles-mcp/releases/tag/v3.0.3) · 2026-04-21 | 280 |
