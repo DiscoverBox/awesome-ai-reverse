@@ -1,0 +1,23 @@
+README_EN.md
+  s_a875f109a66c2f::t_5936653377cd57 83-84,91,99-100,102,116-121,124,132-134,146-147
+  s_a875f109a66c2f::t_ab8b16d554ff4b 145
+README.md
+  s_a875f109a66c2f::t_5936653377cd57 81-82,89,97-98,100,114-119,122,130-132,144-145
+  s_a875f109a66c2f::t_ab8b16d554ff4b 143
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.17",
+  "base_commit_sha": "c6634980b3d0c86e54b0836b140b3d359daa86b9",
+  "prompts": {},
+  "sessions": {
+    "s_a875f109a66c2f": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "019fb094-fcd1-75e0-81b6-2bd503732ffd",
+        "model": "gpt-5.6-sol"
+      },
+      "human_author": "DiscoverBox <pczhuling@gmail.com>"
+    }
+  }
+}
