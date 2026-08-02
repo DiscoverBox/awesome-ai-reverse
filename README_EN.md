@@ -38,7 +38,9 @@ The list includes MCP servers, skills, plugins for IDA Pro, Ghidra, Binary Ninja
 
 - [Quick Selection](#quick-selection)
 - [JavaScript and Web Reverse Engineering](#javascript-and-web-reverse-engineering)
+- [IDA Pro Ecosystem](#ida-pro-ecosystem)
 - [Binary and Native Reverse Engineering](#binary-and-native-reverse-engineering)
+- [Ghidra Ecosystem](#ghidra-ecosystem)
 - [Android and iOS Security Analysis](#android-and-ios-security-analysis)
 - [Browser Automation and Traffic Analysis](#browser-automation-and-traffic-analysis)
 - [Evaluation Criteria](#evaluation-criteria)
@@ -62,12 +64,18 @@ The list includes MCP servers, skills, plugins for IDA Pro, Ghidra, Binary Ninja
 | Perform real-time AI analysis in IDA Pro | [IDA Pro MCP](https://github.com/mrexodia/ida-pro-mcp) |
 | Export IDA data for analysis by an AI coding tool | [IDA-NO-MCP](https://github.com/P4nda0s/IDA-NO-MCP) |
 | Run IDA as a headless service | [ida-mcp-rs](https://github.com/blacktop/ida-mcp-rs) |
-| Integrate AI with Ghidra | [GhidraMCP](https://github.com/LaurieWired/GhidraMCP) |
+| Analyze several IDA instances in parallel | [ida-multi-mcp](https://github.com/MeroZemory/ida-multi-mcp) |
+| Use multiple AI models directly inside IDA | [WPeGPT](https://github.com/WPeace-HcH/WPeGPT) |
+| Use AI with Ghidra in GUI or headless mode | [Ghidra MCP Server](https://github.com/bethington/ghidra-mcp) |
+| Connect radare2 to AI agents | [Radare2 MCP Server](https://github.com/radareorg/radare2-mcp) |
 | Integrate AI with Binary Ninja | [Binary Ninja MCP](https://github.com/fosdickio/binary_ninja_mcp) |
 | Perform dynamic debugging in x64dbg or x32dbg | [x64dbg-mcp](https://github.com/SetsunaYukiOvO/x64dbg-mcp) |
+| Analyze process memory through Cheat Engine | [Cheat Engine MCP Bridge](https://github.com/miscusi-peek/cheatengine-mcp-bridge) |
 | Automate binary analysis across multiple tools | [revula](https://github.com/president-xd/revula) |
 | Extract Android APIs and analyze call chains | [Android Reverse Engineering Skill](https://github.com/SimoneAvogadro/android-reverse-engineering-skill) |
 | Perform interactive AI analysis in JADX | [JADX-AI-MCP](https://github.com/zinja-coder/jadx-ai-mcp) |
+| Decode, inspect Smali, and rebuild APKs with Apktool | [apktool-mcp-server](https://github.com/zinja-coder/apktool-mcp-server) |
+| Perform dynamic Android instrumentation with Frida | [frida-analykit](https://github.com/ZSA233/frida-analykit) |
 | Connect Charles traffic to AI systems | [Charles MCP Server](https://github.com/heizaheiza/Charles-mcp) |
 | Use an all-in-one protocol analysis workstation | [Anything Analyzer](https://github.com/Mouseww/anything-analyzer) |
 | Trace JS, JSVMP, and WASM at the engine level | [Firefox-Reverse](https://github.com/WhiteNightShadow/firefox-reverse) |
@@ -107,30 +115,82 @@ The list includes MCP servers, skills, plugins for IDA Pro, Ghidra, Binary Ninja
 | --- | --- | --- | --- | --- | --- | --- | --- |
 | [ruishu-mcp](https://github.com/xuange520/ruishu-mcp) | MCP | Dynamic WAF traffic research | Analyzing Ruishu-style dynamic defenses, request parameters, and traffic in authorized environments | 🚀 专为 AI Agent 打造的瑞数防爬流量净化 MCP 工具 / An MCP Tool for AI Agents to Stealthily Bypass and Purify Ruishu WAF Traffic | Yes · 2026-07-13 | [v1.1.0](https://github.com/xuange520/ruishu-mcp/releases/tag/v1.1.0) · 2026-04-13 | 85 |
 
-## Binary and Native Reverse Engineering
+## IDA Pro Ecosystem
 
-> IDA Pro, Ghidra, Binary Ninja, debuggers, disassemblers, and automated binary analysis.
+> MCP servers, data-export tools, in-app AI plugins, and multi-instance analysis interfaces for IDA Pro.
 
 | Project | Type | Core Focus | Best For | GitHub Description | Recently Updated | Latest Release | Stars |
 | --- | --- | --- | --- | --- | --- | --- | --- |
+| [IDA Pro MCP](https://github.com/mrexodia/ida-pro-mcp) | IDA Plugin / MCP | Direct AI access to and control of IDA Pro | Decompilation, cross-references, renaming, comments, and type recovery | AI-powered reverse engineering assistant that bridges IDA Pro with language models through MCP. | Yes · 2026-07-30 | [1.4.0](https://github.com/mrexodia/ida-pro-mcp/releases/tag/1.4.0) · 2025-10-06 | 10999 |
 | [IDA-NO-MCP](https://github.com/P4nda0s/IDA-NO-MCP) | IDA Plugin / Export Tool | Exporting IDA data for analysis by AI coding tools | Large-scale code indexing and analysis with low interaction overhead | Say goodbye to the complex, verbose, and laggy interaction mode of IDA Pro MCP | Yes · 2026-07-26 | None | 1858 |
-| [IDA Pro MCP](https://github.com/mrexodia/ida-pro-mcp) | MCP | Direct AI access to and control of IDA Pro | Decompilation, cross-references, renaming, comments, and type recovery | AI-powered reverse engineering assistant that bridges IDA Pro with language models through MCP. | Yes · 2026-07-30 | [1.4.0](https://github.com/mrexodia/ida-pro-mcp/releases/tag/1.4.0) · 2025-10-06 | 10999 |
+| [WPeGPT](https://github.com/WPeace-HcH/WPeGPT) | IDA AI Plugin | Direct integration of multiple AI models into IDA | Interactive binary analysis with models such as OpenAI and DeepSeek | An IDA plugin for binary file analysis, powered by AI models such as OpenAI and DeepSeek. | Yes · 2026-05-27 | [v3.0](https://github.com/WPeace-HcH/WPeGPT/releases/tag/v3.0) · 2026-05-27 | 1392 |
 | [ida-mcp-rs](https://github.com/blacktop/ida-mcp-rs) | MCP | Headless IDA service implemented in Rust | Server deployments and automated pipelines | Headless IDA Pro MCP Server | Yes · 2026-07-27 | [v9.4.1](https://github.com/blacktop/ida-mcp-rs/releases/tag/v9.4.1) · 2026-07-15 | 687 |
-| [GhidraMCP](https://github.com/LaurieWired/GhidraMCP) | Ghidra Plugin / MCP | Connecting Ghidra to AI clients | Decompilation, function analysis, and symbol organization | MCP Server for Ghidra | No · 2025-06-23 | [1.4](https://github.com/LaurieWired/GhidraMCP/releases/tag/1.4) · 2025-06-23 | 9677 |
-| [Binary Ninja MCP](https://github.com/fosdickio/binary_ninja_mcp) | Plugin / MCP | AI bridge for Binary Ninja | Real-time analysis across multiple binary targets | A Binary Ninja plugin containing an MCP server that enables seamless integration with your favorite LLM/MCP client. | No · 2026-04-05 | [v1.2.1](https://github.com/fosdickio/binary_ninja_mcp/releases/tag/v1.2.1) · 2026-03-22 | 410 |
-| [x64dbg-mcp](https://github.com/SetsunaYukiOvO/x64dbg-mcp) | Plugin / MCP | Remote control of x64dbg and x32dbg through MCP | Execution control, breakpoints, memory, registers, disassembly, and automated dynamic debugging | MCP server plugin for x64dbg debugger - enables AI agents and external tools to control debugging via JSON-RPC 2.0 over HTTP/SSE | Yes · 2026-07-18 | [v1.0.10](https://github.com/SetsunaYukiOvO/x64dbg-mcp/releases/tag/v1.0.10) · 2026-07-18 | 336 |
-| [revula](https://github.com/president-xd/revula) | MCP Platform | General-purpose reverse engineering automation backend | Static analysis, dynamic debugging, malware analysis, and batch processing | A fully functional and production-grade reverse engineering MCP Server | Yes · 2026-07-10 | None | 70 |
+| [ida-multi-mcp](https://github.com/MeroZemory/ida-multi-mcp) | IDA Plugin / MCP | Managing multiple IDA instances through one endpoint | Parallel multi-binary analysis, cross-sample function similarity, and malware component correlation | Multi-instance IDA Pro MCP server — analyze multiple binaries simultaneously through a single MCP endpoint. | Yes · 2026-07-30 | None | 369 |
+
+## Binary and Native Reverse Engineering
+
+> radare2, Binary Ninja, dynamic debuggers, memory-analysis tools, and cross-tool reverse engineering agents and automation platforms.
+
+### radare2 Ecosystem
+
+| Project | Type | Core Focus | Best For | GitHub Description | Recently Updated | Latest Release | Stars |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| [Radare2 MCP Server](https://github.com/radareorg/radare2-mcp) | radare2 Plugin / MCP | Official radare2 interface for AI agents | CLI and remote sessions, headless analysis, read-only mode, sandboxing, and automated pipelines | MCP stdio server for radare2 | Yes · 2026-07-17 | [1.8.4](https://github.com/radareorg/radare2-mcp/releases/tag/1.8.4) · 2026-06-03 | 275 |
+| [r2ai](https://github.com/radareorg/r2ai) | radare2 AI Plugin | Local and remote LLMs inside radare2 | Function explanation, automatic naming, vulnerability analysis, decompilation assistance, and ReAct workflows | LLM-based reversing for radare2 | Yes · 2026-07-22 | [1.4.0](https://github.com/radareorg/r2ai/releases/tag/1.4.0) · 2026-06-03 | 461 |
+
+### Dynamic Debugging and Memory Analysis
+
+| Project | Type | Core Focus | Best For | GitHub Description | Recently Updated | Latest Release | Stars |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| [Cheat Engine MCP Bridge](https://github.com/miscusi-peek/cheatengine-mcp-bridge) | Cheat Engine Bridge / MCP | AI-driven process-memory analysis | Memory scans, pointer chains, structure recovery, disassembly, and signature generation | Connect Cursor, Copilot & Claude AI directly to Cheat Engine via MCP. Automate reverse engineering, pointer scanning, and memory analysis using natural language. | Yes · 2026-07-16 | None | 1141 |
+| [x64dbg-mcp](https://github.com/SetsunaYukiOvO/x64dbg-mcp) | x64dbg Plugin / MCP | Remote control of x64dbg and x32dbg through MCP | Execution control, breakpoints, memory, registers, disassembly, and automated dynamic debugging | MCP server plugin for x64dbg debugger - enables AI agents and external tools to control debugging via JSON-RPC 2.0 over HTTP/SSE | Yes · 2026-07-18 | [v1.0.10](https://github.com/SetsunaYukiOvO/x64dbg-mcp/releases/tag/v1.0.10) · 2026-07-18 | 336 |
+
+### Other Reverse Engineering Integrations
+
+| Project | Type | Core Focus | Best For | GitHub Description | Recently Updated | Latest Release | Stars |
+| --- | --- | --- | --- | --- | --- | --- | --- |
 | [Rikugan](https://github.com/buzzer-re/Rikugan) | Agent / Plugin | AI agent embedded in IDA and Binary Ninja | Continuous conversational analysis within a reverse engineering interface | A reverse-engineering agent for IDA Pro and Binary Ninja | Yes · 2026-06-15 | [v1.3.2](https://github.com/buzzer-re/Rikugan/releases/tag/v1.3.2) · 2026-06-15 | 665 |
+| [Binary Ninja MCP](https://github.com/fosdickio/binary_ninja_mcp) | Binary Ninja Plugin / MCP | AI bridge for Binary Ninja | Real-time analysis across multiple binary targets | A Binary Ninja plugin containing an MCP server that enables seamless integration with your favorite LLM/MCP client. | No · 2026-04-05 | [v1.2.1](https://github.com/fosdickio/binary_ninja_mcp/releases/tag/v1.2.1) · 2026-03-22 | 410 |
+
+### General Agents, Platforms, and Knowledge Bases
+
+| Project | Type | Core Focus | Best For | GitHub Description | Recently Updated | Latest Release | Stars |
+| --- | --- | --- | --- | --- | --- | --- | --- |
 | [reverse-skill](https://github.com/zhaoxuya520/reverse-skill) | Skill / Router | Routing security tasks and toolchains | Multi-tool orchestration, CTFs, security research, and report generation | Reverse Engineering / Authorized Penetration Testing / Security Research Skill Router Pack AI-powered routing + On-demand toolchain bootstrapping + Self-evolving knowledge base Supports Claude Code, Kiro, Cursor, Cline, and other AI coding clients 逆向/渗透/安全技能路由包 - AI 自动路由 + 按需自举工具链 + 自动进化经验库 &#124; 支持 Claude Code / Kiro / Cursor / Cline 等代码 AI 客户端 | Yes · 2026-08-01 | [v1.0.0](https://github.com/zhaoxuya520/reverse-skill/releases/tag/v1.0.0) · 2026-07-17 | 12311 |
+| [Open ReverseLab](https://github.com/LING71671/open-reverselab) | Lab / Knowledge Base / MCP | Agent-native reverse engineering laboratory | Authorized CTF, APK, PE, cryptography, and protocol-analysis workflows | Agent-native reverse-engineering lab with a 197-article knowledge base, MCP tools, and CTF/APK/PE automation workflows. | Yes · 2026-08-01 | [v1.1.0-windows](https://github.com/LING71671/open-reverselab/releases/tag/v1.1.0-windows) · 2026-07-08 | 959 |
+| [revula](https://github.com/president-xd/revula) | MCP Platform | General-purpose reverse engineering automation backend | Static analysis, dynamic debugging, malware analysis, and batch processing | A fully functional and production-grade reverse engineering MCP Server | Yes · 2026-07-10 | None | 70 |
+
+## Ghidra Ecosystem
+
+> MCP servers, native extensions, in-app AI plugins, headless automation interfaces, and agents that use Ghidra as their analysis backend.
+
+| Project | Type | Core Focus | Best For | GitHub Description | Recently Updated | Latest Release | Stars |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| [Ghidra MCP Server](https://github.com/bethington/ghidra-mcp) | Ghidra Plugin / MCP | Comprehensive Ghidra MCP service | GUI and headless analysis, batch operations, P-code, debugging, and team workflows | Ghidra MCP Server — 200+ MCP tools for AI-powered reverse engineering. GUI plugin + headless server, lazy tool loading, convention enforcement, batch operations, Ghidra Server integration, and Docker deployment. | Yes · 2026-08-02 | [v6.0.0](https://github.com/bethington/ghidra-mcp/releases/tag/v6.0.0) · 2026-07-25 | 3106 |
+| [auto-re-agent](https://github.com/Dryxio/auto-re-agent) | Agent / Ghidra Backend | Reconstructing and validating C/C++ functions from binaries | Decompilation evidence, candidate source generation, build tests, and parity checks | Open-source AI reverse-engineering agent using Ghidra and LLMs to reconstruct and validate C/C++ functions from binaries. | Yes · 2026-07-23 | [v0.2.1](https://github.com/Dryxio/auto-re-agent/releases/tag/v0.2.1) · 2026-07-23 | 1265 |
+| [reverse-engineering-assistant](https://github.com/cyberkaida/reverse-engineering-assistant) | Ghidra Plugin / MCP | MCP interface for Ghidra reverse engineering tasks | Decompilation, function and data-type analysis, renaming, and comments | MCP server for reverse engineering tasks in Ghidra 👩‍💻 | Yes · 2026-07-28 | [v7.3.0](https://github.com/cyberkaida/reverse-engineering-assistant/releases/tag/v7.3.0) · 2026-06-13 | 795 |
+| [GhidrAssistMCP](https://github.com/symgraph/GhidrAssistMCP) | Native Ghidra Extension / MCP | An in-process MCP server for Ghidra | Live binary analysis and agent tool calls inside Ghidra | An native MCP server extension for Ghidra | Yes · 2026-08-02 | [2.10.0](https://github.com/symgraph/GhidrAssistMCP/releases/tag/2.10.0) · 2026-07-10 | 686 |
+| [GhidraGPT](https://github.com/weirdmachine64/GhidraGPT) | Ghidra AI Plugin | Direct integration of multiple LLMs into Ghidra | Conversational function explanation, symbol naming, and AI-assisted analysis | Integrate LLM models directly into Ghidra for AI-enhanced reverse engineering. | Yes · 2026-07-22 | [v1.4.0](https://github.com/weirdmachine64/GhidraGPT/releases/tag/v1.4.0) · 2026-07-22 | 610 |
+| [PyGhidra-MCP](https://github.com/clearbluejar/pyghidra-mcp) | CLI / MCP | Command-line MCP built on PyGhidra | Headless analysis, shared GUI state, scripted tasks, and automated pipelines | Python Command-Line Ghidra MCP | Yes · 2026-07-14 | [v0.2.3](https://github.com/clearbluejar/pyghidra-mcp/releases/tag/v0.2.3) · 2026-07-07 | 394 |
+| [GhidraMCP](https://github.com/LaurieWired/GhidraMCP) | Ghidra Plugin / MCP | Connecting Ghidra to AI clients | Decompilation, function analysis, and symbol organization | MCP Server for Ghidra | No · 2025-06-23 | [1.4](https://github.com/LaurieWired/GhidraMCP/releases/tag/1.4) · 2025-06-23 | 9678 |
 
 ## Android and iOS Security Analysis
 
 > APK decompilation, API extraction, dynamic instrumentation, device management, traffic analysis, and mobile security knowledge bases.
 
+### Android Static Analysis and Decompilation
+
 | Project | Type | Core Focus | Best For | GitHub Description | Recently Updated | Latest Release | Stars |
 | --- | --- | --- | --- | --- | --- | --- | --- |
 | [Android Reverse Engineering Skill](https://github.com/SimoneAvogadro/android-reverse-engineering-skill) | Skill | Android static analysis and API extraction | APK, XAPK, JAR, AAR, Retrofit, OkHttp, and call-chain analysis | Claude Code skill to support Android app's reverse engineering | Yes · 2026-06-10 | [v1.1.0](https://github.com/SimoneAvogadro/android-reverse-engineering-skill/releases/tag/v1.1.0) · 2026-04-27 | 6613 |
 | [JADX-AI-MCP](https://github.com/zinja-coder/jadx-ai-mcp) | JADX Plugin / MCP | Real-time AI analysis in JADX | APK code review, vulnerability analysis, and contextual inspection | Plugin for JADX to integrate MCP server | Yes · 2026-05-28 | [v6.4.0](https://github.com/zinja-coder/jadx-ai-mcp/releases/tag/v6.4.0) · 2026-05-28 | 2589 |
+| [apktool-mcp-server](https://github.com/zinja-coder/apktool-mcp-server) | Apktool / MCP | AI access to Apktool decoding and rebuilding | Manifest, resource, and Smali analysis; APK decoding, modification, and rebuilding | A MCP Server for APK Tool (Part of Android Reverse Engineering MCP Suites) | Yes · 2026-07-02 | [V3.0.2](https://github.com/zinja-coder/apktool-mcp-server/releases/tag/V3.0.2) · 2026-07-02 | 615 |
+
+### Dynamic Instrumentation and Device Control
+
+| Project | Type | Core Focus | Best For | GitHub Description | Recently Updated | Latest Release | Stars |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| [frida-analykit](https://github.com/ZSA233/frida-analykit) | Frida Toolkit / MCP | Dynamic instrumentation for Android agents | Frida version management, low-level tool wrappers, hooks, and runtime analysis | Frida 工具包 - 主要面向安卓端逆向，解决frida环境版本管理和对Agent端常用底层工具方法封装，支持MCP。（目前主要由AI开发维护代码） | Yes · 2026-05-16 | [v2.1.4](https://github.com/ZSA233/frida-analykit/releases/tag/v2.1.4) · 2026-05-14 | 150 |
 | [iOS MCP](https://github.com/witchan/ios-mcp) | MCP | Control of jailbroken iOS devices | Applications, files, logs, HID, and accessibility operations | iOS MCP: MCP management tool for jailbroken iPhones, enabling developers and AI agents to inspect and control devices. | Yes · 2026-07-30 | [v1.2.3](https://github.com/witchan/ios-mcp/releases/tag/v1.2.3) · 2026-07-30 | 588 |
 
 ## Browser Automation and Traffic Analysis

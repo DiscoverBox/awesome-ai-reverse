@@ -36,7 +36,9 @@ Awesome AI Reverse Engineering 收集 AI 辅助逆向工具，覆盖 JavaScript 
 
 - [快速选型](#快速选型)
 - [JavaScript 与 Web 逆向](#javascript-与-web-逆向)
+- [IDA Pro 生态](#ida-pro-生态)
 - [二进制与原生程序逆向](#二进制与原生程序逆向)
+- [Ghidra 生态](#ghidra-生态)
 - [Android 与 iOS 安全分析](#android-与-ios-安全分析)
 - [浏览器自动化与流量分析](#浏览器自动化与流量分析)
 - [工具评估维度](#工具评估维度)
@@ -60,12 +62,18 @@ Awesome AI Reverse Engineering 收集 AI 辅助逆向工具，覆盖 JavaScript 
 | IDA Pro 实时 AI 分析                | [IDA Pro MCP](https://github.com/mrexodia/ida-pro-mcp)                       |
 | IDA 文件导出后交给 AI 分析               | [IDA-NO-MCP](https://github.com/P4nda0s/IDA-NO-MCP)                        |
 | 无头 IDA 服务                       | [ida-mcp-rs](https://github.com/blacktop/ida-mcp-rs)                        |
-| Ghidra AI 集成                    | [GhidraMCP](https://github.com/LaurieWired/GhidraMCP)                         |
+| 多个 IDA 实例并行分析                  | [ida-multi-mcp](https://github.com/MeroZemory/ida-multi-mcp)                 |
+| IDA 内直接使用多种 AI 模型              | [WPeGPT](https://github.com/WPeace-HcH/WPeGPT)                               |
+| Ghidra GUI 与无头 AI 分析          | [Ghidra MCP Server](https://github.com/bethington/ghidra-mcp)                 |
+| radare2 接入 AI Agent              | [Radare2 MCP Server](https://github.com/radareorg/radare2-mcp)                |
 | Binary Ninja AI 集成              | [Binary Ninja MCP](https://github.com/fosdickio/binary_ninja_mcp)                  |
 | x64dbg / x32dbg 动态调试           | [x64dbg-mcp](https://github.com/SetsunaYukiOvO/x64dbg-mcp)                  |
+| Cheat Engine 内存分析              | [Cheat Engine MCP Bridge](https://github.com/miscusi-peek/cheatengine-mcp-bridge) |
 | 多工具二进制自动化平台                     | [revula](https://github.com/president-xd/revula)                            |
 | Android API 提取和调用链分析            | [Android Reverse Engineering Skill](https://github.com/SimoneAvogadro/android-reverse-engineering-skill) |
 | JADX 内交互式 AI 分析                 | [JADX-AI-MCP](https://github.com/zinja-coder/jadx-ai-mcp)                       |
+| Apktool 解包、Smali 分析与重建          | [apktool-mcp-server](https://github.com/zinja-coder/apktool-mcp-server)         |
+| Android Frida 动态插桩               | [frida-analykit](https://github.com/ZSA233/frida-analykit)                      |
 | Charles 流量接入 AI                 | [Charles MCP Server](https://github.com/heizaheiza/Charles-mcp)                |
 | 一体化协议分析工作站                      | [Anything Analyzer](https://github.com/Mouseww/anything-analyzer)                 |
 | 引擎级 JS、JSVMP、WASM 追踪            | [Firefox-Reverse](https://github.com/WhiteNightShadow/firefox-reverse)                   |
@@ -105,30 +113,82 @@ Awesome AI Reverse Engineering 收集 AI 辅助逆向工具，覆盖 JavaScript 
 | --- | --- | --- | --- | --- | --- | --- | --- |
 | [ruishu-mcp](https://github.com/xuange520/ruishu-mcp) | MCP | 动态 WAF 流量研究工具 | 授权环境中的瑞数类动态防护、请求参数和流量分析 | 🚀 专为 AI Agent 打造的瑞数防爬流量净化 MCP 工具 / An MCP Tool for AI Agents to Stealthily Bypass and Purify Ruishu WAF Traffic | 是 · 2026-07-13 | [v1.1.0](https://github.com/xuange520/ruishu-mcp/releases/tag/v1.1.0) · 2026-04-13 | 85 |
 
-## 二进制与原生程序逆向
+## IDA Pro 生态
 
-> IDA Pro、Ghidra、Binary Ninja、调试器、反汇编器以及自动化二进制分析。
+> IDA Pro 的 MCP 服务、数据导出工具、内置 AI 插件以及多实例分析接口。
 
 | 项目 | 形态 | 核心定位 | 适用场景 | GitHub 简介 | 最近更新 | 最新 Release | Stars |
 | --- | --- | --- | --- | --- | --- | --- | --- |
+| [IDA Pro MCP](https://github.com/mrexodia/ida-pro-mcp) | IDA 插件 / MCP | AI 直接读取和操作 IDA Pro | 反编译、交叉引用、重命名、注释和类型恢复 | AI-powered reverse engineering assistant that bridges IDA Pro with language models through MCP. | 是 · 2026-07-30 | [1.4.0](https://github.com/mrexodia/ida-pro-mcp/releases/tag/1.4.0) · 2025-10-06 | 10999 |
 | [IDA-NO-MCP](https://github.com/P4nda0s/IDA-NO-MCP) | IDA 插件 / 导出工具 | 将 IDA 数据导出后交给 AI IDE 分析 | 大规模代码索引、低交互成本分析 | Say goodbye to the complex, verbose, and laggy interaction mode of IDA Pro MCP | 是 · 2026-07-26 | 暂无 | 1858 |
-| [IDA Pro MCP](https://github.com/mrexodia/ida-pro-mcp) | MCP | AI 直接读取和操作 IDA Pro | 反编译、交叉引用、重命名、注释和类型恢复 | AI-powered reverse engineering assistant that bridges IDA Pro with language models through MCP. | 是 · 2026-07-30 | [1.4.0](https://github.com/mrexodia/ida-pro-mcp/releases/tag/1.4.0) · 2025-10-06 | 10999 |
+| [WPeGPT](https://github.com/WPeace-HcH/WPeGPT) | IDA AI 插件 | 将多种 AI 模型直接嵌入 IDA | 使用 OpenAI、DeepSeek 等模型进行交互式二进制分析 | An IDA plugin for binary file analysis, powered by AI models such as OpenAI and DeepSeek. | 是 · 2026-05-27 | [v3.0](https://github.com/WPeace-HcH/WPeGPT/releases/tag/v3.0) · 2026-05-27 | 1392 |
 | [ida-mcp-rs](https://github.com/blacktop/ida-mcp-rs) | MCP | Rust 实现的无头 IDA 服务 | 服务端部署、自动化流水线 | Headless IDA Pro MCP Server | 是 · 2026-07-27 | [v9.4.1](https://github.com/blacktop/ida-mcp-rs/releases/tag/v9.4.1) · 2026-07-15 | 687 |
-| [GhidraMCP](https://github.com/LaurieWired/GhidraMCP) | Ghidra 插件 / MCP | Ghidra 与 AI 客户端连接 | 反编译、函数分析和符号整理 | MCP Server for Ghidra | 否 · 2025-06-23 | [1.4](https://github.com/LaurieWired/GhidraMCP/releases/tag/1.4) · 2025-06-23 | 9677 |
-| [Binary Ninja MCP](https://github.com/fosdickio/binary_ninja_mcp) | 插件 / MCP | Binary Ninja AI 桥接 | 多目标二进制实时分析 | A Binary Ninja plugin containing an MCP server that enables seamless integration with your favorite LLM/MCP client. | 否 · 2026-04-05 | [v1.2.1](https://github.com/fosdickio/binary_ninja_mcp/releases/tag/v1.2.1) · 2026-03-22 | 410 |
-| [x64dbg-mcp](https://github.com/SetsunaYukiOvO/x64dbg-mcp) | 插件 / MCP | 通过 MCP 远程控制 x64dbg 与 x32dbg | 执行控制、断点、内存、寄存器、反汇编和动态调试自动化 | MCP server plugin for x64dbg debugger - enables AI agents and external tools to control debugging via JSON-RPC 2.0 over HTTP/SSE | 是 · 2026-07-18 | [v1.0.10](https://github.com/SetsunaYukiOvO/x64dbg-mcp/releases/tag/v1.0.10) · 2026-07-18 | 336 |
-| [revula](https://github.com/president-xd/revula) | MCP 平台 | 通用逆向工程自动化后端 | 静态分析、动态调试、恶意软件和批量处理 | A fully functional and production-grade reverse engineering MCP Server | 是 · 2026-07-10 | 暂无 | 70 |
+| [ida-multi-mcp](https://github.com/MeroZemory/ida-multi-mcp) | IDA 插件 / MCP | 通过单个端点管理多个 IDA 实例 | 多二进制并行分析、跨样本函数相似性搜索和恶意软件组件关联 | Multi-instance IDA Pro MCP server — analyze multiple binaries simultaneously through a single MCP endpoint. | 是 · 2026-07-30 | 暂无 | 369 |
+
+## 二进制与原生程序逆向
+
+> radare2、Binary Ninja、动态调试器、内存分析工具以及跨工具逆向 Agent 和自动化平台。
+
+### radare2 生态
+
+| 项目 | 形态 | 核心定位 | 适用场景 | GitHub 简介 | 最近更新 | 最新 Release | Stars |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| [Radare2 MCP Server](https://github.com/radareorg/radare2-mcp) | radare2 插件 / MCP | radare2 官方 Agent 接口 | CLI 与远程会话、无头分析、只读模式、沙箱和自动化流水线 | MCP stdio server for radare2 | 是 · 2026-07-17 | [1.8.4](https://github.com/radareorg/radare2-mcp/releases/tag/1.8.4) · 2026-06-03 | 275 |
+| [r2ai](https://github.com/radareorg/r2ai) | radare2 AI 插件 | 在 radare2 内使用本地或远程 LLM | 函数解释、自动命名、漏洞分析、反编译辅助和 ReAct 工作流 | LLM-based reversing for radare2 | 是 · 2026-07-22 | [1.4.0](https://github.com/radareorg/r2ai/releases/tag/1.4.0) · 2026-06-03 | 461 |
+
+### 动态调试与内存分析
+
+| 项目 | 形态 | 核心定位 | 适用场景 | GitHub 简介 | 最近更新 | 最新 Release | Stars |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| [Cheat Engine MCP Bridge](https://github.com/miscusi-peek/cheatengine-mcp-bridge) | Cheat Engine 桥接 / MCP | AI 驱动的进程内存分析 | 内存扫描、指针链、结构恢复、反汇编和特征码生成 | Connect Cursor, Copilot & Claude AI directly to Cheat Engine via MCP. Automate reverse engineering, pointer scanning, and memory analysis using natural language. | 是 · 2026-07-16 | 暂无 | 1141 |
+| [x64dbg-mcp](https://github.com/SetsunaYukiOvO/x64dbg-mcp) | x64dbg 插件 / MCP | 通过 MCP 远程控制 x64dbg 与 x32dbg | 执行控制、断点、内存、寄存器、反汇编和动态调试自动化 | MCP server plugin for x64dbg debugger - enables AI agents and external tools to control debugging via JSON-RPC 2.0 over HTTP/SSE | 是 · 2026-07-18 | [v1.0.10](https://github.com/SetsunaYukiOvO/x64dbg-mcp/releases/tag/v1.0.10) · 2026-07-18 | 336 |
+
+### 其他逆向软件集成
+
+| 项目 | 形态 | 核心定位 | 适用场景 | GitHub 简介 | 最近更新 | 最新 Release | Stars |
+| --- | --- | --- | --- | --- | --- | --- | --- |
 | [Rikugan](https://github.com/buzzer-re/Rikugan) | Agent / 插件 | 嵌入 IDA 和 Binary Ninja 的 AI Agent | 在逆向界面中进行连续对话式分析 | A reverse-engineering agent for IDA Pro and Binary Ninja | 是 · 2026-06-15 | [v1.3.2](https://github.com/buzzer-re/Rikugan/releases/tag/v1.3.2) · 2026-06-15 | 665 |
+| [Binary Ninja MCP](https://github.com/fosdickio/binary_ninja_mcp) | Binary Ninja 插件 / MCP | Binary Ninja AI 桥接 | 多目标二进制实时分析 | A Binary Ninja plugin containing an MCP server that enables seamless integration with your favorite LLM/MCP client. | 否 · 2026-04-05 | [v1.2.1](https://github.com/fosdickio/binary_ninja_mcp/releases/tag/v1.2.1) · 2026-03-22 | 410 |
+
+### 通用 Agent、平台与知识库
+
+| 项目 | 形态 | 核心定位 | 适用场景 | GitHub 简介 | 最近更新 | 最新 Release | Stars |
+| --- | --- | --- | --- | --- | --- | --- | --- |
 | [reverse-skill](https://github.com/zhaoxuya520/reverse-skill) | Skill / Router | 安全任务和工具链路由 | 多工具编排、CTF、安全研究和报告生成 | Reverse Engineering / Authorized Penetration Testing / Security Research Skill Router Pack AI-powered routing + On-demand toolchain bootstrapping + Self-evolving knowledge base Supports Claude Code, Kiro, Cursor, Cline, and other AI coding clients 逆向/渗透/安全技能路由包 - AI 自动路由 + 按需自举工具链 + 自动进化经验库 &#124; 支持 Claude Code / Kiro / Cursor / Cline 等代码 AI 客户端 | 是 · 2026-08-01 | [v1.0.0](https://github.com/zhaoxuya520/reverse-skill/releases/tag/v1.0.0) · 2026-07-17 | 12311 |
+| [Open ReverseLab](https://github.com/LING71671/open-reverselab) | 实验环境 / 知识库 / MCP | 面向 Agent 的综合逆向实验室 | 授权环境中的 CTF、APK、PE、密码与协议分析工作流 | Agent-native reverse-engineering lab with a 197-article knowledge base, MCP tools, and CTF/APK/PE automation workflows. | 是 · 2026-08-01 | [v1.1.0-windows](https://github.com/LING71671/open-reverselab/releases/tag/v1.1.0-windows) · 2026-07-08 | 959 |
+| [revula](https://github.com/president-xd/revula) | MCP 平台 | 通用逆向工程自动化后端 | 静态分析、动态调试、恶意软件和批量处理 | A fully functional and production-grade reverse engineering MCP Server | 是 · 2026-07-10 | 暂无 | 70 |
+
+## Ghidra 生态
+
+> Ghidra 的 MCP 服务、原生扩展、内置 AI 插件、无头自动化接口以及以 Ghidra 为分析后端的 Agent。
+
+| 项目 | 形态 | 核心定位 | 适用场景 | GitHub 简介 | 最近更新 | 最新 Release | Stars |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| [Ghidra MCP Server](https://github.com/bethington/ghidra-mcp) | Ghidra 插件 / MCP | 综合型 Ghidra MCP 服务 | GUI 与无头分析、批量操作、P-code、调试器和团队协作 | Ghidra MCP Server — 200+ MCP tools for AI-powered reverse engineering. GUI plugin + headless server, lazy tool loading, convention enforcement, batch operations, Ghidra Server integration, and Docker deployment. | 是 · 2026-08-02 | [v6.0.0](https://github.com/bethington/ghidra-mcp/releases/tag/v6.0.0) · 2026-07-25 | 3106 |
+| [auto-re-agent](https://github.com/Dryxio/auto-re-agent) | Agent / Ghidra 后端 | 自动重建并验证二进制中的 C/C++ 函数 | 反编译证据收集、候选源码生成、构建测试和一致性检查 | Open-source AI reverse-engineering agent using Ghidra and LLMs to reconstruct and validate C/C++ functions from binaries. | 是 · 2026-07-23 | [v0.2.1](https://github.com/Dryxio/auto-re-agent/releases/tag/v0.2.1) · 2026-07-23 | 1265 |
+| [reverse-engineering-assistant](https://github.com/cyberkaida/reverse-engineering-assistant) | Ghidra 插件 / MCP | Ghidra 逆向任务接口 | 反编译、函数与数据类型分析、重命名和注释 | MCP server for reverse engineering tasks in Ghidra 👩‍💻 | 是 · 2026-07-28 | [v7.3.0](https://github.com/cyberkaida/reverse-engineering-assistant/releases/tag/v7.3.0) · 2026-06-13 | 795 |
+| [GhidrAssistMCP](https://github.com/symgraph/GhidrAssistMCP) | Ghidra 原生扩展 / MCP | Ghidra 内置 MCP 服务 | 原生界面中的实时二进制分析和 Agent 工具调用 | An native MCP server extension for Ghidra | 是 · 2026-08-02 | [2.10.0](https://github.com/symgraph/GhidrAssistMCP/releases/tag/2.10.0) · 2026-07-10 | 686 |
+| [GhidraGPT](https://github.com/weirdmachine64/GhidraGPT) | Ghidra AI 插件 | 将多种 LLM 直接集成到 Ghidra | 对话式函数解释、符号命名和 AI 辅助分析 | Integrate LLM models directly into Ghidra for AI-enhanced reverse engineering. | 是 · 2026-07-22 | [v1.4.0](https://github.com/weirdmachine64/GhidraGPT/releases/tag/v1.4.0) · 2026-07-22 | 610 |
+| [PyGhidra-MCP](https://github.com/clearbluejar/pyghidra-mcp) | CLI / MCP | 基于 PyGhidra 的命令行 MCP | 无头分析、GUI 共享状态、脚本化任务和自动化流水线 | Python Command-Line Ghidra MCP | 是 · 2026-07-14 | [v0.2.3](https://github.com/clearbluejar/pyghidra-mcp/releases/tag/v0.2.3) · 2026-07-07 | 394 |
+| [GhidraMCP](https://github.com/LaurieWired/GhidraMCP) | Ghidra 插件 / MCP | Ghidra 与 AI 客户端连接 | 反编译、函数分析和符号整理 | MCP Server for Ghidra | 否 · 2025-06-23 | [1.4](https://github.com/LaurieWired/GhidraMCP/releases/tag/1.4) · 2025-06-23 | 9678 |
 
 ## Android 与 iOS 安全分析
 
 > APK 反编译、API 提取、动态插桩、设备管理、流量分析和移动安全知识库。
 
+### Android 静态分析与反编译
+
 | 项目 | 形态 | 核心定位 | 适用场景 | GitHub 简介 | 最近更新 | 最新 Release | Stars |
 | --- | --- | --- | --- | --- | --- | --- | --- |
 | [Android Reverse Engineering Skill](https://github.com/SimoneAvogadro/android-reverse-engineering-skill) | Skill | Android 静态分析与 API 提取 | APK、XAPK、JAR、AAR、Retrofit、OkHttp 和调用链分析 | Claude Code skill to support Android app's reverse engineering | 是 · 2026-06-10 | [v1.1.0](https://github.com/SimoneAvogadro/android-reverse-engineering-skill/releases/tag/v1.1.0) · 2026-04-27 | 6613 |
 | [JADX-AI-MCP](https://github.com/zinja-coder/jadx-ai-mcp) | JADX 插件 / MCP | JADX 内实时 AI 分析 | APK 代码阅读、漏洞分析和上下文审查 | Plugin for JADX to integrate MCP server | 是 · 2026-05-28 | [v6.4.0](https://github.com/zinja-coder/jadx-ai-mcp/releases/tag/v6.4.0) · 2026-05-28 | 2589 |
+| [apktool-mcp-server](https://github.com/zinja-coder/apktool-mcp-server) | Apktool / MCP | 通过 AI 操作 Apktool 的解包与重建能力 | Manifest、资源和 Smali 分析，APK 解包、修改与重新构建 | A MCP Server for APK Tool (Part of Android Reverse Engineering MCP Suites) | 是 · 2026-07-02 | [V3.0.2](https://github.com/zinja-coder/apktool-mcp-server/releases/tag/V3.0.2) · 2026-07-02 | 615 |
+
+### 动态插桩与设备控制
+
+| 项目 | 形态 | 核心定位 | 适用场景 | GitHub 简介 | 最近更新 | 最新 Release | Stars |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| [frida-analykit](https://github.com/ZSA233/frida-analykit) | Frida 工具包 / MCP | 面向 Android Agent 的动态插桩接口 | Frida 版本管理、底层工具封装、Hook 和运行时分析 | Frida 工具包 - 主要面向安卓端逆向，解决frida环境版本管理和对Agent端常用底层工具方法封装，支持MCP。（目前主要由AI开发维护代码） | 是 · 2026-05-16 | [v2.1.4](https://github.com/ZSA233/frida-analykit/releases/tag/v2.1.4) · 2026-05-14 | 150 |
 | [iOS MCP](https://github.com/witchan/ios-mcp) | MCP | 越狱 iOS 设备控制 | 应用、文件、日志、HID 和辅助功能操作 | iOS MCP: MCP management tool for jailbroken iPhones, enabling developers and AI agents to inspect and control devices. | 是 · 2026-07-30 | [v1.2.3](https://github.com/witchan/ios-mcp/releases/tag/v1.2.3) · 2026-07-30 | 588 |
 
 ## 浏览器自动化与流量分析
