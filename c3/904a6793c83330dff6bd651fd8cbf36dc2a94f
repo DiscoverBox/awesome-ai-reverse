@@ -1,0 +1,29 @@
+README_EN.md
+  s_be22d6be4bfe8f::t_83cf54ef6927bd 169-175
+  s_be22d6be4bfe8f::t_769b423b20f436 41,67-68,70,73,77-78
+  s_be22d6be4bfe8f::t_44e777d38f83b1 181-182,187-193
+  s_be22d6be4bfe8f::t_f3870620e75794 43,69,162-168
+  s_be22d6be4bfe8f::t_bdcfe070beed1c 118,120,124,126,128-151,153-158,160-161
+README.md
+  s_be22d6be4bfe8f::t_769b423b20f436 39,65-66,68,71,75-76
+  s_be22d6be4bfe8f::t_858c94c4fe1af9 116,118,122,124,126-149,151-156,158-159
+  s_be22d6be4bfe8f::t_f3870620e75794 41,67,160-166
+  s_be22d6be4bfe8f::t_83cf54ef6927bd 167-173
+  s_be22d6be4bfe8f::t_6b0235be4ef104 179-180,185-191
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.20",
+  "base_commit_sha": "c3904a6793c83330dff6bd651fd8cbf36dc2a94f",
+  "prompts": {},
+  "sessions": {
+    "s_be22d6be4bfe8f": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "019fc27e-c697-7f20-ac02-733dbe29b84f",
+        "model": "gpt-5.6-sol"
+      },
+      "human_author": "DiscoverBox <pczhuling@gmail.com>"
+    }
+  }
+}
