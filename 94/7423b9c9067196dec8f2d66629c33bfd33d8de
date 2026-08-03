@@ -1,0 +1,24 @@
+README.md
+  s_40d415a658ade7::t_2f9683a972a84a 20
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.20",
+  "base_commit_sha": "947423b9c9067196dec8f2d66629c33bfd33d8de",
+  "prompts": {},
+  "humans": {
+    "h_94c24d9d37904f": {
+      "author": "DiscoverBox <pczhuling@gmail.com>"
+    }
+  },
+  "sessions": {
+    "s_40d415a658ade7": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "f6ea9950-ec2a-453b-b8fa-49bb55645021",
+        "model": "unknown"
+      },
+      "human_author": "DiscoverBox <pczhuling@gmail.com>"
+    }
+  }
+}
