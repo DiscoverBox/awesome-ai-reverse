@@ -1,0 +1,23 @@
+README.md
+  s_11c8372cd35307::t_c340ab9dff73f5 76
+  s_11c8372cd35307::t_d53e3a3507799f 187
+README_EN.md
+  s_11c8372cd35307::t_0f9c28fc6ed985 78
+  s_11c8372cd35307::t_37fd7f550bc003 189
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.20",
+  "base_commit_sha": "615be95b6f9aae09f5bbcdafbbb48ea3c07463ae",
+  "prompts": {},
+  "sessions": {
+    "s_11c8372cd35307": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "64d55279-8cc9-47ba-b4ac-7238aca33836",
+        "model": "glm-5.2"
+      },
+      "human_author": "DiscoverBox <pczhuling@gmail.com>"
+    }
+  }
+}
