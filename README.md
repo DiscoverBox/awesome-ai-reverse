@@ -37,8 +37,9 @@ Awesome AI Reverse Engineering 收集 AI 辅助逆向工具，覆盖 JavaScript 
 - [快速选型](#快速选型)
 - [JavaScript 与 Web 逆向](#javascript-与-web-逆向)
 - [IDA Pro 生态](#ida-pro-生态)
-- [二进制与原生程序逆向](#二进制与原生程序逆向)
 - [Ghidra 生态](#ghidra-生态)
+- [二进制与原生程序逆向](#二进制与原生程序逆向)
+- [通用 Agent、平台与知识库](#通用-agent平台与知识库)
 - [Android 与 iOS 安全分析](#android-与-ios-安全分析)
 - [浏览器自动化与流量分析](#浏览器自动化与流量分析)
 - [工具评估维度](#工具评估维度)
@@ -108,6 +109,12 @@ Awesome AI Reverse Engineering 收集 AI 辅助逆向工具，覆盖 JavaScript 
 | [reverse-skill](https://github.com/715494637/reverse-skill/) | Skill | 高级 Web 逆向方法库 | JSVMP、Worker、WASM、Webpack、AST 和协议分析 | 面向 Web JS 逆向分析的技能仓库，覆盖请求链定位、运行时诊断、AST 混淆恢复、JSVMP、worker、WASM、webpack/runtime 与协议语义分析。 | 否 · 2026-05-02 | [jsr-skills-15-a3e116e](https://github.com/715494637/reverse-skill/releases/tag/jsr-skills-15-a3e116e) · 2026-05-02 | 325 |
 | [xbsReverseSkill](https://github.com/lwjjike/xbsReverseSkill) | Skill 套件 | 模块化 Web 逆向能力 | AST、纯算法、协议分析、浏览器补环境 | Ai逆向的skill目录 | 是 · 2026-07-21 | [v1.0.0](https://github.com/lwjjike/xbsReverseSkill/releases/tag/v1.0.0) · 2026-03-28 | 342 |
 
+### 定制浏览器与引擎级分析
+
+| 项目 | 形态 | 核心定位 | 适用场景 | GitHub 简介 | 最近更新 | 最新 Release | Stars |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| [Firefox-Reverse](https://github.com/WhiteNightShadow/firefox-reverse) | 定制浏览器 / Agent | 引擎级 JS、JSVMP 和 WASM 追踪 | 高级混淆、动态代码和底层执行轨迹分析 | 🦊 内置 AI 逆向 Agent 的 Firefox — 通用 JS/JSVMP/WASM/签名逆向工作站，SpiderMonkey 引擎层非侵入 trace，把加密参数从黑盒还原成不依赖浏览器的纯算法 | 是 · 2026-07-29 | [v0.22.4](https://github.com/WhiteNightShadow/firefox-reverse/releases/tag/v0.22.4) · 2026-07-29 | 612 |
+
 ### 专用 Web 安全分析工具
 
 | 项目 | 形态 | 核心定位 | 适用场景 | GitHub 简介 | 最近更新 | 最新 Release | Stars |
@@ -126,9 +133,23 @@ Awesome AI Reverse Engineering 收集 AI 辅助逆向工具，覆盖 JavaScript 
 | [ida-mcp-rs](https://github.com/blacktop/ida-mcp-rs) | MCP | Rust 实现的无头 IDA 服务 | 服务端部署、自动化流水线 | Headless IDA Pro MCP Server | 是 · 2026-07-27 | [v9.4.1](https://github.com/blacktop/ida-mcp-rs/releases/tag/v9.4.1) · 2026-07-15 | 697 |
 | [ida-multi-mcp](https://github.com/MeroZemory/ida-multi-mcp) | IDA 插件 / MCP | 通过单个端点管理多个 IDA 实例 | 多二进制并行分析、跨样本函数相似性搜索和恶意软件组件关联 | Multi-instance IDA Pro MCP server — analyze multiple binaries simultaneously through a single MCP endpoint. | 是 · 2026-07-30 | 暂无 | 370 |
 
+## Ghidra 生态
+
+> Ghidra 的 MCP 服务、原生扩展、内置 AI 插件、无头自动化接口以及以 Ghidra 为分析后端的 Agent。
+
+| 项目 | 形态 | 核心定位 | 适用场景 | GitHub 简介 | 最近更新 | 最新 Release | Stars |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| [Ghidra MCP Server](https://github.com/bethington/ghidra-mcp) | Ghidra 插件 / MCP | 综合型 Ghidra MCP 服务 | GUI 与无头分析、批量操作、P-code、调试器和团队协作 | Ghidra MCP Server — 200+ MCP tools for AI-powered reverse engineering. GUI plugin + headless server, lazy tool loading, convention enforcement, batch operations, Ghidra Server integration, and Docker deployment. | 是 · 2026-08-04 | [v6.0.0](https://github.com/bethington/ghidra-mcp/releases/tag/v6.0.0) · 2026-07-25 | 3135 |
+| [auto-re-agent](https://github.com/Dryxio/auto-re-agent) | Agent / Ghidra 后端 | 自动重建并验证二进制中的 C/C++ 函数 | 反编译证据收集、候选源码生成、构建测试和一致性检查 | Open-source AI reverse-engineering agent using Ghidra and LLMs to reconstruct and validate C/C++ functions from binaries. | 是 · 2026-07-23 | [v0.2.1](https://github.com/Dryxio/auto-re-agent/releases/tag/v0.2.1) · 2026-07-23 | 1274 |
+| [reverse-engineering-assistant](https://github.com/cyberkaida/reverse-engineering-assistant) | Ghidra 插件 / MCP | Ghidra 逆向任务接口 | 反编译、函数与数据类型分析、重命名和注释 | MCP server for reverse engineering tasks in Ghidra 👩‍💻 | 是 · 2026-08-04 | [v7.3.0](https://github.com/cyberkaida/reverse-engineering-assistant/releases/tag/v7.3.0) · 2026-06-13 | 796 |
+| [GhidrAssistMCP](https://github.com/symgraph/GhidrAssistMCP) | Ghidra 原生扩展 / MCP | Ghidra 内置 MCP 服务 | 原生界面中的实时二进制分析和 Agent 工具调用 | An native MCP server extension for Ghidra | 是 · 2026-08-03 | [2.11.0](https://github.com/symgraph/GhidrAssistMCP/releases/tag/2.11.0) · 2026-08-03 | 695 |
+| [GhidraGPT](https://github.com/weirdmachine64/GhidraGPT) | Ghidra AI 插件 | 将多种 LLM 直接集成到 Ghidra | 对话式函数解释、符号命名和 AI 辅助分析 | Integrate LLM models directly into Ghidra for AI-enhanced reverse engineering. | 是 · 2026-07-22 | [v1.4.0](https://github.com/weirdmachine64/GhidraGPT/releases/tag/v1.4.0) · 2026-07-22 | 613 |
+| [PyGhidra-MCP](https://github.com/clearbluejar/pyghidra-mcp) | CLI / MCP | 基于 PyGhidra 的命令行 MCP | 无头分析、GUI 共享状态、脚本化任务和自动化流水线 | Python Command-Line Ghidra MCP | 是 · 2026-08-03 | [v0.2.4](https://github.com/clearbluejar/pyghidra-mcp/releases/tag/v0.2.4) · 2026-08-03 | 397 |
+| [GhidraMCP](https://github.com/LaurieWired/GhidraMCP) | Ghidra 插件 / MCP | Ghidra 与 AI 客户端连接 | 反编译、函数分析和符号整理 | MCP Server for Ghidra | 否 · 2025-06-23 | [1.4](https://github.com/LaurieWired/GhidraMCP/releases/tag/1.4) · 2025-06-23 | 9701 |
+
 ## 二进制与原生程序逆向
 
-> radare2、Binary Ninja、动态调试器、内存分析工具以及跨工具逆向 Agent 和自动化平台。
+> radare2、Binary Ninja、动态调试器、内存分析工具以及跨工具逆向 Agent。
 
 ### radare2 生态
 
@@ -151,27 +172,13 @@ Awesome AI Reverse Engineering 收集 AI 辅助逆向工具，覆盖 JavaScript 
 | [Rikugan](https://github.com/buzzer-re/Rikugan) | Agent / 插件 | 嵌入 IDA 和 Binary Ninja 的 AI Agent | 在逆向界面中进行连续对话式分析 | A reverse-engineering agent for IDA Pro and Binary Ninja | 是 · 2026-06-15 | [v1.3.2](https://github.com/buzzer-re/Rikugan/releases/tag/v1.3.2) · 2026-06-15 | 666 |
 | [Binary Ninja MCP](https://github.com/fosdickio/binary_ninja_mcp) | Binary Ninja 插件 / MCP | Binary Ninja AI 桥接 | 多目标二进制实时分析 | A Binary Ninja plugin containing an MCP server that enables seamless integration with your favorite LLM/MCP client. | 否 · 2026-04-05 | [v1.2.1](https://github.com/fosdickio/binary_ninja_mcp/releases/tag/v1.2.1) · 2026-03-22 | 412 |
 
-### 通用 Agent、平台与知识库
+## 通用 Agent、平台与知识库
 
 | 项目 | 形态 | 核心定位 | 适用场景 | GitHub 简介 | 最近更新 | 最新 Release | Stars |
 | --- | --- | --- | --- | --- | --- | --- | --- |
 | [reverse-skill](https://github.com/zhaoxuya520/reverse-skill) | Skill / Router | 安全任务和工具链路由 | 多工具编排、CTF、安全研究和报告生成 | Reverse Engineering / Authorized Penetration Testing / Security Research Skill Router Pack AI-powered routing + On-demand toolchain bootstrapping + Self-evolving knowledge base Supports Claude Code, Kiro, Cursor, Cline, and other AI coding clients 逆向/渗透/安全技能路由包 - AI 自动路由 + 按需自举工具链 + 自动进化经验库 &#124; 支持 Claude Code / Kiro / Cursor / Cline 等代码 AI 客户端 | 是 · 2026-08-04 | [v1.0.0](https://github.com/zhaoxuya520/reverse-skill/releases/tag/v1.0.0) · 2026-07-17 | 16994 |
 | [Open ReverseLab](https://github.com/LING71671/open-reverselab) | 实验环境 / 知识库 / MCP | 面向 Agent 的综合逆向实验室 | 授权环境中的 CTF、APK、PE、密码与协议分析工作流 | Agent-native reverse-engineering lab with a 197-article knowledge base, MCP tools, and CTF/APK/PE automation workflows. | 是 · 2026-08-01 | [v1.1.0-windows](https://github.com/LING71671/open-reverselab/releases/tag/v1.1.0-windows) · 2026-07-08 | 970 |
 | [revula](https://github.com/president-xd/revula) | MCP 平台 | 通用逆向工程自动化后端 | 静态分析、动态调试、恶意软件和批量处理 | A fully functional and production-grade reverse engineering MCP Server | 是 · 2026-07-10 | 暂无 | 70 |
-
-## Ghidra 生态
-
-> Ghidra 的 MCP 服务、原生扩展、内置 AI 插件、无头自动化接口以及以 Ghidra 为分析后端的 Agent。
-
-| 项目 | 形态 | 核心定位 | 适用场景 | GitHub 简介 | 最近更新 | 最新 Release | Stars |
-| --- | --- | --- | --- | --- | --- | --- | --- |
-| [Ghidra MCP Server](https://github.com/bethington/ghidra-mcp) | Ghidra 插件 / MCP | 综合型 Ghidra MCP 服务 | GUI 与无头分析、批量操作、P-code、调试器和团队协作 | Ghidra MCP Server — 200+ MCP tools for AI-powered reverse engineering. GUI plugin + headless server, lazy tool loading, convention enforcement, batch operations, Ghidra Server integration, and Docker deployment. | 是 · 2026-08-04 | [v6.0.0](https://github.com/bethington/ghidra-mcp/releases/tag/v6.0.0) · 2026-07-25 | 3135 |
-| [auto-re-agent](https://github.com/Dryxio/auto-re-agent) | Agent / Ghidra 后端 | 自动重建并验证二进制中的 C/C++ 函数 | 反编译证据收集、候选源码生成、构建测试和一致性检查 | Open-source AI reverse-engineering agent using Ghidra and LLMs to reconstruct and validate C/C++ functions from binaries. | 是 · 2026-07-23 | [v0.2.1](https://github.com/Dryxio/auto-re-agent/releases/tag/v0.2.1) · 2026-07-23 | 1274 |
-| [reverse-engineering-assistant](https://github.com/cyberkaida/reverse-engineering-assistant) | Ghidra 插件 / MCP | Ghidra 逆向任务接口 | 反编译、函数与数据类型分析、重命名和注释 | MCP server for reverse engineering tasks in Ghidra 👩‍💻 | 是 · 2026-08-04 | [v7.3.0](https://github.com/cyberkaida/reverse-engineering-assistant/releases/tag/v7.3.0) · 2026-06-13 | 796 |
-| [GhidrAssistMCP](https://github.com/symgraph/GhidrAssistMCP) | Ghidra 原生扩展 / MCP | Ghidra 内置 MCP 服务 | 原生界面中的实时二进制分析和 Agent 工具调用 | An native MCP server extension for Ghidra | 是 · 2026-08-03 | [2.11.0](https://github.com/symgraph/GhidrAssistMCP/releases/tag/2.11.0) · 2026-08-03 | 695 |
-| [GhidraGPT](https://github.com/weirdmachine64/GhidraGPT) | Ghidra AI 插件 | 将多种 LLM 直接集成到 Ghidra | 对话式函数解释、符号命名和 AI 辅助分析 | Integrate LLM models directly into Ghidra for AI-enhanced reverse engineering. | 是 · 2026-07-22 | [v1.4.0](https://github.com/weirdmachine64/GhidraGPT/releases/tag/v1.4.0) · 2026-07-22 | 613 |
-| [PyGhidra-MCP](https://github.com/clearbluejar/pyghidra-mcp) | CLI / MCP | 基于 PyGhidra 的命令行 MCP | 无头分析、GUI 共享状态、脚本化任务和自动化流水线 | Python Command-Line Ghidra MCP | 是 · 2026-08-03 | [v0.2.4](https://github.com/clearbluejar/pyghidra-mcp/releases/tag/v0.2.4) · 2026-08-03 | 397 |
-| [GhidraMCP](https://github.com/LaurieWired/GhidraMCP) | Ghidra 插件 / MCP | Ghidra 与 AI 客户端连接 | 反编译、函数分析和符号整理 | MCP Server for Ghidra | 否 · 2025-06-23 | [1.4](https://github.com/LaurieWired/GhidraMCP/releases/tag/1.4) · 2025-06-23 | 9701 |
 
 ## Android 与 iOS 安全分析
 
@@ -204,7 +211,6 @@ Awesome AI Reverse Engineering 收集 AI 辅助逆向工具，覆盖 JavaScript 
 | [Charles MCP Server](https://github.com/heizaheiza/Charles-mcp) | MCP | Charles Proxy AI 接入 | 实时流量、历史 Session 和请求分析 | Charles Proxy MCP server for AI agents with live capture, structured traffic analysis, and agent-friendly tool contracts | 是 · 2026-06-23 | [v3.0.3](https://github.com/heizaheiza/Charles-mcp/releases/tag/v3.0.3) · 2026-04-21 | 290 |
 | [CipherBridge](https://github.com/CuriousLearnerDev/CipherBridge) | 桌面工作站 / AI Agent | AI 辅助的 APP/Web 加解密逆向与流量桥接 | 浏览器 Hook、小程序源码分析、加解密参数还原、Burp 双向加解密桥接和 mitmdump 插件生成 | 面向APP/Web 加解密逆向分析、渗透测试人员的可视化解密框架 | 是 · 2026-07-29 | [3.5](https://github.com/CuriousLearnerDev/CipherBridge/releases/tag/3.5) · 2026-07-27 | 331 |
 | [Anything Analyzer](https://github.com/Mouseww/anything-analyzer) | 桌面工作站 | 一体化协议和逆向分析 | 浏览器、代理、Hook、AI 和 MCP 集成 | 全能协议分析工具：浏览器抓包 + MITM 代理 + 指纹伪装 + AI 分析 + MCP Server 无缝对接 AI Agent/IDE &#124; All-in-one protocol analysis toolkit — built-in browser capture, MITM proxy, JS hooks, fingerprint spoofing, AI analysis & MCP server for agent integration | 是 · 2026-08-04 | [v3.6.55](https://github.com/Mouseww/anything-analyzer/releases/tag/v3.6.55) · 2026-08-04 | 3410 |
-| [Firefox-Reverse](https://github.com/WhiteNightShadow/firefox-reverse) | 定制浏览器 / Agent | 引擎级 JS、JSVMP 和 WASM 追踪 | 高级混淆、动态代码和底层执行轨迹分析 | 🦊 内置 AI 逆向 Agent 的 Firefox — 通用 JS/JSVMP/WASM/签名逆向工作站，SpiderMonkey 引擎层非侵入 trace，把加密参数从黑盒还原成不依赖浏览器的纯算法 | 是 · 2026-07-29 | [v0.22.4](https://github.com/WhiteNightShadow/firefox-reverse/releases/tag/v0.22.4) · 2026-07-29 | 612 |
 
 ## 工具评估维度
 

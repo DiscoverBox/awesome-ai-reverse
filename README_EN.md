@@ -39,8 +39,9 @@ The list includes MCP servers, skills, plugins for IDA Pro, Ghidra, Binary Ninja
 - [Quick Selection](#quick-selection)
 - [JavaScript and Web Reverse Engineering](#javascript-and-web-reverse-engineering)
 - [IDA Pro Ecosystem](#ida-pro-ecosystem)
-- [Binary and Native Reverse Engineering](#binary-and-native-reverse-engineering)
 - [Ghidra Ecosystem](#ghidra-ecosystem)
+- [Binary and Native Reverse Engineering](#binary-and-native-reverse-engineering)
+- [General Agents, Platforms, and Knowledge Bases](#general-agents-platforms-and-knowledge-bases)
 - [Android and iOS Security Analysis](#android-and-ios-security-analysis)
 - [Browser Automation and Traffic Analysis](#browser-automation-and-traffic-analysis)
 - [Evaluation Criteria](#evaluation-criteria)
@@ -110,6 +111,12 @@ The list includes MCP servers, skills, plugins for IDA Pro, Ghidra, Binary Ninja
 | [reverse-skill](https://github.com/715494637/reverse-skill/) | Skill | Advanced Web reverse engineering methods | JSVMP, workers, WASM, Webpack, AST, and protocol analysis | 面向 Web JS 逆向分析的技能仓库，覆盖请求链定位、运行时诊断、AST 混淆恢复、JSVMP、worker、WASM、webpack/runtime 与协议语义分析。 | No · 2026-05-02 | [jsr-skills-15-a3e116e](https://github.com/715494637/reverse-skill/releases/tag/jsr-skills-15-a3e116e) · 2026-05-02 | 325 |
 | [xbsReverseSkill](https://github.com/lwjjike/xbsReverseSkill) | Skill Suite | Modular Web reverse engineering capabilities | AST analysis, standalone algorithms, protocol analysis, and browser environment emulation | Ai逆向的skill目录 | Yes · 2026-07-21 | [v1.0.0](https://github.com/lwjjike/xbsReverseSkill/releases/tag/v1.0.0) · 2026-03-28 | 342 |
 
+### Custom Browsers and Engine-Level Analysis
+
+| Project | Type | Core Focus | Best For | GitHub Description | Recently Updated | Latest Release | Stars |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| [Firefox-Reverse](https://github.com/WhiteNightShadow/firefox-reverse) | Custom Browser / Agent | Engine-level tracing for JS, JSVMP, and WASM | Advanced obfuscation, dynamic code, and low-level execution tracing | 🦊 内置 AI 逆向 Agent 的 Firefox — 通用 JS/JSVMP/WASM/签名逆向工作站，SpiderMonkey 引擎层非侵入 trace，把加密参数从黑盒还原成不依赖浏览器的纯算法 | Yes · 2026-07-29 | [v0.22.4](https://github.com/WhiteNightShadow/firefox-reverse/releases/tag/v0.22.4) · 2026-07-29 | 612 |
+
 ### Specialized Web Security Analysis Tools
 
 | Project | Type | Core Focus | Best For | GitHub Description | Recently Updated | Latest Release | Stars |
@@ -128,9 +135,23 @@ The list includes MCP servers, skills, plugins for IDA Pro, Ghidra, Binary Ninja
 | [ida-mcp-rs](https://github.com/blacktop/ida-mcp-rs) | MCP | Headless IDA service implemented in Rust | Server deployments and automated pipelines | Headless IDA Pro MCP Server | Yes · 2026-07-27 | [v9.4.1](https://github.com/blacktop/ida-mcp-rs/releases/tag/v9.4.1) · 2026-07-15 | 697 |
 | [ida-multi-mcp](https://github.com/MeroZemory/ida-multi-mcp) | IDA Plugin / MCP | Managing multiple IDA instances through one endpoint | Parallel multi-binary analysis, cross-sample function similarity, and malware component correlation | Multi-instance IDA Pro MCP server — analyze multiple binaries simultaneously through a single MCP endpoint. | Yes · 2026-07-30 | None | 370 |
 
+## Ghidra Ecosystem
+
+> MCP servers, native extensions, in-app AI plugins, headless automation interfaces, and agents that use Ghidra as their analysis backend.
+
+| Project | Type | Core Focus | Best For | GitHub Description | Recently Updated | Latest Release | Stars |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| [Ghidra MCP Server](https://github.com/bethington/ghidra-mcp) | Ghidra Plugin / MCP | Comprehensive Ghidra MCP service | GUI and headless analysis, batch operations, P-code, debugging, and team workflows | Ghidra MCP Server — 200+ MCP tools for AI-powered reverse engineering. GUI plugin + headless server, lazy tool loading, convention enforcement, batch operations, Ghidra Server integration, and Docker deployment. | Yes · 2026-08-04 | [v6.0.0](https://github.com/bethington/ghidra-mcp/releases/tag/v6.0.0) · 2026-07-25 | 3135 |
+| [auto-re-agent](https://github.com/Dryxio/auto-re-agent) | Agent / Ghidra Backend | Reconstructing and validating C/C++ functions from binaries | Decompilation evidence, candidate source generation, build tests, and parity checks | Open-source AI reverse-engineering agent using Ghidra and LLMs to reconstruct and validate C/C++ functions from binaries. | Yes · 2026-07-23 | [v0.2.1](https://github.com/Dryxio/auto-re-agent/releases/tag/v0.2.1) · 2026-07-23 | 1274 |
+| [reverse-engineering-assistant](https://github.com/cyberkaida/reverse-engineering-assistant) | Ghidra Plugin / MCP | MCP interface for Ghidra reverse engineering tasks | Decompilation, function and data-type analysis, renaming, and comments | MCP server for reverse engineering tasks in Ghidra 👩‍💻 | Yes · 2026-08-04 | [v7.3.0](https://github.com/cyberkaida/reverse-engineering-assistant/releases/tag/v7.3.0) · 2026-06-13 | 796 |
+| [GhidrAssistMCP](https://github.com/symgraph/GhidrAssistMCP) | Native Ghidra Extension / MCP | An in-process MCP server for Ghidra | Live binary analysis and agent tool calls inside Ghidra | An native MCP server extension for Ghidra | Yes · 2026-08-03 | [2.11.0](https://github.com/symgraph/GhidrAssistMCP/releases/tag/2.11.0) · 2026-08-03 | 695 |
+| [GhidraGPT](https://github.com/weirdmachine64/GhidraGPT) | Ghidra AI Plugin | Direct integration of multiple LLMs into Ghidra | Conversational function explanation, symbol naming, and AI-assisted analysis | Integrate LLM models directly into Ghidra for AI-enhanced reverse engineering. | Yes · 2026-07-22 | [v1.4.0](https://github.com/weirdmachine64/GhidraGPT/releases/tag/v1.4.0) · 2026-07-22 | 613 |
+| [PyGhidra-MCP](https://github.com/clearbluejar/pyghidra-mcp) | CLI / MCP | Command-line MCP built on PyGhidra | Headless analysis, shared GUI state, scripted tasks, and automated pipelines | Python Command-Line Ghidra MCP | Yes · 2026-08-03 | [v0.2.4](https://github.com/clearbluejar/pyghidra-mcp/releases/tag/v0.2.4) · 2026-08-03 | 397 |
+| [GhidraMCP](https://github.com/LaurieWired/GhidraMCP) | Ghidra Plugin / MCP | Connecting Ghidra to AI clients | Decompilation, function analysis, and symbol organization | MCP Server for Ghidra | No · 2025-06-23 | [1.4](https://github.com/LaurieWired/GhidraMCP/releases/tag/1.4) · 2025-06-23 | 9701 |
+
 ## Binary and Native Reverse Engineering
 
-> radare2, Binary Ninja, dynamic debuggers, memory-analysis tools, and cross-tool reverse engineering agents and automation platforms.
+> radare2, Binary Ninja, dynamic debuggers, memory-analysis tools, and cross-tool reverse engineering agents.
 
 ### radare2 Ecosystem
 
@@ -153,27 +174,13 @@ The list includes MCP servers, skills, plugins for IDA Pro, Ghidra, Binary Ninja
 | [Rikugan](https://github.com/buzzer-re/Rikugan) | Agent / Plugin | AI agent embedded in IDA and Binary Ninja | Continuous conversational analysis within a reverse engineering interface | A reverse-engineering agent for IDA Pro and Binary Ninja | Yes · 2026-06-15 | [v1.3.2](https://github.com/buzzer-re/Rikugan/releases/tag/v1.3.2) · 2026-06-15 | 666 |
 | [Binary Ninja MCP](https://github.com/fosdickio/binary_ninja_mcp) | Binary Ninja Plugin / MCP | AI bridge for Binary Ninja | Real-time analysis across multiple binary targets | A Binary Ninja plugin containing an MCP server that enables seamless integration with your favorite LLM/MCP client. | No · 2026-04-05 | [v1.2.1](https://github.com/fosdickio/binary_ninja_mcp/releases/tag/v1.2.1) · 2026-03-22 | 412 |
 
-### General Agents, Platforms, and Knowledge Bases
+## General Agents, Platforms, and Knowledge Bases
 
 | Project | Type | Core Focus | Best For | GitHub Description | Recently Updated | Latest Release | Stars |
 | --- | --- | --- | --- | --- | --- | --- | --- |
 | [reverse-skill](https://github.com/zhaoxuya520/reverse-skill) | Skill / Router | Routing security tasks and toolchains | Multi-tool orchestration, CTFs, security research, and report generation | Reverse Engineering / Authorized Penetration Testing / Security Research Skill Router Pack AI-powered routing + On-demand toolchain bootstrapping + Self-evolving knowledge base Supports Claude Code, Kiro, Cursor, Cline, and other AI coding clients 逆向/渗透/安全技能路由包 - AI 自动路由 + 按需自举工具链 + 自动进化经验库 &#124; 支持 Claude Code / Kiro / Cursor / Cline 等代码 AI 客户端 | Yes · 2026-08-04 | [v1.0.0](https://github.com/zhaoxuya520/reverse-skill/releases/tag/v1.0.0) · 2026-07-17 | 16994 |
 | [Open ReverseLab](https://github.com/LING71671/open-reverselab) | Lab / Knowledge Base / MCP | Agent-native reverse engineering laboratory | Authorized CTF, APK, PE, cryptography, and protocol-analysis workflows | Agent-native reverse-engineering lab with a 197-article knowledge base, MCP tools, and CTF/APK/PE automation workflows. | Yes · 2026-08-01 | [v1.1.0-windows](https://github.com/LING71671/open-reverselab/releases/tag/v1.1.0-windows) · 2026-07-08 | 970 |
 | [revula](https://github.com/president-xd/revula) | MCP Platform | General-purpose reverse engineering automation backend | Static analysis, dynamic debugging, malware analysis, and batch processing | A fully functional and production-grade reverse engineering MCP Server | Yes · 2026-07-10 | None | 70 |
-
-## Ghidra Ecosystem
-
-> MCP servers, native extensions, in-app AI plugins, headless automation interfaces, and agents that use Ghidra as their analysis backend.
-
-| Project | Type | Core Focus | Best For | GitHub Description | Recently Updated | Latest Release | Stars |
-| --- | --- | --- | --- | --- | --- | --- | --- |
-| [Ghidra MCP Server](https://github.com/bethington/ghidra-mcp) | Ghidra Plugin / MCP | Comprehensive Ghidra MCP service | GUI and headless analysis, batch operations, P-code, debugging, and team workflows | Ghidra MCP Server — 200+ MCP tools for AI-powered reverse engineering. GUI plugin + headless server, lazy tool loading, convention enforcement, batch operations, Ghidra Server integration, and Docker deployment. | Yes · 2026-08-04 | [v6.0.0](https://github.com/bethington/ghidra-mcp/releases/tag/v6.0.0) · 2026-07-25 | 3135 |
-| [auto-re-agent](https://github.com/Dryxio/auto-re-agent) | Agent / Ghidra Backend | Reconstructing and validating C/C++ functions from binaries | Decompilation evidence, candidate source generation, build tests, and parity checks | Open-source AI reverse-engineering agent using Ghidra and LLMs to reconstruct and validate C/C++ functions from binaries. | Yes · 2026-07-23 | [v0.2.1](https://github.com/Dryxio/auto-re-agent/releases/tag/v0.2.1) · 2026-07-23 | 1274 |
-| [reverse-engineering-assistant](https://github.com/cyberkaida/reverse-engineering-assistant) | Ghidra Plugin / MCP | MCP interface for Ghidra reverse engineering tasks | Decompilation, function and data-type analysis, renaming, and comments | MCP server for reverse engineering tasks in Ghidra 👩‍💻 | Yes · 2026-08-04 | [v7.3.0](https://github.com/cyberkaida/reverse-engineering-assistant/releases/tag/v7.3.0) · 2026-06-13 | 796 |
-| [GhidrAssistMCP](https://github.com/symgraph/GhidrAssistMCP) | Native Ghidra Extension / MCP | An in-process MCP server for Ghidra | Live binary analysis and agent tool calls inside Ghidra | An native MCP server extension for Ghidra | Yes · 2026-08-03 | [2.11.0](https://github.com/symgraph/GhidrAssistMCP/releases/tag/2.11.0) · 2026-08-03 | 695 |
-| [GhidraGPT](https://github.com/weirdmachine64/GhidraGPT) | Ghidra AI Plugin | Direct integration of multiple LLMs into Ghidra | Conversational function explanation, symbol naming, and AI-assisted analysis | Integrate LLM models directly into Ghidra for AI-enhanced reverse engineering. | Yes · 2026-07-22 | [v1.4.0](https://github.com/weirdmachine64/GhidraGPT/releases/tag/v1.4.0) · 2026-07-22 | 613 |
-| [PyGhidra-MCP](https://github.com/clearbluejar/pyghidra-mcp) | CLI / MCP | Command-line MCP built on PyGhidra | Headless analysis, shared GUI state, scripted tasks, and automated pipelines | Python Command-Line Ghidra MCP | Yes · 2026-08-03 | [v0.2.4](https://github.com/clearbluejar/pyghidra-mcp/releases/tag/v0.2.4) · 2026-08-03 | 397 |
-| [GhidraMCP](https://github.com/LaurieWired/GhidraMCP) | Ghidra Plugin / MCP | Connecting Ghidra to AI clients | Decompilation, function analysis, and symbol organization | MCP Server for Ghidra | No · 2025-06-23 | [1.4](https://github.com/LaurieWired/GhidraMCP/releases/tag/1.4) · 2025-06-23 | 9701 |
 
 ## Android and iOS Security Analysis
 
@@ -206,7 +213,6 @@ The list includes MCP servers, skills, plugins for IDA Pro, Ghidra, Binary Ninja
 | [Charles MCP Server](https://github.com/heizaheiza/Charles-mcp) | MCP | AI integration for Charles Proxy | Live traffic, historical sessions, and request analysis | Charles Proxy MCP server for AI agents with live capture, structured traffic analysis, and agent-friendly tool contracts | Yes · 2026-06-23 | [v3.0.3](https://github.com/heizaheiza/Charles-mcp/releases/tag/v3.0.3) · 2026-04-21 | 290 |
 | [CipherBridge](https://github.com/CuriousLearnerDev/CipherBridge) | Desktop Workstation / AI Agent | AI-assisted APP/Web encryption reversing and traffic bridging | Browser hooks, Mini Program source analysis, encryption/decryption parameter recovery, bidirectional Burp encryption/decryption bridging, and mitmdump plugin generation | 面向APP/Web 加解密逆向分析、渗透测试人员的可视化解密框架 | Yes · 2026-07-29 | [3.5](https://github.com/CuriousLearnerDev/CipherBridge/releases/tag/3.5) · 2026-07-27 | 331 |
 | [Anything Analyzer](https://github.com/Mouseww/anything-analyzer) | Desktop Workstation | All-in-one protocol and reverse engineering analysis | Integrated browser, proxy, hooking, AI, and MCP workflows | 全能协议分析工具：浏览器抓包 + MITM 代理 + 指纹伪装 + AI 分析 + MCP Server 无缝对接 AI Agent/IDE &#124; All-in-one protocol analysis toolkit — built-in browser capture, MITM proxy, JS hooks, fingerprint spoofing, AI analysis & MCP server for agent integration | Yes · 2026-08-04 | [v3.6.55](https://github.com/Mouseww/anything-analyzer/releases/tag/v3.6.55) · 2026-08-04 | 3410 |
-| [Firefox-Reverse](https://github.com/WhiteNightShadow/firefox-reverse) | Custom Browser / Agent | Engine-level tracing for JS, JSVMP, and WASM | Advanced obfuscation, dynamic code, and low-level execution tracing | 🦊 内置 AI 逆向 Agent 的 Firefox — 通用 JS/JSVMP/WASM/签名逆向工作站，SpiderMonkey 引擎层非侵入 trace，把加密参数从黑盒还原成不依赖浏览器的纯算法 | Yes · 2026-07-29 | [v0.22.4](https://github.com/WhiteNightShadow/firefox-reverse/releases/tag/v0.22.4) · 2026-07-29 | 612 |
 
 ## Evaluation Criteria
 
