@@ -44,6 +44,7 @@ The list includes MCP servers, skills, plugins for IDA Pro, Ghidra, Binary Ninja
 - [General Agents, Platforms, and Knowledge Bases](#general-agents-platforms-and-knowledge-bases)
 - [Android and iOS Security Analysis](#android-and-ios-security-analysis)
 - [Browser Automation and Traffic Analysis](#browser-automation-and-traffic-analysis)
+- [Foundational Reverse Engineering Tools (Non-AI)](#foundational-reverse-engineering-tools-non-ai)
 - [Watchlist](#watchlist)
 - [Evaluation Criteria](#evaluation-criteria)
 - [Acceptable Use](#acceptable-use)
@@ -57,11 +58,9 @@ The list includes MCP servers, skills, plugins for IDA Pro, Ghidra, Binary Ninja
 | Comprehensive JS, WASM, AST, and network analysis | [jshookmcp](https://github.com/vmoranv/jshookmcp) |
 | Advanced Web reversing involving workers, Webpack, or JSVMP | [reverse-skill](https://github.com/715494637/reverse-skill/) |
 | Wrap browser encryption functions as APIs | [js-reverse-automation--skill](https://github.com/Fausto-404/js-reverse-automation--skill) |
-| Turn website traffic into reusable API clients | [reverse-api-engineer](https://github.com/kalil0321/reverse-api-engineer) |
+| Turn website traffic into reusable API clients | [reverse-api-engineer](https://github.com/nottelabs/reverse-api-engineer) |
 | Preserve evidence and reproduce algorithms locally | [JSReverser-MCP](https://github.com/NoOne-hub/JSReverser-MCP) |
 | Use an anti-detection browser environment | [Camoufox MCP Server](https://github.com/whit3rabbit/camoufox-mcp) |
-| Decrypt WeChat Mini Program packages and recover source trees | [wxapkg](https://github.com/wux1an/wxapkg) |
-| Enable F12 debugging for Windows WeChat Mini Programs | [zhong-wechat-wmpf-debugger](https://github.com/netz888/zhong-wechat-wmpf-debugger) |
 | Analyze WeChat Mini Program runtimes | [MiniApp CDP MCP](https://github.com/zhizhuodemao/miniapp-cdp-mcp) |
 | Perform real-time AI analysis in IDA Pro | [IDA Pro MCP](https://github.com/mrexodia/ida-pro-mcp) |
 | Export IDA data for analysis by an AI coding tool | [IDA-NO-MCP](https://github.com/P4nda0s/IDA-NO-MCP) |
@@ -108,8 +107,6 @@ The list includes MCP servers, skills, plugins for IDA Pro, Ghidra, Binary Ninja
 
 | Project | Type | Core Focus | Best For | GitHub Description | Recently Updated | Latest Release | Stars |
 | --- | --- | --- | --- | --- | --- | --- | --- |
-| [wxapkg](https://github.com/wux1an/wxapkg) | Desktop Tool | WeChat Mini Program package decryption and unpacking | `.wxapkg` scanning, decryption, unpacking, and source-tree recovery | 跨平台微信小程序反编译 GUI 工具，.wxapkg 文件扫描 + 解密 + 解包工具 | No · 2026-04-28 | [v2.0.0](https://github.com/wux1an/wxapkg/releases/tag/v2.0.0) · 2026-04-16 | 3988 |
-| [zhong-wechat-wmpf-debugger](https://github.com/netz888/zhong-wechat-wmpf-debugger) | Debugging Tool | F12 debugging for Windows WeChat Mini Programs | WMPF version detection, CDP/DevTools bridging, and legacy or modern runtime debugging | WeChatOpenDevTool 微信小程序强制开启开发者工具 | Yes · 2026-07-18 | [v1.3.0](https://github.com/netz888/zhong-wechat-wmpf-debugger/releases/tag/v1.3.0) · 2026-07-18 | 86 |
 | [MiniApp CDP MCP](https://github.com/zhizhuodemao/miniapp-cdp-mcp) | MCP | CDP debugging for WeChat Mini Programs | WeChat DevTools, desktop WeChat Mini Programs, runtime code, and request analysis | 微信小程序逆向工程 MCP 服务器，让你的 AI 编码助手（如 Claude、Cursor、Antigravity）能够直接通过 Chrome DevTools Protocol (CDP) 调试和分析微信小程序（包括微信开发者工具或 PC 端微信小程序）中的 JavaScript 代码。 | No · 2026-04-22 | None | 152 |
 
 ### JavaScript Reverse Engineering Skills
@@ -126,12 +123,6 @@ The list includes MCP servers, skills, plugins for IDA Pro, Ghidra, Binary Ninja
 | Project | Type | Core Focus | Best For | GitHub Description | Recently Updated | Latest Release | Stars |
 | --- | --- | --- | --- | --- | --- | --- | --- |
 | [Firefox-Reverse](https://github.com/WhiteNightShadow/firefox-reverse) | Custom Browser / Agent | Engine-level tracing for JS, JSVMP, and WASM | Advanced obfuscation, dynamic code, and low-level execution tracing | 🦊 内置 AI 逆向 Agent 的 Firefox — 通用 JS/JSVMP/WASM/签名逆向工作站，SpiderMonkey 引擎层非侵入 trace，把加密参数从黑盒还原成不依赖浏览器的纯算法 | Yes · 2026-08-20 | [v0.23.0](https://github.com/WhiteNightShadow/firefox-reverse/releases/tag/v0.23.0) · 2026-08-14 | 699 |
-
-### Specialized Web Security Analysis Tools
-
-| Project | Type | Core Focus | Best For | GitHub Description | Recently Updated | Latest Release | Stars |
-| --- | --- | --- | --- | --- | --- | --- | --- |
-| [ruishu-mcp](https://github.com/xuange520/ruishu-mcp) | MCP | Dynamic WAF traffic research | Analyzing Ruishu-style dynamic defenses, request parameters, and traffic in authorized environments | 🚀 专为 AI Agent 打造的瑞数防爬流量净化 MCP 工具 / An MCP Tool for AI Agents to Stealthily Bypass and Purify Ruishu WAF Traffic | Yes · 2026-07-13 | [v1.1.0](https://github.com/xuange520/ruishu-mcp/releases/tag/v1.1.0) · 2026-04-13 | 86 |
 
 ## IDA Pro Ecosystem
 
@@ -157,7 +148,7 @@ The list includes MCP servers, skills, plugins for IDA Pro, Ghidra, Binary Ninja
 | [GhidrAssistMCP](https://github.com/symgraph/GhidrAssistMCP) | Native Ghidra Extension / MCP | An in-process MCP server for Ghidra | Live binary analysis and agent tool calls inside Ghidra | An native MCP server extension for Ghidra | Yes · 2026-08-03 | [2.11.0](https://github.com/symgraph/GhidrAssistMCP/releases/tag/2.11.0) · 2026-08-03 | 723 |
 | [GhidraGPT](https://github.com/weirdmachine64/GhidraGPT) | Ghidra AI Plugin | Direct integration of multiple LLMs into Ghidra | Conversational function explanation, symbol naming, and AI-assisted analysis | Integrate LLM models directly into Ghidra for AI-enhanced reverse engineering. | Yes · 2026-07-22 | [v1.4.0](https://github.com/weirdmachine64/GhidraGPT/releases/tag/v1.4.0) · 2026-07-22 | 664 |
 | [PyGhidra-MCP](https://github.com/clearbluejar/pyghidra-mcp) | CLI / MCP | Command-line MCP built on PyGhidra | Headless analysis, shared GUI state, scripted tasks, and automated pipelines | Python Command-Line Ghidra MCP | Yes · 2026-08-09 | [v0.2.5](https://github.com/clearbluejar/pyghidra-mcp/releases/tag/v0.2.5) · 2026-08-06 | 412 |
-| [GhidraMCP](https://github.com/LaurieWired/GhidraMCP) | Ghidra Plugin / MCP | Connecting Ghidra to AI clients | Decompilation, function analysis, and symbol organization | MCP Server for Ghidra | No · 2025-06-23 | [1.4](https://github.com/LaurieWired/GhidraMCP/releases/tag/1.4) · 2025-06-23 | 9826 |
+| [OGhidra](https://github.com/llnl/OGhidra) | Ghidra Plugin / Agent | Local or cloud LLM analysis inside Ghidra | Natural-language queries, automatic renaming, knowledge graphs, malware patterns, and multi-instance analysis | OGhidra bridges Large Language Models (LLMs) via Ollama with the Ghidra reverse engineering platform, enabling AI-driven binary analysis through natural language. Interact with Ghidra using conversational queries and automate complex reverse engineering workflows. | Yes · 2026-08-17 | None | 414 |
 
 ## Binary and Native Reverse Engineering
 
@@ -238,23 +229,34 @@ The list includes MCP servers, skills, plugins for IDA Pro, Ghidra, Binary Ninja
 | [CipherBridge](https://github.com/CuriousLearnerDev/CipherBridge) | Desktop Workstation / AI Agent | AI-assisted APP/Web encryption reversing and traffic bridging | Browser hooks, Mini Program source analysis, encryption/decryption parameter recovery, bidirectional Burp encryption/decryption bridging, and mitmdump plugin generation | 面向APP/Web 加解密逆向分析、渗透测试人员的可视化解密框架 | Yes · 2026-08-09 | [3.5](https://github.com/CuriousLearnerDev/CipherBridge/releases/tag/3.5) · 2026-07-27 | 363 |
 | [Anything Analyzer](https://github.com/Mouseww/anything-analyzer) | Desktop Workstation | All-in-one protocol and reverse engineering analysis | Integrated browser, proxy, hooking, AI, and MCP workflows | 全能协议分析工具：浏览器抓包 + MITM 代理 + 指纹伪装 + AI 分析 + MCP Server 无缝对接 AI Agent/IDE &#124; All-in-one protocol analysis toolkit — built-in browser capture, MITM proxy, JS hooks, fingerprint spoofing, AI analysis & MCP server for agent integration | Yes · 2026-08-07 | [v3.6.60](https://github.com/Mouseww/anything-analyzer/releases/tag/v3.6.60) · 2026-08-07 | 3543 |
 
+## Foundational Reverse Engineering Tools (Non-AI)
+
+> These projects provide prerequisite capabilities such as unpacking, decryption, or debugging, but do not themselves expose AI, MCP, skill, or agent interfaces. They are not counted as formal AI projects or quick-selection recommendations.
+
+| Project | Type | Core Focus | Best For | GitHub Description | Recently Updated | Latest Release | Stars |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| [wxapkg](https://github.com/wux1an/wxapkg) | Desktop Tool | WeChat Mini Program package decryption and unpacking | `.wxapkg` scanning, decryption, unpacking, and source-tree recovery | 跨平台微信小程序反编译 GUI 工具，.wxapkg 文件扫描 + 解密 + 解包工具 | No · 2026-04-28 | [v2.0.0](https://github.com/wux1an/wxapkg/releases/tag/v2.0.0) · 2026-04-16 | 3988 |
+| [zhong-wechat-wmpf-debugger](https://github.com/netz888/zhong-wechat-wmpf-debugger) | Debugging Tool | F12 debugging for Windows WeChat Mini Programs | WMPF version detection, CDP/DevTools bridging, and legacy or modern runtime debugging | WeChatOpenDevTool 微信小程序强制开启开发者工具 | Yes · 2026-07-18 | [v1.3.0](https://github.com/netz888/zhong-wechat-wmpf-debugger/releases/tag/v1.3.0) · 2026-07-18 | 86 |
+
 ## Watchlist
 
-> These projects closely match the scope of this list, but their maintenance continuity, maturity, licensing, or overlap with existing entries still merits observation. Watchlist placement does not mean they should not be tested.
+> These projects closely match the scope of this list, but their maintenance continuity, maturity, use boundaries, or overlap with existing entries still merits observation. Watchlist placement does not mean they should not be tested.
 
 | Project | Type | Core Focus | Best For | GitHub Description | Recently Updated | Latest Release | Stars |
 | --- | --- | --- | --- | --- | --- | --- | --- |
 | [WinDbg MCP](https://github.com/memoryforensics1/windbg-mcp) | WinDbg / MCP | Windows kernel and user-mode debugging interface | DbgEng, KDNET, TTD, Frida, remote debugging, and virtual-machine control | C# MCP server for kernel & user-mode Windows debugging — DbgEng COM, KDNET, Frida, dbgsrv, TTD, and integrated VM control. 29 tools for LLM agents. | Yes · 2026-07-05 | None | 40 |
 | [HexGraph](https://github.com/branover/hexgraph) | Local Workstation / Agent / MCP | Binary and firmware vulnerability research workbench | Decompilation, fuzzing, verification, evidence graphs, and research notes | Self-hosted, agentic vulnerability research for binaries & firmware: an AI agent decompiles, fuzzes, and verifies exploits inside a sandbox, recording every finding to a typed graph. BYOK, fully local. | Yes · 2026-08-15 | [hexgraph-v0.9.0](https://github.com/branover/hexgraph/releases/tag/hexgraph-v0.9.0) · 2026-07-07 | 19 |
 | [jebmcp](https://github.com/flankerhqd/jebmcp) | JEB Pro Plugin / MCP | AI-client access to JEB Pro analysis | APK decompilation, call relationships, manifests, symbol renaming, and vulnerability analysis | No description | No · 2026-04-26 | None | 257 |
-| [OGhidra](https://github.com/llnl/OGhidra) | Ghidra Plugin / Agent | Local or cloud LLM analysis inside Ghidra | Natural-language queries, automatic renaming, knowledge graphs, malware patterns, and multi-instance analysis | OGhidra bridges Large Language Models (LLMs) via Ollama with the Ghidra reverse engineering platform, enabling AI-driven binary analysis through natural language. Interact with Ghidra using conversational queries and automate complex reverse engineering workflows. | Yes · 2026-08-17 | None | 414 |
+| [GhidraMCP](https://github.com/LaurieWired/GhidraMCP) | Ghidra Plugin / MCP | Connecting Ghidra to AI clients | Decompilation, function analysis, and symbol organization | MCP Server for Ghidra | No · 2025-06-23 | [1.4](https://github.com/LaurieWired/GhidraMCP/releases/tag/1.4) · 2025-06-23 | 9826 |
+| [ruishu-mcp](https://github.com/xuange520/ruishu-mcp) | MCP | Dynamic WAF traffic research | Analyzing Ruishu-style dynamic defenses, request parameters, and traffic in authorized environments | 🚀 专为 AI Agent 打造的瑞数防爬流量净化 MCP 工具 / An MCP Tool for AI Agents to Stealthily Bypass and Purify Ruishu WAF Traffic | Yes · 2026-07-13 | [v1.1.0](https://github.com/xuange520/ruishu-mcp/releases/tag/v1.1.0) · 2026-04-13 | 86 |
 
 Reasons for watchlist placement:
 
 * WinDbg MCP currently has a short commit history, so real-world compatibility and maintenance continuity need more evidence;
-* HexGraph is still early, extends into exploit verification, and uses AGPL-3.0;
-* jebmcp describes itself as a quick implementation and does not currently declare a clear repository license;
-* OGhidra is substantial, but overlaps with several Ghidra MCP servers and agents already listed.
+* HexGraph is still early and extends into exploit verification, so its real-world stability and safety boundaries need more evidence;
+* jebmcp describes itself as a quick implementation and has not been updated since 2026-04-26, so maintenance continuity needs more evidence;
+* GhidraMCP has not been updated since 2025-06-23, while several comparable projects remain active;
+* ruishu-mcp focuses on dynamic-defense parameter handling and data extraction, so its authorized-use boundaries and misuse risks need further observation.
 
 ## Evaluation Criteria
 
@@ -266,7 +268,7 @@ Reasons for watchlist placement:
 | Context usage | Support for on-demand loading, search, summaries, chunked reading, and minimal responses |
 | Deliverables | Whether it preserves request and response samples, hook scripts, call chains, key code, environment dependencies, reproduction code, failure records, evidence, and reports |
 | Deployment | Local desktop, headless service, Docker, virtual machine, jailbroken or rooted device, browser extension, or IDE plugin |
-| Maintenance | Recent commits, issue responses, releases, installation documentation, supported client and software versions, licenses, and experimental features |
+| Maintenance | Recent commits, issue responses, releases, installation documentation, supported client and software versions, and experimental features |
 
 Inclusion in this list does not guarantee a project's security, stability, or continued maintenance.
 

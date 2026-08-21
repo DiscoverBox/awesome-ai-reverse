@@ -42,6 +42,7 @@ Awesome AI Reverse Engineering 收集 AI 辅助逆向工具，覆盖 JavaScript 
 - [通用 Agent、平台与知识库](#通用-agent平台与知识库)
 - [Android 与 iOS 安全分析](#android-与-ios-安全分析)
 - [浏览器自动化与流量分析](#浏览器自动化与流量分析)
+- [基础逆向工具（非 AI）](#基础逆向工具非-ai)
 - [观察中项目](#观察中项目)
 - [工具评估维度](#工具评估维度)
 - [使用规范](#使用规范)
@@ -55,11 +56,9 @@ Awesome AI Reverse Engineering 收集 AI 辅助逆向工具，覆盖 JavaScript 
 | 综合型 JS、WASM、AST 和网络分析           | [jshookmcp](https://github.com/vmoranv/jshookmcp)                         |
 | Worker、Webpack、JSVMP 等高级 Web 逆向 | [reverse-skill](https://github.com/715494637/reverse-skill/)                     |
 | 将浏览器加密函数封装成接口                   | [js-reverse-automation--skill](https://github.com/Fausto-404/js-reverse-automation--skill)      |
-| 将网站流量转换为可复用 API 客户端              | [reverse-api-engineer](https://github.com/kalil0321/reverse-api-engineer)              |
+| 将网站流量转换为可复用 API 客户端              | [reverse-api-engineer](https://github.com/nottelabs/reverse-api-engineer)              |
 | 强调证据沉淀和本地复现                     | [JSReverser-MCP](https://github.com/NoOne-hub/JSReverser-MCP)                    |
 | 反检测浏览器环境                        | [Camoufox MCP Server](https://github.com/whit3rabbit/camoufox-mcp)               |
-| 微信小程序包解密与源码还原                | [wxapkg](https://github.com/wux1an/wxapkg)                                      |
-| Windows 微信小程序 F12 调试             | [zhong-wechat-wmpf-debugger](https://github.com/netz888/zhong-wechat-wmpf-debugger) |
 | 微信小程序运行时分析                      | [MiniApp CDP MCP](https://github.com/zhizhuodemao/miniapp-cdp-mcp)                   |
 | IDA Pro 实时 AI 分析                | [IDA Pro MCP](https://github.com/mrexodia/ida-pro-mcp)                       |
 | IDA 文件导出后交给 AI 分析               | [IDA-NO-MCP](https://github.com/P4nda0s/IDA-NO-MCP)                        |
@@ -106,8 +105,6 @@ Awesome AI Reverse Engineering 收集 AI 辅助逆向工具，覆盖 JavaScript 
 
 | 项目 | 形态 | 核心定位 | 适用场景 | GitHub 简介 | 最近更新 | 最新 Release | Stars |
 | --- | --- | --- | --- | --- | --- | --- | --- |
-| [wxapkg](https://github.com/wux1an/wxapkg) | 桌面工具 | 微信小程序包解密与解包 | `.wxapkg` 扫描、解密、解包和源码结构还原 | 跨平台微信小程序反编译 GUI 工具，.wxapkg 文件扫描 + 解密 + 解包工具 | 否 · 2026-04-28 | [v2.0.0](https://github.com/wux1an/wxapkg/releases/tag/v2.0.0) · 2026-04-16 | 3988 |
-| [zhong-wechat-wmpf-debugger](https://github.com/netz888/zhong-wechat-wmpf-debugger) | 调试工具 | Windows 微信小程序 F12 调试入口 | WMPF 版本检测、CDP/DevTools 桥接和新旧运行时调试 | WeChatOpenDevTool 微信小程序强制开启开发者工具 | 是 · 2026-07-18 | [v1.3.0](https://github.com/netz888/zhong-wechat-wmpf-debugger/releases/tag/v1.3.0) · 2026-07-18 | 86 |
 | [MiniApp CDP MCP](https://github.com/zhizhuodemao/miniapp-cdp-mcp) | MCP | 微信小程序 CDP 调试工具 | 微信开发者工具、PC 微信小程序、运行时代码和请求分析 | 微信小程序逆向工程 MCP 服务器，让你的 AI 编码助手（如 Claude、Cursor、Antigravity）能够直接通过 Chrome DevTools Protocol (CDP) 调试和分析微信小程序（包括微信开发者工具或 PC 端微信小程序）中的 JavaScript 代码。 | 否 · 2026-04-22 | 暂无 | 152 |
 
 ### JS 逆向 Skill
@@ -124,12 +121,6 @@ Awesome AI Reverse Engineering 收集 AI 辅助逆向工具，覆盖 JavaScript 
 | 项目 | 形态 | 核心定位 | 适用场景 | GitHub 简介 | 最近更新 | 最新 Release | Stars |
 | --- | --- | --- | --- | --- | --- | --- | --- |
 | [Firefox-Reverse](https://github.com/WhiteNightShadow/firefox-reverse) | 定制浏览器 / Agent | 引擎级 JS、JSVMP 和 WASM 追踪 | 高级混淆、动态代码和底层执行轨迹分析 | 🦊 内置 AI 逆向 Agent 的 Firefox — 通用 JS/JSVMP/WASM/签名逆向工作站，SpiderMonkey 引擎层非侵入 trace，把加密参数从黑盒还原成不依赖浏览器的纯算法 | 是 · 2026-08-20 | [v0.23.0](https://github.com/WhiteNightShadow/firefox-reverse/releases/tag/v0.23.0) · 2026-08-14 | 699 |
-
-### 专用 Web 安全分析工具
-
-| 项目 | 形态 | 核心定位 | 适用场景 | GitHub 简介 | 最近更新 | 最新 Release | Stars |
-| --- | --- | --- | --- | --- | --- | --- | --- |
-| [ruishu-mcp](https://github.com/xuange520/ruishu-mcp) | MCP | 动态 WAF 流量研究工具 | 授权环境中的瑞数类动态防护、请求参数和流量分析 | 🚀 专为 AI Agent 打造的瑞数防爬流量净化 MCP 工具 / An MCP Tool for AI Agents to Stealthily Bypass and Purify Ruishu WAF Traffic | 是 · 2026-07-13 | [v1.1.0](https://github.com/xuange520/ruishu-mcp/releases/tag/v1.1.0) · 2026-04-13 | 86 |
 
 ## IDA Pro 生态
 
@@ -155,7 +146,7 @@ Awesome AI Reverse Engineering 收集 AI 辅助逆向工具，覆盖 JavaScript 
 | [GhidrAssistMCP](https://github.com/symgraph/GhidrAssistMCP) | Ghidra 原生扩展 / MCP | Ghidra 内置 MCP 服务 | 原生界面中的实时二进制分析和 Agent 工具调用 | An native MCP server extension for Ghidra | 是 · 2026-08-03 | [2.11.0](https://github.com/symgraph/GhidrAssistMCP/releases/tag/2.11.0) · 2026-08-03 | 723 |
 | [GhidraGPT](https://github.com/weirdmachine64/GhidraGPT) | Ghidra AI 插件 | 将多种 LLM 直接集成到 Ghidra | 对话式函数解释、符号命名和 AI 辅助分析 | Integrate LLM models directly into Ghidra for AI-enhanced reverse engineering. | 是 · 2026-07-22 | [v1.4.0](https://github.com/weirdmachine64/GhidraGPT/releases/tag/v1.4.0) · 2026-07-22 | 664 |
 | [PyGhidra-MCP](https://github.com/clearbluejar/pyghidra-mcp) | CLI / MCP | 基于 PyGhidra 的命令行 MCP | 无头分析、GUI 共享状态、脚本化任务和自动化流水线 | Python Command-Line Ghidra MCP | 是 · 2026-08-09 | [v0.2.5](https://github.com/clearbluejar/pyghidra-mcp/releases/tag/v0.2.5) · 2026-08-06 | 412 |
-| [GhidraMCP](https://github.com/LaurieWired/GhidraMCP) | Ghidra 插件 / MCP | Ghidra 与 AI 客户端连接 | 反编译、函数分析和符号整理 | MCP Server for Ghidra | 否 · 2025-06-23 | [1.4](https://github.com/LaurieWired/GhidraMCP/releases/tag/1.4) · 2025-06-23 | 9826 |
+| [OGhidra](https://github.com/llnl/OGhidra) | Ghidra 插件 / Agent | Ghidra 内的本地或云端 LLM 分析 | 自然语言查询、自动重命名、知识图谱、恶意代码模式和多实例分析 | OGhidra bridges Large Language Models (LLMs) via Ollama with the Ghidra reverse engineering platform, enabling AI-driven binary analysis through natural language. Interact with Ghidra using conversational queries and automate complex reverse engineering workflows. | 是 · 2026-08-17 | 暂无 | 414 |
 
 ## 二进制与原生程序逆向
 
@@ -236,23 +227,34 @@ Awesome AI Reverse Engineering 收集 AI 辅助逆向工具，覆盖 JavaScript 
 | [CipherBridge](https://github.com/CuriousLearnerDev/CipherBridge) | 桌面工作站 / AI Agent | AI 辅助的 APP/Web 加解密逆向与流量桥接 | 浏览器 Hook、小程序源码分析、加解密参数还原、Burp 双向加解密桥接和 mitmdump 插件生成 | 面向APP/Web 加解密逆向分析、渗透测试人员的可视化解密框架 | 是 · 2026-08-09 | [3.5](https://github.com/CuriousLearnerDev/CipherBridge/releases/tag/3.5) · 2026-07-27 | 363 |
 | [Anything Analyzer](https://github.com/Mouseww/anything-analyzer) | 桌面工作站 | 一体化协议和逆向分析 | 浏览器、代理、Hook、AI 和 MCP 集成 | 全能协议分析工具：浏览器抓包 + MITM 代理 + 指纹伪装 + AI 分析 + MCP Server 无缝对接 AI Agent/IDE &#124; All-in-one protocol analysis toolkit — built-in browser capture, MITM proxy, JS hooks, fingerprint spoofing, AI analysis & MCP server for agent integration | 是 · 2026-08-07 | [v3.6.60](https://github.com/Mouseww/anything-analyzer/releases/tag/v3.6.60) · 2026-08-07 | 3543 |
 
+## 基础逆向工具（非 AI）
+
+> 以下项目可提供解包、解密或调试等逆向前置能力，但自身不包含 AI、MCP、Skill 或 Agent 接口，因此不计入正式 AI 项目或快速选型推荐。
+
+| 项目 | 形态 | 核心定位 | 适用场景 | GitHub 简介 | 最近更新 | 最新 Release | Stars |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| [wxapkg](https://github.com/wux1an/wxapkg) | 桌面工具 | 微信小程序包解密与解包 | `.wxapkg` 扫描、解密、解包和源码结构还原 | 跨平台微信小程序反编译 GUI 工具，.wxapkg 文件扫描 + 解密 + 解包工具 | 否 · 2026-04-28 | [v2.0.0](https://github.com/wux1an/wxapkg/releases/tag/v2.0.0) · 2026-04-16 | 3988 |
+| [zhong-wechat-wmpf-debugger](https://github.com/netz888/zhong-wechat-wmpf-debugger) | 调试工具 | Windows 微信小程序 F12 调试入口 | WMPF 版本检测、CDP/DevTools 桥接和新旧运行时调试 | WeChatOpenDevTool 微信小程序强制开启开发者工具 | 是 · 2026-07-18 | [v1.3.0](https://github.com/netz888/zhong-wechat-wmpf-debugger/releases/tag/v1.3.0) · 2026-07-18 | 86 |
+
 ## 观察中项目
 
-> 以下项目与清单主题高度相关，但仍需观察维护持续性、成熟度、许可状态或与现有项目的重叠程度。列入观察区不代表不推荐试用。
+> 以下项目与清单主题高度相关，但仍需观察维护持续性、成熟度、使用边界或与现有项目的重叠程度。列入观察区不代表不推荐试用。
 
 | 项目 | 形态 | 核心定位 | 适用场景 | GitHub 简介 | 最近更新 | 最新 Release | Stars |
 | --- | --- | --- | --- | --- | --- | --- | --- |
 | [WinDbg MCP](https://github.com/memoryforensics1/windbg-mcp) | WinDbg / MCP | Windows 内核与用户态调试接口 | DbgEng、KDNET、TTD、Frida、远程调试和虚拟机控制 | C# MCP server for kernel & user-mode Windows debugging — DbgEng COM, KDNET, Frida, dbgsrv, TTD, and integrated VM control. 29 tools for LLM agents. | 是 · 2026-07-05 | 暂无 | 40 |
 | [HexGraph](https://github.com/branover/hexgraph) | 本地工作站 / Agent / MCP | 二进制与固件漏洞研究工作站 | 反编译、模糊测试、验证、证据图谱和研究记录 | Self-hosted, agentic vulnerability research for binaries & firmware: an AI agent decompiles, fuzzes, and verifies exploits inside a sandbox, recording every finding to a typed graph. BYOK, fully local. | 是 · 2026-08-15 | [hexgraph-v0.9.0](https://github.com/branover/hexgraph/releases/tag/hexgraph-v0.9.0) · 2026-07-07 | 19 |
 | [jebmcp](https://github.com/flankerhqd/jebmcp) | JEB Pro 插件 / MCP | 将 JEB Pro 分析能力接入 AI 客户端 | APK 反编译、调用关系、Manifest、符号重命名和漏洞分析 | 暂无简介 | 否 · 2026-04-26 | 暂无 | 257 |
-| [OGhidra](https://github.com/llnl/OGhidra) | Ghidra 插件 / Agent | Ghidra 内的本地或云端 LLM 分析 | 自然语言查询、自动重命名、知识图谱、恶意代码模式和多实例分析 | OGhidra bridges Large Language Models (LLMs) via Ollama with the Ghidra reverse engineering platform, enabling AI-driven binary analysis through natural language. Interact with Ghidra using conversational queries and automate complex reverse engineering workflows. | 是 · 2026-08-17 | 暂无 | 414 |
+| [GhidraMCP](https://github.com/LaurieWired/GhidraMCP) | Ghidra 插件 / MCP | Ghidra 与 AI 客户端连接 | 反编译、函数分析和符号整理 | MCP Server for Ghidra | 否 · 2025-06-23 | [1.4](https://github.com/LaurieWired/GhidraMCP/releases/tag/1.4) · 2025-06-23 | 9826 |
+| [ruishu-mcp](https://github.com/xuange520/ruishu-mcp) | MCP | 动态 WAF 流量研究工具 | 授权环境中的瑞数类动态防护、请求参数和流量分析 | 🚀 专为 AI Agent 打造的瑞数防爬流量净化 MCP 工具 / An MCP Tool for AI Agents to Stealthily Bypass and Purify Ruishu WAF Traffic | 是 · 2026-07-13 | [v1.1.0](https://github.com/xuange520/ruishu-mcp/releases/tag/v1.1.0) · 2026-04-13 | 86 |
 
 观察原因：
 
 * WinDbg MCP 当前提交历史较少，需要继续观察实际兼容性和维护持续性；
-* HexGraph 仍处于早期版本，范围延伸到漏洞验证，并采用 AGPL-3.0；
-* jebmcp 自述为快速实现，且仓库暂未声明明确许可证；
-* OGhidra 功能完整，但与已收录的多个 Ghidra MCP/Agent 有较多重叠。
+* HexGraph 仍处于早期版本，且范围延伸到漏洞验证，需要继续观察真实使用中的稳定性与安全边界；
+* jebmcp 自述为快速实现，且 2026-04-26 后暂无更新，需要继续观察维护持续性；
+* GhidraMCP 自 2025-06-23 后暂无更新，且已有多个保持活跃的同类项目；
+* ruishu-mcp 聚焦动态防护参数处理和数据提取，需要继续观察授权使用边界与滥用风险。
 
 ## 工具评估维度
 
@@ -264,7 +266,7 @@ Awesome AI Reverse Engineering 收集 AI 辅助逆向工具，覆盖 JavaScript 
 | 上下文占用 | 是否支持按需加载、搜索、摘要、分片读取和最小化返回 |
 | 任务产物 | 是否保存请求与响应样本、Hook 脚本、调用链、关键代码、环境依赖、复现代码、失败记录、证据和报告 |
 | 部署方式 | 本地桌面、无头服务、Docker、虚拟机、越狱或 Root 设备、浏览器扩展、IDE 插件 |
-| 维护情况 | 最近提交、Issue 响应、Release、安装文档、客户端与软件版本、License、实验性功能 |
+| 维护情况 | 最近提交、Issue 响应、Release、安装文档、客户端与软件版本、实验性功能 |
 
 本列表收录不代表对项目安全性、稳定性或持续维护状态作出保证。
 
