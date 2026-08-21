@@ -26,7 +26,7 @@ class ReadmeUpdateTests(unittest.TestCase):
     def setUp(self):
         self.metadata = RepositoryMetadata(
             description="A tool | for reverse engineering",
-            pushed_at="2026-06-01T12:00:00Z",
+            default_branch_committed_at="2026-06-01T12:00:00Z",
             release_tag="v1.2.3",
             release_published_at="2026-05-20T08:30:00Z",
             release_url="https://github.com/example/tool/releases/tag/v1.2.3",
@@ -118,7 +118,7 @@ Outro stays unchanged.
     def test_marks_repository_inactive_after_ninety_days(self):
         metadata = RepositoryMetadata(
             description="Tool",
-            pushed_at="2026-04-13T00:00:00Z",
+            default_branch_committed_at="2026-04-13T00:00:00Z",
             release_tag=None,
             release_published_at=None,
             release_url=None,
@@ -160,7 +160,7 @@ Outro stays unchanged.
     def test_english_empty_metadata_values_are_localized(self):
         metadata = RepositoryMetadata(
             description="",
-            pushed_at="2026-07-01T00:00:00Z",
+            default_branch_committed_at="2026-07-01T00:00:00Z",
             release_tag=None,
             release_published_at=None,
             release_url=None,
@@ -188,7 +188,7 @@ Outro stays unchanged.
     def test_archived_repository_is_marked_deprecated(self):
         metadata = RepositoryMetadata(
             description="A archived tool",
-            pushed_at="2026-06-01T12:00:00Z",
+            default_branch_committed_at="2026-06-01T12:00:00Z",
             release_tag="v1.2.3",
             release_published_at="2026-05-20T08:30:00Z",
             release_url="https://github.com/example/tool/releases/tag/v1.2.3",
@@ -209,7 +209,7 @@ Outro stays unchanged.
     def test_removed_repository_is_marked_deprecated(self):
         metadata = RepositoryMetadata(
             description="",
-            pushed_at="",
+            default_branch_committed_at="",
             release_tag=None,
             release_published_at=None,
             release_url=None,
@@ -228,7 +228,7 @@ Outro stays unchanged.
     def test_moved_repository_link_is_rewritten(self):
         metadata = RepositoryMetadata(
             description="A moved tool",
-            pushed_at="2026-06-01T12:00:00Z",
+            default_branch_committed_at="2026-06-01T12:00:00Z",
             release_tag=None,
             release_published_at=None,
             release_url=None,
@@ -254,7 +254,7 @@ Outro stays unchanged.
     def test_archived_takes_precedence_over_moved(self):
         metadata = RepositoryMetadata(
             description="",
-            pushed_at="2026-06-01T12:00:00Z",
+            default_branch_committed_at="2026-06-01T12:00:00Z",
             release_tag=None,
             release_published_at=None,
             release_url=None,
@@ -281,7 +281,7 @@ class MultiReadmeUpdateTests(unittest.TestCase):
     ):
         fetch_metadata_mock.return_value = RepositoryMetadata(
             description="Description",
-            pushed_at="2026-07-01T00:00:00Z",
+            default_branch_committed_at="2026-07-01T00:00:00Z",
             release_tag=None,
             release_published_at=None,
             release_url=None,
@@ -325,7 +325,7 @@ class MultiReadmeUpdateTests(unittest.TestCase):
     ):
         fetch_metadata_mock.return_value = RepositoryMetadata(
             description="Archived",
-            pushed_at="2026-07-01T00:00:00Z",
+            default_branch_committed_at="2026-07-01T00:00:00Z",
             release_tag=None,
             release_published_at=None,
             release_url=None,
@@ -358,7 +358,7 @@ class MultiReadmeUpdateTests(unittest.TestCase):
     ):
         fetch_metadata_mock.return_value = RepositoryMetadata(
             description="",
-            pushed_at="2026-07-01T00:00:00Z",
+            default_branch_committed_at="2026-07-01T00:00:00Z",
             release_tag=None,
             release_published_at=None,
             release_url=None,
@@ -395,15 +395,26 @@ class GitHubFetchTests(unittest.TestCase):
             {
                 "description": "Tool",
                 "full_name": "example/tool",
-                "pushed_at": "2026-07-01T00:00:00Z",
+                "default_branch": "main",
+                "pushed_at": "2026-08-19T00:00:00Z",
                 "stargazers_count": 321,
             },
+            {"commit": {"committer": {"date": "2026-03-27T00:00:00Z"}}},
             GitHubAPIError("Not Found", status=404),
         ]
         metadata = fetch_repository_metadata("example", "tool")
         self.assertEqual(metadata.description, "Tool")
+        self.assertEqual(metadata.default_branch_committed_at, "2026-03-27T00:00:00Z")
         self.assertIsNone(metadata.release_tag)
         self.assertEqual(metadata.stargazers_count, 321)
+        self.assertEqual(
+            metadata_cells(metadata, date(2026, 8, 21), EN_LOCALE)[1],
+            "No · 2026-03-27",
+        )
+        self.assertEqual(
+            request.call_args_list[1].args[0],
+            "https://api.github.com/repos/example/tool/commits/main",
+        )
 
     @patch("scripts.update_readme_metadata.github_request")
     def test_missing_repository_is_reported_as_removed(self, request):
@@ -424,6 +435,7 @@ class GitHubFetchTests(unittest.TestCase):
         ]
         metadata = fetch_repository_metadata("example", "tool")
         self.assertEqual(metadata.status, RepositoryStatus.ARCHIVED)
+        self.assertEqual(request.call_count, 1)
 
     @patch("scripts.update_readme_metadata.github_request")
     def test_transferred_repository_is_reported_as_moved(self, request):
@@ -431,20 +443,26 @@ class GitHubFetchTests(unittest.TestCase):
             {
                 "description": "Tool",
                 "full_name": "newowner/tool",
+                "default_branch": "trunk",
                 "pushed_at": "2026-07-01T00:00:00Z",
                 "archived": False,
             },
+            {"commit": {"committer": {"date": "2026-07-01T00:00:00Z"}}},
             GitHubAPIError("Not Found", status=404),
         ]
         metadata = fetch_repository_metadata("example", "tool")
         self.assertEqual(metadata.status, RepositoryStatus.MOVED)
         self.assertEqual(metadata.new_full_name, "newowner/tool")
+        self.assertEqual(
+            request.call_args_list[1].args[0],
+            "https://api.github.com/repos/newowner/tool/commits/trunk",
+        )
 
     @patch("scripts.update_readme_metadata.github_request")
     def test_release_failure_keeps_archived_status(self, request):
-        # Archived repos skip the release endpoint entirely (the deprecated
-        # row renders "暂无" regardless), so a 5xx there must not even be
-        # requested and must not pollute the archived status.
+        # Archived repos skip the commit and release endpoints entirely (the
+        # deprecated row renders fixed metadata), so a 5xx there must not even
+        # be requested and must not pollute the archived status.
         request.side_effect = [
             {
                 "description": "Tool",
@@ -458,7 +476,7 @@ class GitHubFetchTests(unittest.TestCase):
         self.assertEqual(metadata.status, RepositoryStatus.ARCHIVED)
         self.assertIsNone(metadata.release_tag)
         self.assertFalse(metadata.release_fetch_failed)
-        # release endpoint never queried for archived repos.
+        # Neither the commit nor release endpoint is queried for archived repos.
         self.assertEqual(request.call_count, 1)
 
     @patch("scripts.update_readme_metadata.github_request")
@@ -467,9 +485,11 @@ class GitHubFetchTests(unittest.TestCase):
             {
                 "description": "Tool",
                 "full_name": "newowner/tool",
+                "default_branch": "main",
                 "pushed_at": "2026-07-01T00:00:00Z",
                 "archived": False,
             },
+            {"commit": {"committer": {"date": "2026-07-01T00:00:00Z"}}},
             GitHubAPIError("Server Error", status=503),
         ]
         metadata = fetch_repository_metadata("example", "tool")
@@ -484,9 +504,11 @@ class GitHubFetchTests(unittest.TestCase):
             {
                 "description": "Tool",
                 "full_name": "example/tool",
+                "default_branch": "main",
                 "pushed_at": "2026-07-01T00:00:00Z",
                 "archived": False,
             },
+            {"commit": {"committer": {"date": "2026-07-01T00:00:00Z"}}},
             GitHubAPIError("Not Found", status=404),
         ]
         metadata = fetch_repository_metadata("example", "tool")
@@ -497,7 +519,7 @@ class GitHubFetchTests(unittest.TestCase):
     def test_release_transient_failure_preserves_previous_release(self):
         metadata = RepositoryMetadata(
             description="Tool",
-            pushed_at="2026-06-01T12:00:00Z",
+            default_branch_committed_at="2026-06-01T12:00:00Z",
             release_tag=None,
             release_published_at=None,
             release_url=None,
@@ -520,7 +542,7 @@ class GitHubFetchTests(unittest.TestCase):
     def test_release_transient_failure_preserves_previous_release_idempotent(self):
         metadata = RepositoryMetadata(
             description="Tool",
-            pushed_at="2026-06-01T12:00:00Z",
+            default_branch_committed_at="2026-06-01T12:00:00Z",
             release_tag=None,
             release_published_at=None,
             release_url=None,
@@ -548,7 +570,7 @@ class GitHubFetchTests(unittest.TestCase):
     def test_release_404_clears_previous_release(self):
         metadata = RepositoryMetadata(
             description="Tool",
-            pushed_at="2026-06-01T12:00:00Z",
+            default_branch_committed_at="2026-06-01T12:00:00Z",
             release_tag=None,
             release_published_at=None,
             release_url=None,
@@ -660,7 +682,7 @@ class AtomicMultiReadmeWriteTests(unittest.TestCase):
     ):
         fetch_metadata_mock.return_value = RepositoryMetadata(
             description="Tool",
-            pushed_at="2026-07-01T00:00:00Z",
+            default_branch_committed_at="2026-07-01T00:00:00Z",
             release_tag=None,
             release_published_at=None,
             release_url=None,
@@ -737,7 +759,7 @@ class StepSummaryTests(unittest.TestCase):
     ):
         fetch_metadata_mock.return_value = RepositoryMetadata(
             description="Tool",
-            pushed_at="2026-07-01T00:00:00Z",
+            default_branch_committed_at="2026-07-01T00:00:00Z",
             release_tag=None,
             release_published_at=None,
             release_url=None,
@@ -762,7 +784,7 @@ class StepSummaryTests(unittest.TestCase):
     ):
         fetch_metadata_mock.return_value = RepositoryMetadata(
             description="Tool",
-            pushed_at="2026-07-01T00:00:00Z",
+            default_branch_committed_at="2026-07-01T00:00:00Z",
             release_tag=None,
             release_published_at=None,
             release_url=None,
@@ -789,7 +811,7 @@ class StepSummaryTests(unittest.TestCase):
         fetch_metadata_mock.side_effect = [
             RepositoryMetadata(
                 description="A",
-                pushed_at="2026-07-01T00:00:00Z",
+                default_branch_committed_at="2026-07-01T00:00:00Z",
                 release_tag=None,
                 release_published_at=None,
                 release_url=None,
@@ -797,7 +819,7 @@ class StepSummaryTests(unittest.TestCase):
             ),
             RepositoryMetadata(
                 description="B",
-                pushed_at="2026-07-01T00:00:00Z",
+                default_branch_committed_at="2026-07-01T00:00:00Z",
                 release_tag=None,
                 release_published_at=None,
                 release_url=None,
@@ -806,7 +828,7 @@ class StepSummaryTests(unittest.TestCase):
             ),
             RepositoryMetadata(
                 description="C",
-                pushed_at="2026-07-01T00:00:00Z",
+                default_branch_committed_at="2026-07-01T00:00:00Z",
                 release_tag=None,
                 release_published_at=None,
                 release_url=None,
@@ -843,7 +865,7 @@ class StepSummaryTests(unittest.TestCase):
     ):
         fetch_metadata_mock.return_value = RepositoryMetadata(
             description="",
-            pushed_at="2026-07-01T00:00:00Z",
+            default_branch_committed_at="2026-07-01T00:00:00Z",
             release_tag=None,
             release_published_at=None,
             release_url=None,
@@ -910,7 +932,7 @@ class StepSummaryTests(unittest.TestCase):
     ):
         fetch_metadata_mock.return_value = RepositoryMetadata(
             description="",
-            pushed_at="2026-07-01T00:00:00Z",
+            default_branch_committed_at="2026-07-01T00:00:00Z",
             release_tag=None,
             release_published_at=None,
             release_url=None,
@@ -932,7 +954,7 @@ class StepSummaryTests(unittest.TestCase):
     ):
         fetch_metadata_mock.return_value = RepositoryMetadata(
             description="Tool",
-            pushed_at="2026-07-01T00:00:00Z",
+            default_branch_committed_at="2026-07-01T00:00:00Z",
             release_tag=None,
             release_published_at=None,
             release_url=None,

@@ -56,12 +56,10 @@ The list includes MCP servers, skills, plugins for IDA Pro, Ghidra, Binary Ninja
 | --- | --- |
 | Locate common web signatures, parameters, and cookies | [JS Reverse MCP](https://github.com/zhizhuodemao/js-reverse-mcp) |
 | Comprehensive JS, WASM, AST, and network analysis | [jshookmcp](https://github.com/vmoranv/jshookmcp) |
-| Advanced Web reversing involving workers, Webpack, or JSVMP | [reverse-skill](https://github.com/715494637/reverse-skill/) |
 | Wrap browser encryption functions as APIs | [js-reverse-automation--skill](https://github.com/Fausto-404/js-reverse-automation--skill) |
 | Turn website traffic into reusable API clients | [reverse-api-engineer](https://github.com/nottelabs/reverse-api-engineer) |
 | Preserve evidence and reproduce algorithms locally | [JSReverser-MCP](https://github.com/NoOne-hub/JSReverser-MCP) |
 | Use an anti-detection browser environment | [Camoufox MCP Server](https://github.com/whit3rabbit/camoufox-mcp) |
-| Analyze WeChat Mini Program runtimes | [MiniApp CDP MCP](https://github.com/zhizhuodemao/miniapp-cdp-mcp) |
 | Perform real-time AI analysis in IDA Pro | [IDA Pro MCP](https://github.com/mrexodia/ida-pro-mcp) |
 | Export IDA data for analysis by an AI coding tool | [IDA-NO-MCP](https://github.com/P4nda0s/IDA-NO-MCP) |
 | Run IDA as a headless service | [ida-mcp-rs](https://github.com/blacktop/ida-mcp-rs) |
@@ -73,8 +71,7 @@ The list includes MCP servers, skills, plugins for IDA Pro, Ghidra, Binary Ninja
 | Perform dynamic debugging in x64dbg or x32dbg | [x64dbg-mcp](https://github.com/SetsunaYukiOvO/x64dbg-mcp) |
 | Analyze process memory through Cheat Engine | [Cheat Engine MCP Bridge](https://github.com/miscusi-peek/cheatengine-mcp-bridge) |
 | Decompile .NET programs | [ILSpy-Mcp](https://github.com/bivex/ILSpy-Mcp) |
-| Diff IDA binaries and analyze patches | [Diaphora MCP](https://github.com/xTeardx/diaphora-mcp) |
-| Recover algorithms from ARM64 traces | [algokiller-plugin](https://github.com/icloudza/algokiller-plugin) |
+| Deobfuscate Python code with AI assistance | [de4py](https://github.com/Fadi002/de4py) |
 | Automate binary analysis across multiple tools | [revula](https://github.com/president-xd/revula) |
 | Run local agentic reversing with evidence management | [REA](https://github.com/morluto/rea) |
 | Combine malware, forensics, and binary analysis | [Reversecore MCP](https://github.com/sjkim1127/Reversecore_MCP) |
@@ -82,11 +79,8 @@ The list includes MCP servers, skills, plugins for IDA Pro, Ghidra, Binary Ninja
 | Perform interactive AI analysis in JADX | [JADX-AI-MCP](https://github.com/zinja-coder/jadx-ai-mcp) |
 | Decode, inspect Smali, and rebuild APKs with Apktool | [apktool-mcp-server](https://github.com/zinja-coder/apktool-mcp-server) |
 | Reverse Android native SO (.so) libraries | [SOMCP](https://github.com/bilieebiliee1-design/SOMCP) |
-| Analyze Android DEX, Hermes, and cross-layer taint | [droidsaw](https://github.com/droidsaw/droidsaw) |
-| Emulate Android native and Java code off-device | [VortexDBG](https://github.com/carlosadrianosj/VortexDBG) |
 | Run full-stack multi-device Android analysis | [FIRERPA](https://github.com/firerpa/lamda) |
 | Perform dynamic Android instrumentation with Frida | [frida-analykit](https://github.com/ZSA233/frida-analykit) |
-| Connect Charles traffic to AI systems | [Charles MCP Server](https://github.com/heizaheiza/Charles-mcp) |
 | Inspect, modify, and replay mitmproxy traffic | [mitmproxy-mcp](https://github.com/snapspecter/mitmproxy-mcp) |
 | Use an all-in-one protocol analysis workstation | [Anything Analyzer](https://github.com/Mouseww/anything-analyzer) |
 | Trace JS, JSVMP, and WASM at the engine level | [Firefox-Reverse](https://github.com/WhiteNightShadow/firefox-reverse) |
@@ -103,19 +97,12 @@ The list includes MCP servers, skills, plugins for IDA Pro, Ghidra, Binary Ninja
 | [JS Reverse MCP](https://github.com/zhizhuodemao/js-reverse-mcp) | MCP | JavaScript debugging in real browser runtimes | Request parameters, dynamic cookies, WebSockets, call chains, and key function tracing | AI Agent-first JS 逆向 MCP Server：有头 Chrome 调试、断点、网络/WebSocket 分析、Patchright 反检测，可选 CloakBrowser。 | Yes · 2026-07-16 | [v4.0.1](https://github.com/zhizhuodemao/js-reverse-mcp/releases/tag/v4.0.1) · 2026-07-10 | 2545 |
 | [JSReverser-MCP](https://github.com/NoOne-hub/JSReverser-MCP) | MCP / Workflow | Standardized Web reverse engineering workflow | Page inspection, runtime sampling, local reproduction, environment emulation, and evidence preservation | JSReverser-MCP 是一个面向 JavaScript 逆向分析的 MCP 工具，专门用于帮助开发者在真实浏览器环境中高效定位前端核心逻辑。它 将脚本检索、断点调试、函数 Hook、网络请求追踪、调用链分析、混淆还原和风险评估整合为统一能力，可直接接入 Claude、 Codex、Cursor 等支持 MCP 的客户端。你可以连接已开启的 Chrome，在登录态页面下持续采样请求参数与返回数据，快速定位签名、 加密、鉴权和关键业务流程。工具同时支持自动化页面操作与结构化报告导出，适合用于接口分析、安全研究、前端调试与工程排障等 场景 | Yes · 2026-05-31 | [v2.0.4](https://github.com/NoOne-hub/JSReverser-MCP/releases/tag/v2.0.4) · 2026-05-31 | 977 |
 
-### WeChat Mini Program Reverse Engineering
-
-| Project | Type | Core Focus | Best For | GitHub Description | Recently Updated | Latest Release | Stars |
-| --- | --- | --- | --- | --- | --- | --- | --- |
-| [MiniApp CDP MCP](https://github.com/zhizhuodemao/miniapp-cdp-mcp) | MCP | CDP debugging for WeChat Mini Programs | WeChat DevTools, desktop WeChat Mini Programs, runtime code, and request analysis | 微信小程序逆向工程 MCP 服务器，让你的 AI 编码助手（如 Claude、Cursor、Antigravity）能够直接通过 Chrome DevTools Protocol (CDP) 调试和分析微信小程序（包括微信开发者工具或 PC 端微信小程序）中的 JavaScript 代码。 | No · 2026-04-22 | None | 152 |
-
 ### JavaScript Reverse Engineering Skills
 
 | Project | Type | Core Focus | Best For | GitHub Description | Recently Updated | Latest Release | Stars |
 | --- | --- | --- | --- | --- | --- | --- | --- |
 | [hello_js_reverse_skill](https://github.com/WhiteNightShadow/hello_js_reverse_skill) | Skill | End-to-end JavaScript reversing with anti-detection browsers | Network capture, source tracing, hooking, algorithm recovery, and local reproduction | 🔧 AI-powered JS逆向工程 Skill —— 覆盖加密还原、混淆分析、动态Cookie、WASM逆向、协议对抗等全链路场景，通过 Node.js 实现算法还原与模拟请求。适配 Claude Code / Claude.ai / 其他AI编码工具 | Yes · 2026-07-29 | [v3.4.1](https://github.com/WhiteNightShadow/hello_js_reverse_skill/releases/tag/v3.4.1) · 2026-07-29 | 1105 |
 | [js-reverse-automation--skill](https://github.com/Fausto-404/js-reverse-automation--skill) | Skill | Exposing JavaScript reversing results as services | JSRPC, Flask, autoDecoder, request encryption, and response decryption | 结合chrome-devtools-mcp的能力并加上Skill的规范，实现JSRPC+Flask+autoDecoder方案的前端JS逆向自动化分析，提升JS逆向的效率 | Yes · 2026-07-30 | [v2.1](https://github.com/Fausto-404/js-reverse-automation--skill/releases/tag/v2.1) · 2026-07-28 | 559 |
-| [reverse-skill](https://github.com/715494637/reverse-skill/) | Skill | Advanced Web reverse engineering methods | JSVMP, workers, WASM, Webpack, AST, and protocol analysis | 面向 Web JS 逆向分析的技能仓库，覆盖请求链定位、运行时诊断、AST 混淆恢复、JSVMP、worker、WASM、webpack/runtime 与协议语义分析。 | No · 2026-05-02 | [jsr-skills-15-a3e116e](https://github.com/715494637/reverse-skill/releases/tag/jsr-skills-15-a3e116e) · 2026-05-02 | 345 |
 | [xbsReverseSkill](https://github.com/lwjjike/xbsReverseSkill) | Skill Suite | Modular Web reverse engineering capabilities | AST analysis, standalone algorithms, protocol analysis, and browser environment emulation | Ai逆向的skill目录 | Yes · 2026-07-21 | [v1.0.0](https://github.com/lwjjike/xbsReverseSkill/releases/tag/v1.0.0) · 2026-03-28 | 355 |
 
 ### Custom Browsers and Engine-Level Analysis
@@ -161,12 +148,17 @@ The list includes MCP servers, skills, plugins for IDA Pro, Ghidra, Binary Ninja
 | [Radare2 MCP Server](https://github.com/radareorg/radare2-mcp) | radare2 Plugin / MCP | Official radare2 interface for AI agents | CLI and remote sessions, headless analysis, read-only mode, sandboxing, and automated pipelines | MCP stdio server for radare2 | Yes · 2026-08-19 | [1.8.6](https://github.com/radareorg/radare2-mcp/releases/tag/1.8.6) · 2026-08-06 | 293 |
 | [r2ai](https://github.com/radareorg/r2ai) | radare2 AI Plugin | Local and remote LLMs inside radare2 | Function explanation, automatic naming, vulnerability analysis, decompilation assistance, and ReAct workflows | LLM-based reversing for radare2 | Yes · 2026-08-19 | [1.4.2](https://github.com/radareorg/r2ai/releases/tag/1.4.2) · 2026-08-16 | 467 |
 
+### Python Reverse Engineering and Deobfuscation
+
+| Project | Type | Core Focus | Best For | GitHub Description | Recently Updated | Latest Release | Stars |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| [de4py](https://github.com/Fadi002/de4py) | Python Deobfuscator / AI | Python code deobfuscation and dynamic analysis | Common obfuscators, packers, behavior monitoring, and Ollama-assisted deobfuscation | The ultimate AI-powered toolkit for python reverse engineering | Yes · 2026-08-17 | [v3.3.2-stable](https://github.com/Fadi002/de4py/releases/tag/v3.3.2-stable) · 2026-08-12 | 998 |
+
 ### .NET and Binary Diffing
 
 | Project | Type | Core Focus | Best For | GitHub Description | Recently Updated | Latest Release | Stars |
 | --- | --- | --- | --- | --- | --- | --- | --- |
 | [ILSpy-Mcp](https://github.com/bivex/ILSpy-Mcp) | .NET Decompiler / MCP | Managed-assembly analysis built on ILSpy | Type discovery, structural analysis, and method-level decompilation for `.dll` and `.exe` files | 🔓 UNLEASH ILSpy'S POWER. Reverse-engineer DOTNET code at GOD SPEED. AI-assisted debugging that THINKS with you. Decompile ANYTHING. 🚀 | Yes · 2026-08-10 | [v1.0.3](https://github.com/bivex/ILSpy-Mcp/releases/tag/v1.0.3) · 2026-08-06 | 54 |
-| [Diaphora MCP](https://github.com/xTeardx/diaphora-mcp) | IDA / Diaphora / MCP | Automated binary diffing | IDA database export, function matching, call-graph changes, security triage, and patch reports | MCP server for automated binary diffing. | Yes · 2026-07-15 | [v1.0.6](https://github.com/xTeardx/diaphora-mcp/releases/tag/v1.0.6) · 2026-07-15 | 17 |
 
 ### Dynamic Debugging and Memory Analysis
 
@@ -174,7 +166,6 @@ The list includes MCP servers, skills, plugins for IDA Pro, Ghidra, Binary Ninja
 | --- | --- | --- | --- | --- | --- | --- | --- |
 | [Cheat Engine MCP Bridge](https://github.com/miscusi-peek/cheatengine-mcp-bridge) | Cheat Engine Bridge / MCP | AI-driven process-memory analysis | Memory scans, pointer chains, structure recovery, disassembly, and signature generation | Connect Cursor, Copilot & Claude AI directly to Cheat Engine via MCP. Automate reverse engineering, pointer scanning, and memory analysis using natural language. | Yes · 2026-08-14 | None | 1268 |
 | [x64dbg-mcp](https://github.com/SetsunaYukiOvO/x64dbg-mcp) | x64dbg Plugin / MCP | Remote control of x64dbg and x32dbg through MCP | Execution control, breakpoints, memory, registers, disassembly, and automated dynamic debugging | MCP server plugin for x64dbg debugger - enables AI agents and external tools to control debugging via JSON-RPC 2.0 over HTTP/SSE | Yes · 2026-08-09 | [v1.0.10](https://github.com/SetsunaYukiOvO/x64dbg-mcp/releases/tag/v1.0.10) · 2026-07-18 | 398 |
-| [algokiller-plugin](https://github.com/icloudza/algokiller-plugin) | Plugin / Skill / MCP | ARM64 execution-trace evidence analysis | Searching GB-scale traces, locating critical data flows, and recovering cryptographic algorithms | ARM64 trace evidence analysis & cipher algorithm recovery — Claude Desktop plugin with skills + local MCP server driving the native ak_search engine over GB-scale trace files | No · 2026-05-14 | None | 77 |
 
 ### Other Reverse Engineering Integrations
 
@@ -187,8 +178,8 @@ The list includes MCP servers, skills, plugins for IDA Pro, Ghidra, Binary Ninja
 
 | Project | Type | Core Focus | Best For | GitHub Description | Recently Updated | Latest Release | Stars |
 | --- | --- | --- | --- | --- | --- | --- | --- |
-| [reverse-skill](https://github.com/zhaoxuya520/reverse-skill) | Skill / Router | Routing security tasks and toolchains | Multi-tool orchestration, CTFs, security research, and report generation | Reverse Engineering / Authorized Penetration Testing / Security Research Skill Router Pack AI-powered routing + On-demand toolchain bootstrapping + Self-evolving knowledge base Supports Claude Code, Kiro, Cursor, Cline, and other AI coding clients 逆向/渗透/安全技能路由包 - AI 自动路由 + 按需自举工具链 + 自动进化经验库 &#124; 支持 Claude Code / Kiro / Cursor / Cline 等代码 AI 客户端 | Yes · 2026-08-19 | [v1.0.1](https://github.com/zhaoxuya520/reverse-skill/releases/tag/v1.0.1) · 2026-08-08 | 26788 |
-| [Open ReverseLab](https://github.com/LING71671/open-reverselab) | Lab / Knowledge Base / MCP | Agent-native reverse engineering laboratory | Authorized CTF, APK, PE, cryptography, and protocol-analysis workflows | Agent-native reverse-engineering lab with a 197-article knowledge base, MCP tools, and CTF/APK/PE automation workflows. | Yes · 2026-08-12 | [v1.1.0-windows](https://github.com/LING71671/open-reverselab/releases/tag/v1.1.0-windows) · 2026-07-08 | 1074 |
+| [reverse-skill](https://github.com/zhaoxuya520/reverse-skill) | Skill / Router | Routing security tasks and toolchains | Multi-tool orchestration, CTFs, security research, and report generation | Reverse Engineering / Authorized Penetration Testing / Security Research Skill Router Pack AI-powered routing + On-demand toolchain bootstrapping + Self-evolving knowledge base Supports Claude Code, Kiro, Cursor, Cline, and other AI coding clients 逆向/渗透/安全技能路由包 - AI 自动路由 + 按需自举工具链 + 自动进化经验库 &#124; 支持 Claude Code / Kiro / Cursor / Cline 等代码 AI 客户端 | Yes · 2026-08-20 | [v1.0.1](https://github.com/zhaoxuya520/reverse-skill/releases/tag/v1.0.1) · 2026-08-08 | 26788 |
+| [Open ReverseLab](https://github.com/LING71671/open-reverselab) | Lab / Knowledge Base / MCP | Agent-native reverse engineering laboratory | Authorized CTF, APK, PE, cryptography, and protocol-analysis workflows | Agent-native reverse-engineering lab with a 197-article knowledge base, MCP tools, and CTF/APK/PE automation workflows. | Yes · 2026-08-13 | [v1.1.0-windows](https://github.com/LING71671/open-reverselab/releases/tag/v1.1.0-windows) · 2026-07-08 | 1074 |
 | [revula](https://github.com/president-xd/revula) | MCP Platform | General-purpose reverse engineering automation backend | Static analysis, dynamic debugging, malware analysis, and batch processing | A fully functional and production-grade reverse engineering MCP Server | Yes · 2026-08-16 | None | 72 |
 | [REA](https://github.com/morluto/rea) | Agent / CLI / MCP / Skill | Local agentic reverse engineering investigation platform | Application behavior and native binary analysis, structured evidence, version comparison, and feature reconstruction | Reverse engineer anything with agents, from app behavior down to native binaries. | Yes · 2026-08-14 | [rea-agents-3.1.0](https://github.com/morluto/rea/releases/tag/rea-agents-3.1.0) · 2026-08-09 | 359 |
 | [Reversecore MCP](https://github.com/sjkim1127/Reversecore_MCP) | MCP Platform | Multi-tool security and reverse engineering interface | Orchestrating and reporting across radare2, YARA, LIEF, CAPA, angr, Volatility, and related tools | A security-first MCP server that empowers AI agents to perform automated reverse engineering, malware analysis, forensics, vulnerability research, and SAST — powered by Radare2, YARA, LIEF, Capstone, and more. | Yes · 2026-08-18 | [v3.0.3](https://github.com/sjkim1127/Reversecore_MCP/releases/tag/v3.0.3) · 2026-08-13 | 188 |
@@ -205,14 +196,12 @@ The list includes MCP servers, skills, plugins for IDA Pro, Ghidra, Binary Ninja
 | [JADX-AI-MCP](https://github.com/zinja-coder/jadx-ai-mcp) | JADX Plugin / MCP | Real-time AI analysis in JADX | APK code review, vulnerability analysis, and contextual inspection | Plugin for JADX to integrate MCP server | Yes · 2026-08-06 | [V6.4.1](https://github.com/zinja-coder/jadx-ai-mcp/releases/tag/V6.4.1) · 2026-08-06 | 2679 |
 | [apktool-mcp-server](https://github.com/zinja-coder/apktool-mcp-server) | Apktool / MCP | AI access to Apktool decoding and rebuilding | Manifest, resource, and Smali analysis; APK decoding, modification, and rebuilding | A MCP Server for APK Tool (Part of Android Reverse Engineering MCP Suites) | Yes · 2026-07-02 | [V3.0.2](https://github.com/zinja-coder/apktool-mcp-server/releases/tag/V3.0.2) · 2026-07-02 | 633 |
 | [SOMCP](https://github.com/bilieebiliee1-design/SOMCP) | Native SO / MCP | On-device Android SO reverse engineering MCP | ELF structure analysis, Rizin disassembly, LIEF ELF patching/rewriting, patch sessions, Cloudflare Tunnel, and APK MCP bridging | SOMCP 是一个运行在 Android 手机上的本地 SO 逆向 MCP 服务器。它通过 Streamable HTTP 暴露 MCP 工具，让客户端可以在手机上完成 ELF 结构分析、Rizin 反汇编/分析、LIEF ELF 修复/重写、补丁会话、构建导出、Cloudflare Tunnel 暴露和可选 APK MCP 桥接 | Yes · 2026-08-20 | [v1.0.18](https://github.com/bilieebiliee1-design/SOMCP/releases/tag/v1.0.18) · 2026-08-20 | 140 |
-| [droidsaw](https://github.com/droidsaw/droidsaw) | Android Decompiler / MCP | DEX, Hermes, and React Native cross-layer analysis | DEX-to-Java, Hermes-to-JavaScript, cross-bridge taint analysis, SBOM generation, and auditing | Pure-Rust Android decompiler and security-audit suite. DEX → Java, Hermes → JavaScript. Cross-layer taint across the React Native bridge. CycloneDX SBOM + OpenVEX. CLI and MCP. Bytecode is not a security layer. | Yes · 2026-06-11 | None | 27 |
 
 ### Dynamic Instrumentation and Device Control
 
 | Project | Type | Core Focus | Best For | GitHub Description | Recently Updated | Latest Release | Stars |
 | --- | --- | --- | --- | --- | --- | --- | --- |
 | [FIRERPA](https://github.com/firerpa/lamda) | Android Platform / MCP / Agent | Full-stack Android device control and dynamic analysis | Multi-device remote control, UI/OCR automation, MITM, Frida, proxy networking, and long-running tasks | Android Full-Stack Device Control Platform: WebRTC/H.264 remote desktop, UI/OCR/image-matching automation, one-click MITM, built-in Frida, proxy/VPN/frp/P2P networking, MCP/Agent, 160+ APIs, designed for multi-device clusters and engineered deployments. | Yes · 2026-08-16 | [v10.6](https://github.com/firerpa/lamda/releases/tag/v10.6) · 2026-08-16 | 8204 |
-| [VortexDBG](https://github.com/carlosadrianosj/VortexDBG) | Android Emulator / MCP | Off-device combined native and DEX/Java emulation | ARM `.so`, Dalvik/Java, JNI, breakpoints, memory, registers, and call tracing | Emulate Android native libraries and DEX/Java classes together, off-device, and drive them with AI through MCP. A production-grade Kotlin engine for Android reverse engineering: native .so emulation (Unicorn2, Dynarmic), Dalvik/DEX and JNI, off-device automation. 安卓逆向工程引擎：在同一处同时模拟原生库与 DEX/Java 类，脱机运行，并通过 MCP 用 AI 驱动。Kotlin 打造，面向生产。 | Yes · 2026-07-16 | None | 9 |
 | [frida-analykit](https://github.com/ZSA233/frida-analykit) | Frida Toolkit / MCP | Dynamic instrumentation for Android agents | Frida version management, low-level tool wrappers, hooks, and runtime analysis | Frida 工具包 - 主要面向安卓端逆向，解决frida环境版本管理和对Agent端常用底层工具方法封装，支持MCP。（目前主要由AI开发维护代码） | No · 2026-05-16 | [v2.1.4](https://github.com/ZSA233/frida-analykit/releases/tag/v2.1.4) · 2026-05-14 | 153 |
 | [iOS MCP](https://github.com/witchan/ios-mcp) | MCP | Control of jailbroken iOS devices | Applications, files, logs, HID, and accessibility operations | iOS MCP: MCP management tool for jailbroken iPhones, enabling developers and AI agents to inspect and control devices. | Yes · 2026-07-30 | [v1.2.3](https://github.com/witchan/ios-mcp/releases/tag/v1.2.3) · 2026-07-30 | 609 |
 
@@ -224,7 +213,6 @@ The list includes MCP servers, skills, plugins for IDA Pro, Ghidra, Binary Ninja
 | --- | --- | --- | --- | --- | --- | --- | --- |
 | [reverse-api-engineer](https://github.com/nottelabs/reverse-api-engineer) | Agent / CLI | Generating typed API clients from endpoints used by websites | Browser traffic capture, endpoint discovery, HAR analysis, and Python/JS/TS client generation | The agent that turns websites into APIs! | Yes · 2026-08-18 | [v0.13.0](https://github.com/nottelabs/reverse-api-engineer/releases/tag/v0.13.0) · 2026-07-27 | 996 |
 | [Camoufox MCP Server](https://github.com/whit3rabbit/camoufox-mcp) | MCP | Anti-detection and privacy-focused browser automation | Fingerprint controls, proxies, session isolation, and realistic browser environments | No description | Yes · 2026-08-08 | [v2.5.0](https://github.com/whit3rabbit/camoufox-mcp/releases/tag/v2.5.0) · 2026-08-08 | 41 |
-| [Charles MCP Server](https://github.com/heizaheiza/Charles-mcp) | MCP | AI integration for Charles Proxy | Live traffic, historical sessions, and request analysis | Charles Proxy MCP server for AI agents with live capture, structured traffic analysis, and agent-friendly tool contracts | Yes · 2026-06-23 | [v3.0.3](https://github.com/heizaheiza/Charles-mcp/releases/tag/v3.0.3) · 2026-04-21 | 295 |
 | [mitmproxy-mcp](https://github.com/snapspecter/mitmproxy-mcp) | mitmproxy / MCP | AI-driven HTTP/HTTPS traffic operations | Traffic search, interception, modification, replay, authentication discovery, and API-structure extraction | MCP Server that wraps mitmproxy and exposes it as a tool to any MCP client, allows your AI agents to inspect traffic, filter traffic, intercept & modify traffic, request reply, set global headers, and start/stop mitmproxy as needed. | Yes · 2026-06-05 | [v0.6.1](https://github.com/snapspecter/mitmproxy-mcp/releases/tag/v0.6.1) · 2026-06-04 | 108 |
 | [CipherBridge](https://github.com/CuriousLearnerDev/CipherBridge) | Desktop Workstation / AI Agent | AI-assisted APP/Web encryption reversing and traffic bridging | Browser hooks, Mini Program source analysis, encryption/decryption parameter recovery, bidirectional Burp encryption/decryption bridging, and mitmdump plugin generation | 面向APP/Web 加解密逆向分析、渗透测试人员的可视化解密框架 | Yes · 2026-08-09 | [3.5](https://github.com/CuriousLearnerDev/CipherBridge/releases/tag/3.5) · 2026-07-27 | 363 |
 | [Anything Analyzer](https://github.com/Mouseww/anything-analyzer) | Desktop Workstation | All-in-one protocol and reverse engineering analysis | Integrated browser, proxy, hooking, AI, and MCP workflows | 全能协议分析工具：浏览器抓包 + MITM 代理 + 指纹伪装 + AI 分析 + MCP Server 无缝对接 AI Agent/IDE &#124; All-in-one protocol analysis toolkit — built-in browser capture, MITM proxy, JS hooks, fingerprint spoofing, AI analysis & MCP server for agent integration | Yes · 2026-08-07 | [v3.6.60](https://github.com/Mouseww/anything-analyzer/releases/tag/v3.6.60) · 2026-08-07 | 3543 |
@@ -249,6 +237,13 @@ The list includes MCP servers, skills, plugins for IDA Pro, Ghidra, Binary Ninja
 | [jebmcp](https://github.com/flankerhqd/jebmcp) | JEB Pro Plugin / MCP | AI-client access to JEB Pro analysis | APK decompilation, call relationships, manifests, symbol renaming, and vulnerability analysis | No description | No · 2026-04-26 | None | 257 |
 | [GhidraMCP](https://github.com/LaurieWired/GhidraMCP) | Ghidra Plugin / MCP | Connecting Ghidra to AI clients | Decompilation, function analysis, and symbol organization | MCP Server for Ghidra | No · 2025-06-23 | [1.4](https://github.com/LaurieWired/GhidraMCP/releases/tag/1.4) · 2025-06-23 | 9826 |
 | [ruishu-mcp](https://github.com/xuange520/ruishu-mcp) | MCP | Dynamic WAF traffic research | Analyzing Ruishu-style dynamic defenses, request parameters, and traffic in authorized environments | 🚀 专为 AI Agent 打造的瑞数防爬流量净化 MCP 工具 / An MCP Tool for AI Agents to Stealthily Bypass and Purify Ruishu WAF Traffic | Yes · 2026-07-13 | [v1.1.0](https://github.com/xuange520/ruishu-mcp/releases/tag/v1.1.0) · 2026-04-13 | 86 |
+| [reverse-skill](https://github.com/715494637/reverse-skill/) | Skill | Advanced Web reverse engineering methods | JSVMP, workers, WASM, Webpack, AST, and protocol analysis | 面向 Web JS 逆向分析的技能仓库，覆盖请求链定位、运行时诊断、AST 混淆恢复、JSVMP、worker、WASM、webpack/runtime 与协议语义分析。 | No · 2026-04-01 | [jsr-skills-15-a3e116e](https://github.com/715494637/reverse-skill/releases/tag/jsr-skills-15-a3e116e) · 2026-05-02 | 345 |
+| [VortexDBG](https://github.com/carlosadrianosj/VortexDBG) | Android Emulator / MCP | Off-device combined native and DEX/Java emulation | ARM `.so`, Dalvik/Java, JNI, breakpoints, memory, registers, and call tracing | Emulate Android native libraries and DEX/Java classes together, off-device, and drive them with AI through MCP. A production-grade Kotlin engine for Android reverse engineering: native .so emulation (Unicorn2, Dynarmic), Dalvik/DEX and JNI, off-device automation. 安卓逆向工程引擎：在同一处同时模拟原生库与 DEX/Java 类，脱机运行，并通过 MCP 用 AI 驱动。Kotlin 打造，面向生产。 | Yes · 2026-07-16 | None | 9 |
+| [droidsaw](https://github.com/droidsaw/droidsaw) | Android Decompiler / MCP | DEX, Hermes, and React Native cross-layer analysis | DEX-to-Java, Hermes-to-JavaScript, cross-bridge taint analysis, SBOM generation, and auditing | Pure-Rust Android decompiler and security-audit suite. DEX → Java, Hermes → JavaScript. Cross-layer taint across the React Native bridge. CycloneDX SBOM + OpenVEX. CLI and MCP. Bytecode is not a security layer. | Yes · 2026-06-11 | None | 27 |
+| [Charles MCP Server](https://github.com/heizaheiza/Charles-mcp) | MCP | AI integration for Charles Proxy | Live traffic, historical sessions, and request analysis | Charles Proxy MCP server for AI agents with live capture, structured traffic analysis, and agent-friendly tool contracts | Yes · 2026-06-23 | [v3.0.3](https://github.com/heizaheiza/Charles-mcp/releases/tag/v3.0.3) · 2026-04-21 | 295 |
+| [algokiller-plugin](https://github.com/icloudza/algokiller-plugin) | Plugin / Skill / MCP | ARM64 execution-trace evidence analysis | Searching GB-scale traces, locating critical data flows, and recovering cryptographic algorithms | ARM64 trace evidence analysis & cipher algorithm recovery — Claude Desktop plugin with skills + local MCP server driving the native ak_search engine over GB-scale trace files | No · 2026-05-14 | None | 77 |
+| [Diaphora MCP](https://github.com/xTeardx/diaphora-mcp) | IDA / Diaphora / MCP | Automated binary diffing | IDA database export, function matching, call-graph changes, security triage, and patch reports | MCP server for automated binary diffing. | Yes · 2026-07-15 | [v1.0.6](https://github.com/xTeardx/diaphora-mcp/releases/tag/v1.0.6) · 2026-07-15 | 17 |
+| [MiniApp CDP MCP](https://github.com/zhizhuodemao/miniapp-cdp-mcp) | MCP | CDP debugging for WeChat Mini Programs | WeChat DevTools, desktop WeChat Mini Programs, runtime code, and request analysis | 微信小程序逆向工程 MCP 服务器，让你的 AI 编码助手（如 Claude、Cursor、Antigravity）能够直接通过 Chrome DevTools Protocol (CDP) 调试和分析微信小程序（包括微信开发者工具或 PC 端微信小程序）中的 JavaScript 代码。 | No · 2026-04-22 | None | 152 |
 
 Reasons for watchlist placement:
 
@@ -256,7 +251,14 @@ Reasons for watchlist placement:
 * HexGraph is still early and extends into exploit verification, so its real-world stability and safety boundaries need more evidence;
 * jebmcp describes itself as a quick implementation and has not been updated since 2026-04-26, so maintenance continuity needs more evidence;
 * GhidraMCP has not been updated since 2025-06-23, while several comparable projects remain active;
-* ruishu-mcp focuses on dynamic-defense parameter handling and data extraction, so its authorized-use boundaries and misuse risks need further observation.
+* ruishu-mcp focuses on dynamic-defense parameter handling and data extraction, so its authorized-use boundaries and misuse risks need further observation;
+* 715494637/reverse-skill has 46 commits, 45 of them concentrated in March 2026, with no default-branch update after 2026-04-01;
+* VortexDBG has 76 commits, 67 of them in its first month, with roughly one month of history and no tags or CI;
+* droidsaw has 34 commits across roughly two months and is maintained mainly by one author, so continuity needs more evidence;
+* Charles MCP Server has 17 commits across only two active months and is maintained mainly by one author; tests and CI do not yet establish continuity;
+* all 46 algokiller-plugin commits landed between 2026-05-11 and 2026-05-14, with no later default-branch updates or tags;
+* Diaphora MCP's 98 commits span only about 16 days, with 74 concentrated in July 2026;
+* all 14 MiniApp CDP MCP commits landed between 2026-04-21 and 2026-04-22, with no later default-branch updates.
 
 ## Evaluation Criteria
 

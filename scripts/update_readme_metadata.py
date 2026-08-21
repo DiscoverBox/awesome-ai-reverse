@@ -83,7 +83,7 @@ class GitHubAPIError(RuntimeError):
 @dataclass(frozen=True)
 class RepositoryMetadata:
     description: str
-    pushed_at: str
+    default_branch_committed_at: str
     release_tag: str | None
     release_published_at: str | None
     release_url: str | None
@@ -157,7 +157,7 @@ def fetch_repository_metadata(
         if error.status == 404:
             return RepositoryMetadata(
                 description="",
-                pushed_at="",
+                default_branch_committed_at="",
                 release_tag=None,
                 release_published_at=None,
                 release_url=None,
@@ -178,13 +178,19 @@ def fetch_repository_metadata(
     else:
         status = RepositoryStatus.ACTIVE
 
+    default_branch_committed_at = ""
     release = None
     release_fetch_failed = False
-    # Archived repos render the deprecated row (release column is always
-    # "暂无"), so the release endpoint is not queried — saves an API call and
-    # avoids a transient release failure polluting an archived entry.
+    # Archived repos render the deprecated row (activity and release columns
+    # are fixed), so neither endpoint is queried.
     if not archived:
         release_slug = "/".join(quote(part, safe="") for part in full_name.split("/", 1))
+        default_branch = quote(repository.get("default_branch") or "HEAD", safe="")
+        default_branch_commit = github_request(
+            f"{api_base}/repos/{release_slug}/commits/{default_branch}",
+            token,
+        )
+        default_branch_committed_at = default_branch_commit["commit"]["committer"]["date"]
         try:
             release = github_request(
                 f"{api_base}/repos/{release_slug}/releases/latest",
@@ -204,7 +210,7 @@ def fetch_repository_metadata(
 
     return RepositoryMetadata(
         description=repository.get("description") or "",
-        pushed_at=repository["pushed_at"],
+        default_branch_committed_at=default_branch_committed_at,
         release_tag=release.get("tag_name") if release else None,
         release_published_at=release.get("published_at") if release else None,
         release_url=release.get("html_url") if release else None,
@@ -296,10 +302,10 @@ def metadata_cells(
     locale: TableLocale = ZH_LOCALE,
     previous_release: str | None = None,
 ) -> tuple[str, str, str, str]:
-    pushed_on = iso_date(metadata.pushed_at)
-    age = (today - pushed_on).days
+    committed_on = iso_date(metadata.default_branch_committed_at)
+    age = (today - committed_on).days
     recently_updated = age <= ACTIVE_DAYS
-    activity = f"{locale.active if recently_updated else locale.inactive} · {pushed_on.isoformat()}"
+    activity = f"{locale.active if recently_updated else locale.inactive} · {committed_on.isoformat()}"
 
     if metadata.release_fetch_failed:
         # Transient release failure: keep the README's previous release value
