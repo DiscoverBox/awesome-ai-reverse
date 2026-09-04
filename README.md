@@ -178,7 +178,6 @@ Awesome AI Reverse Engineering 收集 AI 辅助逆向工具，覆盖 JavaScript 
 | --- | --- | --- | --- | --- | --- | --- | --- |
 | [reverse-skill](https://github.com/zhaoxuya520/reverse-skill) | Skill / Router | 安全任务和工具链路由 | 多工具编排、CTF、安全研究和报告生成 | Reverse Engineering / Authorized Penetration Testing / Security Research Skill Router Pack AI-powered routing + On-demand toolchain bootstrapping + Self-evolving knowledge base Supports Claude Code, Kiro, Cursor, Cline, and other AI coding clients 逆向/渗透/安全技能路由包 - AI 自动路由 + 按需自举工具链 + 自动进化经验库 &#124; 支持 Claude Code / Kiro / Cursor / Cline 等代码 AI 客户端 | 是 · 2026-08-31 | [v1.0.1](https://github.com/zhaoxuya520/reverse-skill/releases/tag/v1.0.1) · 2026-08-08 | 34211 |
 | [HexGraph](https://github.com/branover/hexgraph) | 本地工作站 / Agent / MCP | 二进制与固件漏洞研究工作站 | 反编译、模糊测试、验证、证据图谱和研究记录 | Self-hosted, agentic vulnerability research for binaries & firmware: an AI agent decompiles, fuzzes, and verifies exploits inside a sandbox, recording every finding to a typed graph. BYOK, fully local. | 是 · 2026-08-15 | [hexgraph-v0.9.0](https://github.com/branover/hexgraph/releases/tag/hexgraph-v0.9.0) · 2026-07-07 | 19 |
-| [Open ReverseLab](https://github.com/LING71671/open-reverselab) | 实验环境 / 知识库 / MCP | 面向 Agent 的综合逆向实验室 | 授权环境中的 CTF、APK、PE、密码与协议分析工作流 | 🗄️ 已废弃 | 已废弃 | 暂无 | — |
 | [revula](https://github.com/president-xd/revula) | MCP 平台 | 通用逆向工程自动化后端 | 静态分析、动态调试、恶意软件和批量处理 | A fully functional and production-grade reverse engineering MCP Server | 是 · 2026-08-16 | 暂无 | 73 |
 | [REA](https://github.com/morluto/rea) | Agent / CLI / MCP / Skill | 面向 Agent 的本地逆向调查平台 | 应用行为与原生二进制分析、结构化证据、跨版本比较和功能重建 | Reverse engineer anything with agents, from app behavior down to native binaries. | 是 · 2026-08-29 | [rea-agents-3.1.0](https://github.com/morluto/rea/releases/tag/rea-agents-3.1.0) · 2026-08-09 | 392 |
 | [Reversecore MCP](https://github.com/sjkim1127/Reversecore_MCP) | MCP 平台 | 多工具安全与逆向分析接口 | radare2、YARA、LIEF、CAPA、angr、Volatility 等工具的编排与报告 | A security-first MCP server that empowers AI agents to perform automated reverse engineering, malware analysis, forensics, vulnerability research, and SAST — powered by Radare2, YARA, LIEF, Capstone, and more. | 是 · 2026-08-27 | [v3.0.3](https://github.com/sjkim1127/Reversecore_MCP/releases/tag/v3.0.3) · 2026-08-13 | 196 |
@@ -240,6 +239,7 @@ Awesome AI Reverse Engineering 收集 AI 辅助逆向工具，覆盖 JavaScript 
 | [Charles MCP Server](https://github.com/heizaheiza/Charles-mcp) | MCP | Charles Proxy AI 接入 | 实时流量、历史 Session 和请求分析 | Charles Proxy MCP server for AI agents with live capture, structured traffic analysis, and agent-friendly tool contracts | 是 · 2026-06-23 | [v3.0.3](https://github.com/heizaheiza/Charles-mcp/releases/tag/v3.0.3) · 2026-04-21 | 303 |
 | [algokiller-plugin](https://github.com/icloudza/algokiller-plugin) | Plugin / Skill / MCP | ARM64 执行轨迹证据分析 | GB 级 Trace 检索、关键数据流定位和密码算法恢复 | ARM64 trace evidence analysis & cipher algorithm recovery — Claude Desktop plugin with skills + local MCP server driving the native ak_search engine over GB-scale trace files | 否 · 2026-05-14 | 暂无 | 77 |
 | [Diaphora MCP](https://github.com/xTeardx/diaphora-mcp) | IDA / Diaphora / MCP | 自动化二进制差分 | IDA 数据库导出、函数匹配、调用图变化、安全变更排序和补丁报告 | MCP server for automated binary diffing. | 是 · 2026-07-15 | [v1.0.6](https://github.com/xTeardx/diaphora-mcp/releases/tag/v1.0.6) · 2026-07-15 | 19 |
+| [Reverify](https://github.com/2akouwu/reverify) | MCP / CLI / 验证层 | AI 二进制逆向结论的确定性验证 | 字节、指令、二进制结构、行为等价、表达式证明和跨会话证据账本 | Anti-hallucination for AI agents that read binaries. The model proposes, deterministic tools decide: every claim is VERIFIED or REFUTED against the real bytes, with evidence, and grounded facts survive context resets. MCP server + CLI. | 是 · 2026-09-03 | [v0.8.0](https://github.com/2akouwu/reverify/releases/tag/v0.8.0) · 2026-09-03 | 786 |
 | [MiniApp CDP MCP](https://github.com/zhizhuodemao/miniapp-cdp-mcp) | MCP | 微信小程序 CDP 调试工具 | 微信开发者工具、PC 微信小程序、运行时代码和请求分析 | 微信小程序逆向工程 MCP 服务器，让你的 AI 编码助手（如 Claude、Cursor、Antigravity）能够直接通过 Chrome DevTools Protocol (CDP) 调试和分析微信小程序（包括微信开发者工具或 PC 端微信小程序）中的 JavaScript 代码。 | 否 · 2026-04-22 | 暂无 | 164 |
 
 观察原因：
@@ -253,6 +253,7 @@ Awesome AI Reverse Engineering 收集 AI 辅助逆向工具，覆盖 JavaScript 
 * Charles MCP Server 共 17 次提交，活跃月份仅 2 个且主要由单一作者维护，测试和 CI 尚不足以证明持续性；
 * algokiller-plugin 的 46 次提交全部集中在 2026-05-11 至 2026-05-14，此后暂无默认分支更新和标签；
 * Diaphora MCP 的 98 次提交仅覆盖约 16 天，其中 74 次集中在 2026 年 7 月；
+* Reverify 的定位独特且实现较完整，但公开历史不足一周，提交与版本发布高度集中，当前缺少持续测试 CI；默认纯 Python 后端环境下实测 196 项测试仍有 1 项失败，需要继续观察兼容性和维护持续性；
 * MiniApp CDP MCP 的 14 次提交全部集中在 2026-04-21 至 2026-04-22，此后默认分支暂无更新。
 
 ## 工具评估维度
