@@ -55,7 +55,7 @@ Awesome AI Reverse Engineering 收集 AI 辅助逆向工具，覆盖 JavaScript 
 | 普通网页签名、参数和 Cookie 定位            | [JS Reverse MCP](https://github.com/zhizhuodemao/js-reverse-mcp)                    |
 | 综合型 JS、WASM、AST 和网络分析           | [jshookmcp](https://github.com/vmoranv/jshookmcp)                         |
 | 将浏览器加密函数封装成接口                   | [js-reverse-automation--skill](https://github.com/Fausto-404/js-reverse-automation--skill)      |
-| 将网站流量转换为可复用 API 客户端              | [reverse-api-engineer](https://github.com/nottelabs/reverse-api-engineer)              |
+| 将网站流量转换为可复用 API 客户端              | [reverse-api-engineer](https://github.com/kalil0321/reverse-api-engineer)              |
 | 强调证据沉淀和本地复现                     | [JSReverser-MCP](https://github.com/NoOne-hub/JSReverser-MCP)                    |
 | 反检测浏览器环境                        | [Camoufox MCP Server](https://github.com/whit3rabbit/camoufox-mcp)               |
 | IDA Pro 实时 AI 分析                | [IDA Pro MCP](https://github.com/mrexodia/ida-pro-mcp)                       |
@@ -82,6 +82,8 @@ Awesome AI Reverse Engineering 收集 AI 辅助逆向工具，覆盖 JavaScript 
 | mitmproxy 流量检查、修改与重放          | [mitmproxy-mcp](https://github.com/snapspecter/mitmproxy-mcp)               |
 | 一体化协议分析工作站                      | [Anything Analyzer](https://github.com/Mouseww/anything-analyzer)                 |
 | 引擎级 JS、JSVMP、WASM 追踪            | [Firefox-Reverse](https://github.com/WhiteNightShadow/firefox-reverse)                   |
+
+> 原厂接口参考：Hex-Rays 的[官方 IDA MCP](https://github.com/HexRaysSA/ida-mcp)目前是实验性预发布，要求 IDA 9.4+、idalib 和 Python 3.11+；连接 IDA GUI 还需安装其插件。[JEB 内置 MCP Server](https://pnfsoftware.com/jeb/manual/mcp/)支持 GUI，JEB 5.41 起也支持 `-c --mcp` 无头模式。使用前需具备相应软件许可证；这些接口目前不计入上表的开源项目推荐。
 
 ## JavaScript 与 Web 逆向
 
@@ -245,7 +247,7 @@ Awesome AI Reverse Engineering 收集 AI 辅助逆向工具，覆盖 JavaScript 
 观察原因：
 
 * WinDbg MCP 当前提交历史较少，需要继续观察实际兼容性和维护持续性；
-* jebmcp 自述为快速实现，且 2026-04-26 后暂无更新，需要继续观察维护持续性；
+* jebmcp 自述为快速实现，且 2026-04-26 后暂无更新；JEB 现已内置 MCP Server，还需核对该插件相对原厂接口的独有能力、兼容性和维护持续性；
 * GhidraMCP 自 2025-06-23 后暂无更新，且已有多个保持活跃的同类项目；
 * 715494637/reverse-skill 共 46 次提交，其中 45 次集中在 2026 年 3 月，默认分支自 2026-04-01 后暂无更新；
 * VortexDBG 的 76 次提交中有 67 次集中在首月，完整历史约一个月，且暂无标签和 CI；
@@ -253,7 +255,7 @@ Awesome AI Reverse Engineering 收集 AI 辅助逆向工具，覆盖 JavaScript 
 * Charles MCP Server 共 17 次提交，活跃月份仅 2 个且主要由单一作者维护，测试和 CI 尚不足以证明持续性；
 * algokiller-plugin 的 46 次提交全部集中在 2026-05-11 至 2026-05-14，此后暂无默认分支更新和标签；
 * Diaphora MCP 的 98 次提交仅覆盖约 16 天，其中 74 次集中在 2026 年 7 月；
-* Reverify 的定位独特且实现较完整，但公开历史不足一周，提交与版本发布高度集中，当前缺少持续测试 CI；默认纯 Python 后端环境下实测 196 项测试仍有 1 项失败，需要继续观察兼容性和维护持续性；
+* Reverify 的公开历史始于 2026-08-31，提交与版本发布集中在首周；现已有[跨平台测试与定时 fuzz CI](https://github.com/2akouwu/reverify/actions)。2026-09-20 本地 Python 3.14.6 纯 Python 后端测试运行 369 项：宿主 `CODEX_THREAD_ID` 存在时两项会话测试失败，移除该变量后 320 项通过、49 项跳过；仍需观察长期维护和独立真实样本验证；
 * MiniApp CDP MCP 的 14 次提交全部集中在 2026-04-21 至 2026-04-22，此后默认分支暂无更新。
 
 ## 工具评估维度

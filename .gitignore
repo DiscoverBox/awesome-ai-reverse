@@ -166,3 +166,4 @@ cython_debug/
 .claude/
 
 docs/
+.DS_Store

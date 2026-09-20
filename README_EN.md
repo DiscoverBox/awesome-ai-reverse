@@ -57,7 +57,7 @@ The list includes MCP servers, skills, plugins for IDA Pro, Ghidra, Binary Ninja
 | Locate common web signatures, parameters, and cookies | [JS Reverse MCP](https://github.com/zhizhuodemao/js-reverse-mcp) |
 | Comprehensive JS, WASM, AST, and network analysis | [jshookmcp](https://github.com/vmoranv/jshookmcp) |
 | Wrap browser encryption functions as APIs | [js-reverse-automation--skill](https://github.com/Fausto-404/js-reverse-automation--skill) |
-| Turn website traffic into reusable API clients | [reverse-api-engineer](https://github.com/nottelabs/reverse-api-engineer) |
+| Turn website traffic into reusable API clients | [reverse-api-engineer](https://github.com/kalil0321/reverse-api-engineer) |
 | Preserve evidence and reproduce algorithms locally | [JSReverser-MCP](https://github.com/NoOne-hub/JSReverser-MCP) |
 | Use an anti-detection browser environment | [Camoufox MCP Server](https://github.com/whit3rabbit/camoufox-mcp) |
 | Perform real-time AI analysis in IDA Pro | [IDA Pro MCP](https://github.com/mrexodia/ida-pro-mcp) |
@@ -84,6 +84,8 @@ The list includes MCP servers, skills, plugins for IDA Pro, Ghidra, Binary Ninja
 | Inspect, modify, and replay mitmproxy traffic | [mitmproxy-mcp](https://github.com/snapspecter/mitmproxy-mcp) |
 | Use an all-in-one protocol analysis workstation | [Anything Analyzer](https://github.com/Mouseww/anything-analyzer) |
 | Trace JS, JSVMP, and WASM at the engine level | [Firefox-Reverse](https://github.com/WhiteNightShadow/firefox-reverse) |
+
+> Vendor interfaces for comparison: Hex-Rays' [official IDA MCP](https://github.com/HexRaysSA/ida-mcp) is currently an experimental prerelease requiring IDA 9.4+, idalib, and Python 3.11+; connecting to an IDA GUI instance also requires its plugin. [JEB's built-in MCP server](https://pnfsoftware.com/jeb/manual/mcp/) supports GUI use and, since JEB 5.41, `-c --mcp` headless operation. Use requires the respective software license. These interfaces are not counted among the open-source recommendations above.
 
 ## JavaScript and Web Reverse Engineering
 
@@ -247,7 +249,7 @@ The list includes MCP servers, skills, plugins for IDA Pro, Ghidra, Binary Ninja
 Reasons for watchlist placement:
 
 * WinDbg MCP currently has a short commit history, so real-world compatibility and maintenance continuity need more evidence;
-* jebmcp describes itself as a quick implementation and has not been updated since 2026-04-26, so maintenance continuity needs more evidence;
+* jebmcp describes itself as a quick implementation and has not been updated since 2026-04-26; JEB now includes an MCP server, so this plugin's distinct capabilities, compatibility, and maintenance continuity need more evidence;
 * GhidraMCP has not been updated since 2025-06-23, while several comparable projects remain active;
 * 715494637/reverse-skill has 46 commits, 45 of them concentrated in March 2026, with no default-branch update after 2026-04-01;
 * VortexDBG has 76 commits, 67 of them in its first month, with roughly one month of history and no tags or CI;
@@ -255,7 +257,7 @@ Reasons for watchlist placement:
 * Charles MCP Server has 17 commits across only two active months and is maintained mainly by one author; tests and CI do not yet establish continuity;
 * all 46 algokiller-plugin commits landed between 2026-05-11 and 2026-05-14, with no later default-branch updates or tags;
 * Diaphora MCP's 98 commits span only about 16 days, with 74 concentrated in July 2026;
-* Reverify has a distinctive focus and a substantial implementation, but its public history is less than one week old, commits and releases are heavily concentrated, and the current repository has no continuous test CI; a local run against the default pure-Python backend still had 1 failure among 196 tests, so compatibility and maintenance continuity need more evidence;
+* Reverify's public history began on 2026-08-31, with commits and releases concentrated in its first week; it now has [cross-platform test and scheduled fuzz CI](https://github.com/2akouwu/reverify/actions). On 2026-09-20, a local Python 3.14.6 pure-Python-backend run executed 369 tests: two session tests failed with the host `CODEX_THREAD_ID` set; after removing that variable, 320 passed and 49 skipped. Longer-term maintenance and independent validation on real binaries still need observation;
 * all 14 MiniApp CDP MCP commits landed between 2026-04-21 and 2026-04-22, with no later default-branch updates.
 
 ## Evaluation Criteria
