@@ -183,6 +183,7 @@ Awesome AI Reverse Engineering 收集 AI 辅助逆向工具，覆盖 JavaScript 
 | [revula](https://github.com/president-xd/revula) | MCP 平台 | 通用逆向工程自动化后端 | 静态分析、动态调试、恶意软件和批量处理 | A fully functional and production-grade reverse engineering MCP Server | 是 · 2026-08-16 | 暂无 | 76 |
 | [REA](https://github.com/morluto/rea) | Agent / CLI / MCP / Skill | 面向 Agent 的本地逆向调查平台 | 应用行为与原生二进制分析、结构化证据、跨版本比较和功能重建 | Reverse engineer anything with agents, from app behavior down to native binaries. | 是 · 2026-09-08 | [rea-agents-3.1.0](https://github.com/morluto/rea/releases/tag/rea-agents-3.1.0) · 2026-08-09 | 413 |
 | [Reversecore MCP](https://github.com/sjkim1127/Reversecore_MCP) | MCP 平台 | 多工具安全与逆向分析接口 | radare2、YARA、LIEF、CAPA、angr、Volatility 等工具的编排与报告 | A security-first MCP server that empowers AI agents to perform automated reverse engineering, malware analysis, forensics, vulnerability research, and SAST — powered by Radare2, YARA, LIEF, Capstone, and more. | 是 · 2026-09-19 | [v3.0.4](https://github.com/sjkim1127/Reversecore_MCP/releases/tag/v3.0.4) · 2026-09-18 | 205 |
+| [DeepZero](https://github.com/416rehman/DeepZero) | Python CLI / 流水线（MIT） | 可配置、可恢复的 Windows 驱动研究工作流 | 通过 YAML 阶段组合 Ghidra 反编译、Semgrep 和可选 LLM 评估，持久化逐样本状态并生成 HTML 报告 |
 
 ## Android 与 iOS 安全分析
 
