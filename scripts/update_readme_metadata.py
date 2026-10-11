@@ -225,7 +225,19 @@ def parse_markdown_row(line: str) -> list[str] | None:
     stripped = line.strip()
     if not stripped.startswith("|") or not stripped.endswith("|"):
         return None
-    return [cell.strip() for cell in stripped[1:-1].split("|")]
+    cells: list[str] = []
+    cell: list[str] = []
+    backslashes = 0
+    for char in stripped[1:-1]:
+        if char == "|" and backslashes % 2 == 0:
+            cells.append("".join(cell).strip())
+            cell = []
+            backslashes = 0
+            continue
+        cell.append(char)
+        backslashes = backslashes + 1 if char == "\\" else 0
+    cells.append("".join(cell).strip())
+    return cells
 
 
 def render_markdown_row(cells: list[str] | tuple[str, ...]) -> str:

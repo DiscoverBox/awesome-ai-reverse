@@ -16,6 +16,7 @@ from scripts.update_readme_metadata import (
     fetch_repository_metadata,
     main,
     metadata_cells,
+    parse_markdown_row,
     replace_repository_url,
     repositories_in_managed_tables,
     update_readme,
@@ -23,6 +24,13 @@ from scripts.update_readme_metadata import (
 
 
 class ReadmeUpdateTests(unittest.TestCase):
+    def test_parse_markdown_row_keeps_escaped_pipe_in_unicode_cell(self):
+        self.assertEqual(
+            parse_markdown_row("| 工具 |  | Escaped \\| pipe |"),
+            ["工具", "", "Escaped \\| pipe"],
+        )
+        self.assertIsNone(parse_markdown_row("工具 |  | Escaped \\| pipe |"))
+
     def setUp(self):
         self.metadata = RepositoryMetadata(
             description="A tool | for reverse engineering",
