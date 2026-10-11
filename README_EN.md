@@ -37,6 +37,7 @@ The list includes MCP servers, skills, plugins for IDA Pro, Ghidra, Binary Ninja
 ## Contents
 
 - [Quick Selection](#quick-selection)
+- [Maintenance and Usability Review](#maintenance-and-usability-review-2026-10-11)
 - [Vendor Interfaces](#vendor-interfaces)
 - [JavaScript and Web Reverse Engineering](#javascript-and-web-reverse-engineering)
 - [IDA Pro Ecosystem](#ida-pro-ecosystem)
@@ -59,14 +60,14 @@ The list includes MCP servers, skills, plugins for IDA Pro, Ghidra, Binary Ninja
 | Comprehensive JS, WASM, AST, and network analysis | [jshookmcp](https://github.com/vmoranv/jshookmcp) |
 | Wrap browser encryption functions as APIs | [js-reverse-automation--skill](https://github.com/Fausto-404/js-reverse-automation--skill) |
 | Turn website traffic into reusable API clients | [reverse-api-engineer](https://github.com/kalil0321/reverse-api-engineer) |
-| Preserve evidence and reproduce algorithms locally | [JSReverser-MCP](https://github.com/NoOne-hub/JSReverser-MCP) |
+| Collect evidence, export source/network data, and reproduce locally | [JS Reverse MCP](https://github.com/zhizhuodemao/js-reverse-mcp); see review below for task orchestration |
 | Use an anti-detection browser environment | [Camoufox MCP Server](https://github.com/whit3rabbit/camoufox-mcp) |
 | Use AI with IDA 9.4+ in GUI or headless mode | [Hex-Rays IDA MCP](https://github.com/HexRaysSA/ida-mcp) |
 | Use a third-party MCP compatibility path for IDA 8.3–9.3 | [IDA Pro MCP](https://github.com/mrexodia/ida-pro-mcp) |
 | Export IDA data for analysis by an AI coding tool | [IDA-NO-MCP](https://github.com/P4nda0s/IDA-NO-MCP) |
 | Run IDA as a headless service | [ida-mcp-rs](https://github.com/blacktop/ida-mcp-rs) |
 | Analyze several IDA instances in parallel | [ida-multi-mcp](https://github.com/MeroZemory/ida-multi-mcp) |
-| Use multiple AI models directly inside IDA | [WPeGPT](https://github.com/WPeace-HcH/WPeGPT) |
+| Use multiple AI models directly inside IDA | [Gepetto](https://github.com/JusticeRage/Gepetto) (requires IDA/Hex-Rays; supports local models) |
 | Use AI with Ghidra in GUI or headless mode | [Ghidra MCP Server](https://github.com/bethington/ghidra-mcp) |
 | Connect radare2 to AI agents | [Radare2 MCP Server](https://github.com/radareorg/radare2-mcp) |
 | Integrate AI with Binary Ninja 6.0 | [Binary Ninja built-in MCP](https://binary.ninja/2026/09/03/binary-ninja-6.0-krypton.html) |
@@ -80,13 +81,26 @@ The list includes MCP servers, skills, plugins for IDA Pro, Ghidra, Binary Ninja
 | Combine malware, forensics, and binary analysis | [Reversecore MCP](https://github.com/sjkim1127/Reversecore_MCP) |
 | Extract Android APIs and analyze call chains | [Android Reverse Engineering Skill](https://github.com/SimoneAvogadro/android-reverse-engineering-skill) |
 | Perform interactive AI analysis in JADX | [JADX-AI-MCP](https://github.com/zinja-coder/jadx-ai-mcp) |
-| Decode, inspect Smali, and rebuild APKs with Apktool | [apktool-mcp-server](https://github.com/zinja-coder/apktool-mcp-server) |
+| Decode, inspect Smali, and rebuild APKs with Apktool | [Official Apktool CLI](https://github.com/iBotPeaches/Apktool) + coding agent (not MCP; wrapper limits below) |
 | Reverse Android native SO (.so) libraries | [SOMCP](https://github.com/bilieebiliee1-design/SOMCP) |
 | Run full-stack multi-device Android analysis | [FIRERPA](https://github.com/firerpa/lamda) |
-| Perform dynamic Android instrumentation with Frida | [frida-analykit](https://github.com/ZSA233/frida-analykit) |
+| Perform dynamic Android instrumentation with Frida | [frida-analykit](https://github.com/ZSA233/frida-analykit) (v2.1.4; pin Frida 16/17 and validate the device) |
 | Inspect, modify, and replay mitmproxy traffic | [mitmproxy-mcp](https://github.com/snapspecter/mitmproxy-mcp) |
 | Use an all-in-one protocol analysis workstation | [Anything Analyzer](https://github.com/Mouseww/anything-analyzer) |
 | Trace JS, JSVMP, and WASM at the engine level | [Firefox-Reverse](https://github.com/WhiteNightShadow/firefox-reverse) |
+
+### Maintenance and Usability Review (2026-10-11)
+
+Quick selection considers code changes, issue responses, releases, compatibility, core functionality, and costs together. “Recently Updated” only indicates whether the latest default-branch commit is within 90 days; that commit may be documentation. `pushed_at` records a push, while `updated_at` is not evidence of code maintenance. A 90-day gap does not establish abandonment; none of these four repositories is archived.
+
+| Project | Maintenance and Compatibility Evidence | Selection Decision and Reasons to Retain | Conditions for Free Use |
+| --- | --- | --- | --- |
+| [JSReverser-MCP](https://github.com/NoOne-hub/JSReverser-MCP) | Code and [v2.0.4](https://github.com/NoOne-hub/JSReverser-MCP/releases/tag/v2.0.4) date to 2026-05-31. Unmerged [PR #16](https://github.com/NoOne-hub/JSReverser-MCP/pull/16) reports split browser state, unwired tool timeouts, and Chrome launch issues; its fixes are not in the default branch | Remove the unconditional first-choice position; retain its task evidence, environment reconstruction, and portable-bundle workflow. Prefer [JS Reverse MCP](https://github.com/zhizhuodemao/js-reverse-mcp/releases/tag/v4.0.5) (2026-09-03) for general sampling and source/network exports. It does not replace the full task orchestrator; pure-algorithm reproduction still needs separate verification | Apache-2.0; no mandatory paid service for local tooling. AI client/model costs are separate |
+| [WPeGPT](https://github.com/WPeace-HcH/WPeGPT) | [v3.0](https://github.com/WPeace-HcH/WPeGPT/releases/tag/v3.0) redesigned the architecture on 2026-05-27. The maintainer responded to [issue #41](https://github.com/WPeace-HcH/WPeGPT/issues/41), but the open [IDA 9.1 crash report #44](https://github.com/WPeace-HcH/WPeGPT/issues/44) has no response; it was not independently reproduced | Prefer [Gepetto](https://github.com/JusticeRage/Gepetto) for interactive multi-model use inside IDA. Retain WPeServer, three-phase automation, and JSON/Markdown reports as distinct capabilities. Gepetto's [2026-08-15 main-branch fix](https://github.com/JusticeRage/Gepetto/commit/f98e4c12decf86eae76ece9d6955bb6dfe472190) is newer than its v1.5.1 release from 2025-11-19: check the installed revision rather than assuming an old release has current main-branch capabilities | WPeGPT publishes source but has no license file in the current tree; unrestricted redistribution cannot be assumed. Gepetto is GPL-3.0 and supports local Ollama. Both require the relevant IDA/Hex-Rays license; cloud models may charge |
+| [apktool-mcp-server](https://github.com/zinja-coder/apktool-mcp-server) | [V3.0.2](https://github.com/zinja-coder/apktool-mcp-server/releases/tag/V3.0.2) (2026-07-02) fixed Windows wrapper invocation. Later timeout feedback remains in [issue #7](https://github.com/zinja-coder/apktool-mcp-server/issues/7); [large-workspace startup issue #13](https://github.com/zinja-coder/apktool-mcp-server/issues/13) has no response. Startup recursively scans the workspace. This review reproduced Apktool 3.0.3 rejecting the default `build_apk(debug=true)` flag `-d` | Prefer an AI coding agent invoking the [official Apktool CLI](https://github.com/iBotPeaches/Apktool) for decoding, Smali, and rebuilding. This is a non-AI prerequisite, not another MCP implementation. Retain the wrapper for small workspaces with pinned dependencies and a handshake check; use `debug=false` with 3.0.3, or the official `--debuggable` option when required. JADX/static-analysis skills do not replace rebuilding | Wrapper and Apktool are Apache-2.0. Local operation needs no paid API and can use local models; hardware/model-service costs are separate |
+| [frida-analykit](https://github.com/ZSA233/frida-analykit) | The latest commit (2026-05-16) is documentation; code fixes and [v2.1.4](https://github.com/ZSA233/frida-analykit/releases/tag/v2.1.4) date to 2026-05-14. The maintainer responded to and closed [Frida 17 compatibility issue #3](https://github.com/ZSA233/frida-analykit/issues/3). Documentation/dependencies bound support to `frida>=16.5.9,<18`, with doctor, recovery, and device-regression entry points | Retain as a preferred option for pinned Frida 16/17 environments, starting with v2.1.4 and its locked 17.8.2. This does not guarantee all devices or newer versions work. [Frida 17.23.3](https://github.com/frida/frida/releases/tag/17.23.3), released 2026-10-09, was not tested here. Run doctor and a minimal attach/spawn check on the target; use official Frida tooling if incompatible rather than forcing the wrapper upgrade | MIT; no mandatory cloud service for local CLI/MCP. Matching device-side Frida and appropriate instrumentation privileges are required; AI client costs are separate |
+
+**Validation scope:** Linux, Node 24.19, Java 17. JSReverser-MCP v2.0.4 built and passed 29 selected unit tests; replacement JS Reverse MCP v4.0.5 built and passed 114 tests. Neither result establishes real-browser end-to-end operation. frida-analykit v2.1.4 (Python 3.11, Frida 17.8.2, MCP 1.26.0) passed 205 selected host tests with 5 skipped; an additional local-injection smoke test skipped because attachment was unavailable, and Android devices were not tested. apktool-mcp-server V3.0.2 (Python 3.12, FastMCP 2.2.0, MCP 1.6.0, Pydantic 2.11.3) passed MCP initialization, decoding, and Manifest/Smali reads on a self-created minimal APK. Default rebuilding failed; rebuilding with `debug=false` and an official CLI decode/build/read-back round trip passed. Signing, installation, and large APKs were not tested. WPeGPT/Gepetto received source, documentation, and public-record review only; IDA and paid models were not run. Issue/PR reports are not independent reproductions by this review.
 
 ## Vendor Interfaces
 
@@ -131,6 +145,7 @@ The list includes MCP servers, skills, plugins for IDA Pro, Ghidra, Binary Ninja
 | [Hex-Rays IDA MCP](https://github.com/HexRaysSA/ida-mcp) | IDA Plugin / MCP | Vendor Code Mode and database coordination | IDAPython analysis, shared GUI/headless databases, multiple databases, and agent collaboration | Official Hex-Rays IDA MCP Server. | Yes · 2026-10-08 | [v20261008.0.1](https://github.com/HexRaysSA/ida-mcp/releases/tag/v20261008.0.1) · 2026-10-08 | 907 |
 | [IDA Pro MCP](https://github.com/mrexodia/ida-pro-mcp) | IDA Plugin / MCP | Direct AI access to and control of IDA Pro | Decompilation, cross-references, renaming, comments, and type recovery | AI-powered reverse engineering assistant that bridges IDA Pro with language models through MCP. | Yes · 2026-09-26 | [1.4.0](https://github.com/mrexodia/ida-pro-mcp/releases/tag/1.4.0) · 2025-10-06 | 12604 |
 | [IDA-NO-MCP](https://github.com/P4nda0s/IDA-NO-MCP) | IDA Plugin / Export Tool | Exporting IDA data for analysis by AI coding tools | Large-scale code indexing and analysis with low interaction overhead | Say goodbye to the complex, verbose, and laggy interaction mode of IDA Pro MCP | Yes · 2026-07-26 | None | 2051 |
+| [Gepetto](https://github.com/JusticeRage/Gepetto) | IDA AI Plugin | Interactive multi-model analysis inside IDA | Function explanations, variable renaming, comments; local Ollama/LM Studio; requires IDA/Hex-Rays | IDA plugin which queries language models to speed up reverse-engineering | Yes · 2026-08-15 | [v1.5.1](https://github.com/JusticeRage/Gepetto/releases/tag/v1.5.1) · 2025-11-19 | 3477 |
 | [WPeGPT](https://github.com/WPeace-HcH/WPeGPT) | IDA AI Plugin | Direct integration of multiple AI models into IDA | Interactive binary analysis with models such as OpenAI and DeepSeek | An IDA plugin for binary file analysis, powered by AI models such as OpenAI and DeepSeek. | No · 2026-05-27 | [v3.0](https://github.com/WPeace-HcH/WPeGPT/releases/tag/v3.0) · 2026-05-27 | 1426 |
 | [ida-mcp-rs](https://github.com/blacktop/ida-mcp-rs) | MCP | Headless IDA service implemented in Rust | Server deployments and automated pipelines | Headless IDA Pro MCP Server | Yes · 2026-10-09 | [v9.4.5](https://github.com/blacktop/ida-mcp-rs/releases/tag/v9.4.5) · 2026-10-05 | 858 |
 | [ida-multi-mcp](https://github.com/MeroZemory/ida-multi-mcp) | IDA Plugin / MCP | Managing multiple IDA instances through one endpoint | Parallel multi-binary analysis, cross-sample function similarity, and malware component correlation | Multi-instance IDA Pro MCP server — analyze multiple binaries simultaneously through a single MCP endpoint. | Yes · 2026-09-19 | None | 450 |
@@ -231,10 +246,11 @@ The list includes MCP servers, skills, plugins for IDA Pro, Ghidra, Binary Ninja
 
 ## Foundational Reverse Engineering Tools (Non-AI)
 
-> These projects provide prerequisite capabilities such as unpacking, decryption, or debugging, but do not themselves expose AI, MCP, skill, or agent interfaces. They are not counted as formal AI projects or quick-selection recommendations.
+> These projects provide prerequisite capabilities such as unpacking, decryption, or debugging, but do not themselves expose AI, MCP, skill, or agent interfaces. They are not counted as formal AI projects; quick selection may explicitly identify them as prerequisites invoked by an AI coding agent.
 
 | Project | Type | Core Focus | Best For | GitHub Description | Recently Updated | Latest Release | Stars |
 | --- | --- | --- | --- | --- | --- | --- | --- |
+| [Apktool](https://github.com/iBotPeaches/Apktool) | CLI (Non-AI) | Official APK resource and Smali decoding/rebuilding | Local CLI invoked by a coding agent; no MCP interface | A tool for reverse engineering Android apk files | Yes · 2026-10-06 | [v3.0.3](https://github.com/iBotPeaches/Apktool/releases/tag/v3.0.3) · 2026-07-20 | 25802 |
 | [wxapkg](https://github.com/wux1an/wxapkg) | Desktop Tool | WeChat Mini Program package decryption and unpacking | `.wxapkg` scanning, decryption, unpacking, and source-tree recovery | 跨平台微信小程序反编译 GUI 工具，.wxapkg 文件扫描 + 解密 + 解包工具 | No · 2026-04-28 | [v2.0.0](https://github.com/wux1an/wxapkg/releases/tag/v2.0.0) · 2026-04-16 | 4235 |
 | [zhong-wechat-wmpf-debugger](https://github.com/netz888/zhong-wechat-wmpf-debugger) | Debugging Tool | F12 debugging for Windows WeChat Mini Programs | WMPF version detection, CDP/DevTools bridging, and legacy or modern runtime debugging | WeChatOpenDevTool 微信小程序强制开启开发者工具 | Yes · 2026-07-18 | [v1.3.0](https://github.com/netz888/zhong-wechat-wmpf-debugger/releases/tag/v1.3.0) · 2026-07-18 | 115 |
 
