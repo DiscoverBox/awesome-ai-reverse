@@ -225,7 +225,24 @@ def parse_markdown_row(line: str) -> list[str] | None:
     stripped = line.strip()
     if not stripped.startswith("|") or not stripped.endswith("|"):
         return None
-    return [cell.strip() for cell in stripped[1:-1].split("|")]
+    # This updater requires both outer delimiters; an escaped final pipe
+    # belongs to the cell and must not be stripped as a closing delimiter.
+    suffix = stripped[:-1]
+    if (len(suffix) - len(suffix.rstrip("\\"))) % 2:
+        return None
+    cells: list[str] = []
+    cell: list[str] = []
+    backslashes = 0
+    for char in stripped[1:-1]:
+        if char == "|" and backslashes % 2 == 0:
+            cells.append("".join(cell).strip())
+            cell = []
+            backslashes = 0
+            continue
+        cell.append(char)
+        backslashes = backslashes + 1 if char == "\\" else 0
+    cells.append("".join(cell).strip())
+    return cells
 
 
 def render_markdown_row(cells: list[str] | tuple[str, ...]) -> str:
@@ -451,7 +468,10 @@ def update_readme(
                             previous.append(locale.fetch_failed)
                         managed_cells = tuple(previous)
                     else:
-                        managed_cells = (locale.fetch_failed,) * metadata_count
+                        managed_cells = (
+                            "⚠️ " + locale.fetch_failed,
+                            *((locale.fetch_failed,) * (metadata_count - 1)),
+                        )
                     output.append(
                         render_markdown_row([*base_cells, *managed_cells]) + newline
                     )
