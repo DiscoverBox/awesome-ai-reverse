@@ -47,6 +47,7 @@ Awesome AI Reverse Engineering 收集 AI 辅助逆向工具，覆盖 JavaScript 
 - [观察中项目](#观察中项目)
 - [工具评估维度](#工具评估维度)
 - [使用规范](#使用规范)
+- [社区文档与指南](#社区文档与指南)
 - [贡献指南](#贡献指南)
 
 ## 快速选型
@@ -296,6 +297,12 @@ Awesome AI Reverse Engineering 收集 AI 辅助逆向工具，覆盖 JavaScript 
 * 违反软件许可协议、法律法规或平台规则的活动。
 
 使用者应自行确认目标系统的授权范围和所在地法律要求。
+
+## 社区文档与指南
+
+与清单主题相关的非官方社区文档（不是工具本体；仅作安装与运维参考）：
+
+- [rea.run](https://rea.run/) — 非官方中英双语 REA 社区指南（安装、MCP 客户端矩阵、授权实验案例）；与 [morluto/rea](https://github.com/morluto/rea) 维护方无隶属关系
 
 ## 贡献指南
 

@@ -49,6 +49,7 @@ The list includes MCP servers, skills, plugins for IDA Pro, Ghidra, Binary Ninja
 - [Watchlist](#watchlist)
 - [Evaluation Criteria](#evaluation-criteria)
 - [Acceptable Use](#acceptable-use)
+- [Community guides](#community-guides)
 - [Contributing](#contributing)
 
 ## Quick Selection
@@ -298,6 +299,12 @@ Do not use these tools to:
 * Violate software licenses, laws, regulations, or platform rules.
 
 Users are responsible for confirming the authorization scope for the target system and the legal requirements in their jurisdiction.
+
+## Community guides
+
+Unofficial community docs related to projects in this list (not tools themselves; install/ops reference only):
+
+- [rea.run](https://rea.run/) — unofficial bilingual community guide for REA (install, MCP client matrix, authorized-lab showcases); not affiliated with [morluto/rea](https://github.com/morluto/rea) maintainers
 
 ## Contributing
 
