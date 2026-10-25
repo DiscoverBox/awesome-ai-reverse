@@ -343,3 +343,6 @@ Awesome AI Reverse Engineering 收集 AI 辅助逆向工具，覆盖 JavaScript 
 本列表采用 [MIT License](LICENSE)。
 
 项目列表中的各个工具拥有各自的许可证，使用前请查看对应仓库的 License 和使用说明。
+
+- [DoomPay](https://github.com/doomsday-network/doom-pay) - Non-custodial 3-line Web3 checkout widget, REST API, and remote MCP payment receipt verifier (`wDOOM` on Base Mainnet & `DOOM` Layer-1).
+- [BountyGuard](https://github.com/doomsday-network/bounty-guard) - Zero-dependency MCP security server & CLI auditor that verifies on-chain bounty escrow before AI agents start work.
