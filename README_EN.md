@@ -59,14 +59,14 @@ The list includes MCP servers, skills, plugins for IDA Pro, Ghidra, Binary Ninja
 | Comprehensive JS, WASM, AST, and network analysis | [jshookmcp](https://github.com/vmoranv/jshookmcp) |
 | Wrap browser encryption functions as APIs | [js-reverse-automation--skill](https://github.com/Fausto-404/js-reverse-automation--skill) |
 | Turn website traffic into reusable API clients | [reverse-api-engineer](https://github.com/kalil0321/reverse-api-engineer) |
-| Preserve evidence and reproduce algorithms locally | [JSReverser-MCP](https://github.com/NoOne-hub/JSReverser-MCP) |
+| Collect evidence and prepare for local reproduction | [JS Reverse MCP](https://github.com/zhizhuodemao/js-reverse-mcp) (source/network exports; full task orchestration caveat below) |
 | Use an anti-detection browser environment | [Camoufox MCP Server](https://github.com/whit3rabbit/camoufox-mcp) |
 | Use AI with IDA 9.4+ in GUI or headless mode | [Hex-Rays IDA MCP](https://github.com/HexRaysSA/ida-mcp) |
 | Use a third-party MCP compatibility path for IDA 8.3–9.3 | [IDA Pro MCP](https://github.com/mrexodia/ida-pro-mcp) |
 | Export IDA data for analysis by an AI coding tool | [IDA-NO-MCP](https://github.com/P4nda0s/IDA-NO-MCP) |
 | Run IDA as a headless service | [ida-mcp-rs](https://github.com/blacktop/ida-mcp-rs) |
 | Analyze several IDA instances in parallel | [ida-multi-mcp](https://github.com/MeroZemory/ida-multi-mcp) |
-| Use multiple AI models directly inside IDA | [WPeGPT](https://github.com/WPeace-HcH/WPeGPT) |
+| Use multiple AI models directly inside IDA | [Gepetto](https://github.com/JusticeRage/Gepetto) (requires IDA/Hex-Rays; supports local models) |
 | Use AI with Ghidra in GUI or headless mode | [Ghidra MCP Server](https://github.com/bethington/ghidra-mcp) |
 | Connect radare2 to AI agents | [Radare2 MCP Server](https://github.com/radareorg/radare2-mcp) |
 | Integrate AI with Binary Ninja 6.0 | [Binary Ninja built-in MCP](https://binary.ninja/2026/09/03/binary-ninja-6.0-krypton.html) |
@@ -80,13 +80,26 @@ The list includes MCP servers, skills, plugins for IDA Pro, Ghidra, Binary Ninja
 | Combine malware, forensics, and binary analysis | [Reversecore MCP](https://github.com/sjkim1127/Reversecore_MCP) |
 | Extract Android APIs and analyze call chains | [Android Reverse Engineering Skill](https://github.com/SimoneAvogadro/android-reverse-engineering-skill) |
 | Perform interactive AI analysis in JADX | [JADX-AI-MCP](https://github.com/zinja-coder/jadx-ai-mcp) |
-| Decode, inspect Smali, and rebuild APKs with Apktool | [apktool-mcp-server](https://github.com/zinja-coder/apktool-mcp-server) |
+| Decode, inspect Smali, and rebuild APKs with Apktool | [Official Apktool CLI](https://github.com/iBotPeaches/Apktool) + coding agent (not MCP; wrapper conditions below) |
 | Reverse Android native SO (.so) libraries | [SOMCP](https://github.com/bilieebiliee1-design/SOMCP) |
 | Run full-stack multi-device Android analysis | [FIRERPA](https://github.com/firerpa/lamda) |
-| Perform dynamic Android instrumentation with Frida | [frida-analykit](https://github.com/ZSA233/frida-analykit) |
+| Perform dynamic Android instrumentation with Frida | [frida-analykit](https://github.com/ZSA233/frida-analykit) (v2.1.4; `frida>=16.5.9,<18`; validate the target device) |
 | Inspect, modify, and replay mitmproxy traffic | [mitmproxy-mcp](https://github.com/snapspecter/mitmproxy-mcp) |
 | Use an all-in-one protocol analysis workstation | [Anything Analyzer](https://github.com/Mouseww/anything-analyzer) |
 | Trace JS, JSVMP, and WASM at the engine level | [Firefox-Reverse](https://github.com/WhiteNightShadow/firefox-reverse) |
+
+### Selection Constraints and Review (2026-10-28)
+
+This section reuses the [2026-10-11 technical review in PR #3](https://github.com/DiscoverBox/awesome-ai-reverse/pull/3). Upstream default branches, releases, and relevant issues/PRs were rechecked on 2026-10-28; the full technical tests were not rerun. PR #3 was closed without merging and its public timeline gives no reason; this check found no explicit rejection decision or subsequent changes superseding these conclusions. A 90-day update gap alone does not establish unusability, and automatic metadata updates do not make selection decisions.
+
+| Project | Current Selection and Retained Capabilities | Evidence and Constraints |
+| --- | --- | --- |
+| [JSReverser-MCP](https://github.com/NoOne-hub/JSReverser-MCP) | Prefer JS Reverse MCP v4.0.5 for general sampling and source/network exports; retain the original project's task evidence, environment reconstruction, and portable-bundle workflow | Both default branches still match the historically reviewed commits `65e2e3cb` / `bf7dc506`. Browser-state and timeout concerns in [PR #16](https://github.com/NoOne-hub/JSReverser-MCP/pull/16) remain unmerged upstream reports, not independently reproduced. The alternative does not replace full task orchestration; pure-algorithm local reproduction still needs separate validation |
+| [WPeGPT](https://github.com/WPeace-HcH/WPeGPT) | Prefer Gepetto for interactive multi-model use inside IDA; retain WPeServer, three-phase automation, and JSON/Markdown reports | WPeGPT v3.0 is unchanged; the [IDA 9.1 crash report #44](https://github.com/WPeace-HcH/WPeGPT/issues/44) remains open without a reply and was not independently reproduced. Gepetto's [2026-08-15 main-branch fix](https://github.com/JusticeRage/Gepetto/commit/f98e4c12decf86eae76ece9d6955bb6dfe472190) postdates its v1.5.1 release, so check the installed revision. Local Ollama/LM Studio are supported; the relevant IDA/Hex-Rays license is still required and cloud models may charge |
+| [apktool-mcp-server](https://github.com/zinja-coder/apktool-mcp-server) | Prefer the official CLI + coding agent for decoding, Smali, and rebuilding; retain the MCP wrapper conditionally for pinned dependencies and small workspaces | V3.0.2 still maps the default `build_apk(debug=true)` to `-d`. Historical tests found Apktool 3.0.3 rejected that flag, while rebuilding with `debug=false` passed; use the official CLI's `--debuggable` when needed. The recursive startup scan is unchanged and [large-workspace timeout issue #13](https://github.com/zinja-coder/apktool-mcp-server/issues/13) still has no reply; its timings were not independently reproduced. Check the MCP handshake first; JADX/static analysis does not replace rebuilding |
+| [frida-analykit](https://github.com/ZSA233/frida-analykit) | Retain v2.1.4 as a preferred option for pinned Frida 16/17 environments; dependency range `frida>=16.5.9,<18`, lockfile 17.8.2 | Default branch `8ed737d2` and dependency bounds are unchanged. [Frida 17.24.3](https://github.com/frida/frida/releases/tag/17.24.3) was released on 2026-10-19 and was tested in neither this check nor the historical review. Host tests do not establish device injection success; run doctor and a minimal attach/spawn check on the target with matching device-side Frida; use official Frida tooling if incompatible |
+
+**Historical validation boundaries (2026-10-11, not tests rerun on October 28):** PR #3 records successful builds and 29 / 114 passing tests for JSReverser-MCP / JS Reverse MCP, without real-browser end-to-end validation; frida-analykit host tests had 205 passes and 5 skips, an additional local-injection smoke test skipped, and Android devices were not tested. The Apktool wrapper passed minimal-APK handshake, decoding, Manifest/Smali reads, and rebuilding with `debug=false`; default rebuilding failed, and signing, installation, and large APKs were not tested. WPeGPT/Gepetto received source and public-record review only; IDA and paid models were not run. See PR #3 for environments and versions.
 
 ## Vendor Interfaces
 
@@ -231,7 +244,7 @@ The list includes MCP servers, skills, plugins for IDA Pro, Ghidra, Binary Ninja
 
 ## Foundational Reverse Engineering Tools (Non-AI)
 
-> These projects provide prerequisite capabilities such as unpacking, decryption, or debugging, but do not themselves expose AI, MCP, skill, or agent interfaces. They are not counted as formal AI projects or quick-selection recommendations.
+> These projects provide prerequisite capabilities such as unpacking, decryption, or debugging, but do not themselves expose AI, MCP, skill, or agent interfaces. They are not counted as formal AI projects; quick selection may explicitly identify them as prerequisites invoked by a coding agent.
 
 | Project | Type | Core Focus | Best For | GitHub Description | Recently Updated | Latest Release | Stars |
 | --- | --- | --- | --- | --- | --- | --- | --- |

@@ -57,14 +57,14 @@ Awesome AI Reverse Engineering 收集 AI 辅助逆向工具，覆盖 JavaScript 
 | 综合型 JS、WASM、AST 和网络分析           | [jshookmcp](https://github.com/vmoranv/jshookmcp)                         |
 | 将浏览器加密函数封装成接口                   | [js-reverse-automation--skill](https://github.com/Fausto-404/js-reverse-automation--skill)      |
 | 将网站流量转换为可复用 API 客户端              | [reverse-api-engineer](https://github.com/kalil0321/reverse-api-engineer)              |
-| 强调证据沉淀和本地复现                     | [JSReverser-MCP](https://github.com/NoOne-hub/JSReverser-MCP)                    |
+| 证据采样与本地复现准备 | [JS Reverse MCP](https://github.com/zhizhuodemao/js-reverse-mcp)（源码/网络导出；完整任务编排见下方限制） |
 | 反检测浏览器环境                        | [Camoufox MCP Server](https://github.com/whit3rabbit/camoufox-mcp)               |
 | IDA 9.4+ 的 GUI 与无头 AI 分析       | [Hex-Rays IDA MCP](https://github.com/HexRaysSA/ida-mcp)                     |
 | IDA 8.3–9.3 的第三方 MCP 兼容入口    | [IDA Pro MCP](https://github.com/mrexodia/ida-pro-mcp)                       |
 | IDA 文件导出后交给 AI 分析               | [IDA-NO-MCP](https://github.com/P4nda0s/IDA-NO-MCP)                        |
 | 无头 IDA 服务                       | [ida-mcp-rs](https://github.com/blacktop/ida-mcp-rs)                        |
 | 多个 IDA 实例并行分析                  | [ida-multi-mcp](https://github.com/MeroZemory/ida-multi-mcp)                 |
-| IDA 内直接使用多种 AI 模型              | [WPeGPT](https://github.com/WPeace-HcH/WPeGPT)                               |
+| IDA 内直接使用多种 AI 模型 | [Gepetto](https://github.com/JusticeRage/Gepetto)（需 IDA/Hex-Rays；支持本地模型） |
 | Ghidra GUI 与无头 AI 分析          | [Ghidra MCP Server](https://github.com/bethington/ghidra-mcp)                 |
 | radare2 接入 AI Agent              | [Radare2 MCP Server](https://github.com/radareorg/radare2-mcp)                |
 | Binary Ninja 6.0 AI 集成           | [Binary Ninja 内置 MCP](https://binary.ninja/2026/09/03/binary-ninja-6.0-krypton.html) |
@@ -78,13 +78,26 @@ Awesome AI Reverse Engineering 收集 AI 辅助逆向工具，覆盖 JavaScript 
 | 综合恶意软件、取证与二进制分析               | [Reversecore MCP](https://github.com/sjkim1127/Reversecore_MCP)             |
 | Android API 提取和调用链分析            | [Android Reverse Engineering Skill](https://github.com/SimoneAvogadro/android-reverse-engineering-skill) |
 | JADX 内交互式 AI 分析                 | [JADX-AI-MCP](https://github.com/zinja-coder/jadx-ai-mcp)                       |
-| Apktool 解包、Smali 分析与重建          | [apktool-mcp-server](https://github.com/zinja-coder/apktool-mcp-server)         |
+| Apktool 解包、Smali 分析与重建 | [官方 Apktool CLI](https://github.com/iBotPeaches/Apktool) + 编码 Agent（非 MCP；包装器条件见下方） |
 | Android 原生 SO（.so）逆向           | [SOMCP](https://github.com/bilieebiliee1-design/SOMCP)                              |
 | Android 多设备全栈动态分析              | [FIRERPA](https://github.com/firerpa/lamda)                                |
-| Android Frida 动态插桩               | [frida-analykit](https://github.com/ZSA233/frida-analykit)                      |
+| Android Frida 动态插桩 | [frida-analykit](https://github.com/ZSA233/frida-analykit)（v2.1.4；`frida>=16.5.9,<18`，须验证目标设备） |
 | mitmproxy 流量检查、修改与重放          | [mitmproxy-mcp](https://github.com/snapspecter/mitmproxy-mcp)               |
 | 一体化协议分析工作站                      | [Anything Analyzer](https://github.com/Mouseww/anything-analyzer)                 |
 | 引擎级 JS、JSVMP、WASM 追踪            | [Firefox-Reverse](https://github.com/WhiteNightShadow/firefox-reverse)                   |
+
+### 选型限制与复核（2026-10-28）
+
+本节复用 [2026-10-11 的 PR #3 技术复核](https://github.com/DiscoverBox/awesome-ai-reverse/pull/3)，于 2026-10-28 重新核对上游默认分支、Release 及相关 Issue/PR，未重跑全套技术测试。PR #3 已关闭且未合并，公开时间线未说明原因；截至本次核查，未发现明确的不采纳决定或替代这些结论的后续修改。超过 90 天未更新本身不代表不可用，自动元数据更新也不替代人工选型。
+
+| 项目 | 当前选型与保留能力 | 依据与限制 |
+| --- | --- | --- |
+| [JSReverser-MCP](https://github.com/NoOne-hub/JSReverser-MCP) | 通用采样及源码/网络材料导出优先 JS Reverse MCP v4.0.5；原项目仍适合任务证据、补环境与 portable bundle 工作流 | 两者默认分支仍为历史复核提交 `65e2e3cb` / `bf7dc506`。[PR #16](https://github.com/NoOne-hub/JSReverser-MCP/pull/16) 的浏览器状态与超时问题仍是未合并的上游报告，未独立复现。替代方案不等同于完整任务编排，纯算法本地复现仍须单独验证 |
+| [WPeGPT](https://github.com/WPeace-HcH/WPeGPT) | IDA 内多模型交互优先 Gepetto；保留 WPeServer、三阶段自动分析及 JSON/Markdown 报告能力 | WPeGPT v3.0 未更新，[IDA 9.1 闪退报告 #44](https://github.com/WPeace-HcH/WPeGPT/issues/44) 仍开放且无回复，未独立复现。Gepetto 的 [2026-08-15 主分支修复](https://github.com/JusticeRage/Gepetto/commit/f98e4c12decf86eae76ece9d6955bb6dfe472190) 晚于 v1.5.1 Release，安装时须核对修订。可接本地 Ollama/LM Studio；仍需相应 IDA/Hex-Rays 许可，云模型费用另计 |
+| [apktool-mcp-server](https://github.com/zinja-coder/apktool-mcp-server) | 解包、Smali 与重建优先官方 CLI + 编码 Agent；MCP 包装器保留为固定依赖、小工作区下的有条件选项 | V3.0.2 仍默认将 `build_apk(debug=true)` 转为 `-d`；历史测试中 Apktool 3.0.3 拒绝此参数，`debug=false` 重建通过，需要 debuggable 时使用官方 CLI 的 `--debuggable`。启动前递归扫描逻辑未变，[大工作区超时 #13](https://github.com/zinja-coder/apktool-mcp-server/issues/13) 仍无回复；该报告的计时未独立复现。先检查 MCP 握手；JADX/静态分析不替代重建 |
+| [frida-analykit](https://github.com/ZSA233/frida-analykit) | 保留 v2.1.4 为固定 Frida 16/17 环境下的优先选项；依赖范围 `frida>=16.5.9,<18`，锁文件为 17.8.2 | 默认分支 `8ed737d2` 与依赖约束未变。[Frida 17.24.3](https://github.com/frida/frida/releases/tag/17.24.3) 已于 2026-10-19 发布，未在此次或历史复核中验证。宿主测试不能保证设备注入成功；目标设备先运行 doctor 和最小 attach/spawn 检查，设备端 Frida 须匹配；不兼容时使用官方 Frida 工具链 |
+
+**历史验证边界（2026-10-11，不是 10 月 28 日重测）：** PR #3 记录 JSReverser-MCP / JS Reverse MCP 构建及 29 / 114 项测试通过，未做真实浏览器端到端验证；frida-analykit 宿主测试 205 通过、5 跳过，额外本地注入 smoke 跳过，Android 真机未测；Apktool 包装器的最小 APK 握手、解包、Manifest/Smali 读取及 `debug=false` 重建通过，默认重建失败，签名安装和大型 APK 未测；WPeGPT/Gepetto 仅核查源码与公开记录，未运行 IDA 或付费模型。具体环境与版本见 PR #3。
 
 ## 原厂接口参考
 
@@ -229,7 +242,7 @@ Awesome AI Reverse Engineering 收集 AI 辅助逆向工具，覆盖 JavaScript 
 
 ## 基础逆向工具（非 AI）
 
-> 以下项目可提供解包、解密或调试等逆向前置能力，但自身不包含 AI、MCP、Skill 或 Agent 接口，因此不计入正式 AI 项目或快速选型推荐。
+> 以下项目可提供解包、解密或调试等逆向前置能力，但自身不包含 AI、MCP、Skill 或 Agent 接口，不计入正式 AI 项目；快速选型可明确将其列为编码 Agent 调用的基础依赖。
 
 | 项目 | 形态 | 核心定位 | 适用场景 | GitHub 简介 | 最近更新 | 最新 Release | Stars |
 | --- | --- | --- | --- | --- | --- | --- | --- |
