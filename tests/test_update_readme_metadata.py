@@ -10,6 +10,7 @@ from unittest.mock import patch
 
 from scripts.update_readme_metadata import (
     EN_LOCALE,
+    ZH_LOCALE,
     GitHubAPIError,
     RepositoryMetadata,
     RepositoryStatus,
@@ -17,6 +18,7 @@ from scripts.update_readme_metadata import (
     main,
     metadata_cells,
     parse_markdown_row,
+    render_markdown_row,
     replace_repository_url,
     repositories_in_managed_tables,
     update_readme,
@@ -214,7 +216,7 @@ Outro stays unchanged.
         self.assertNotIn("Old description", updated)
         self.assertNotIn("2020-01-01", updated)
 
-    def test_removed_repository_is_marked_deprecated(self):
+    def test_removed_repository_is_marked_inaccessible_in_both_locales(self):
         metadata = RepositoryMetadata(
             description="",
             default_branch_committed_at="",
@@ -223,15 +225,25 @@ Outro stays unchanged.
             release_url=None,
             status=RepositoryStatus.REMOVED,
         )
-        original = """| 项目 | 形态 | 核心定位 | 适用场景 | GitHub 简介 | 最近更新 | 最新 Release |
-| --- | --- | --- | --- | --- | --- | --- |
-| [Tool](https://github.com/example/tool) | MCP | 人工定位 | 人工场景 | Old description | 否 · 2020-01-01 | 暂无 |
-"""
-        updated, _, _ = update_readme(
-            original, {("example", "tool"): metadata}, today=date(2026, 7, 13)
-        )
-        self.assertIn("🗄️ 已废弃", updated)
-        self.assertNotIn("Old description", updated)
+        for locale in (ZH_LOCALE, EN_LOCALE):
+            with self.subTest(locale=locale.base_headers[0]):
+                original = (
+                    render_markdown_row((*locale.base_headers, *locale.metadata_headers))
+                    + "\n" + render_markdown_row(["---"] * 8)
+                    + "\n| [Tool](https://github.com/example/tool) | MCP | Focus | Use | "
+                    "Old description | Old activity | Old release | 10 |\n"
+                )
+                updated, _, _ = update_readme(
+                    original, {("example", "tool"): metadata}, today=date(2026, 7, 13)
+                )
+                self.assertIn(f"🔒 {locale.unavailable}", updated)
+                self.assertIn(f"| {locale.unavailable} | {locale.no_release} | — |", updated)
+                self.assertNotIn(locale.deprecated, updated)
+                self.assertNotIn("Old description", updated)
+                again, _, _ = update_readme(
+                    updated, {("example", "tool"): metadata}, today=date(2026, 7, 13)
+                )
+                self.assertEqual(updated, again)
 
     def test_moved_repository_link_is_rewritten(self):
         metadata = RepositoryMetadata(
@@ -391,9 +403,10 @@ class MultiReadmeUpdateTests(unittest.TestCase):
                     self.assertEqual(main(), 0)
             summary_text = summary.read_text(encoding="utf-8")
             self.assertIn("README repository metadata update", summary_text)
-            self.assertIn("Deprecated repositories", summary_text)
+            self.assertIn("Archived or inaccessible repositories", summary_text)
             self.assertIn("example/shared", summary_text)
-            self.assertIn("removed", summary_text)
+            self.assertIn("not publicly accessible (HTTP 404)", summary_text)
+            self.assertNotIn("removed", summary_text)
 
 
 class GitHubFetchTests(unittest.TestCase):
@@ -861,7 +874,7 @@ class StepSummaryTests(unittest.TestCase):
                 with redirect_stderr(StringIO()):
                     self.assertEqual(main(), 0)
             text = summary.read_text(encoding="utf-8")
-            self.assertIn("Deprecated repositories", text)
+            self.assertIn("Archived or inaccessible repositories", text)
             self.assertIn("Moved repositories", text)
             self.assertIn("Release fetch failures", text)
             self.assertIn("Repository fetch failures", text)
@@ -889,7 +902,7 @@ class StepSummaryTests(unittest.TestCase):
                     self.assertEqual(main(), 0)
             text = summary.read_text(encoding="utf-8")
             self.assertIn("PRE-EXISTING CONTENT", text)
-            self.assertIn("Deprecated repositories", text)
+            self.assertIn("Archived or inaccessible repositories", text)
 
     @patch("scripts.update_readme_metadata.fetch_repository_metadata")
     @patch("scripts.update_readme_metadata.parse_args")

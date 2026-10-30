@@ -41,6 +41,7 @@ class TableLocale:
     no_release: str
     fetch_failed: str
     deprecated: str
+    unavailable: str
 
 
 ZH_LOCALE = TableLocale(
@@ -53,6 +54,7 @@ ZH_LOCALE = TableLocale(
     no_release="暂无",
     fetch_failed="获取失败",
     deprecated="已废弃",
+    unavailable="无法公开访问",
 )
 EN_LOCALE = TableLocale(
     base_headers=("Project", "Type", "Core Focus", "Best For"),
@@ -64,6 +66,7 @@ EN_LOCALE = TableLocale(
     no_release="None",
     fetch_failed="Fetch failed",
     deprecated="Deprecated",
+    unavailable="Not publicly accessible",
 )
 TABLE_LOCALES = (ZH_LOCALE, EN_LOCALE)
 ACTIVE_DAYS = 90
@@ -150,7 +153,7 @@ def fetch_repository_metadata(
     slug = f"{quote(owner, safe='')}/{quote(repo, safe='')}"
 
     # A 404 on the repository itself means it was deleted or made private
-    # (and the token cannot see it). Treat both as "removed/deprecated".
+    # (and the token cannot see it). A 404 does not establish abandonment.
     try:
         repository = github_request(f"{api_base}/repos/{slug}", token)
     except GitHubAPIError as error:
@@ -349,18 +352,20 @@ def deprecated_cells(
     metadata: RepositoryMetadata,
     locale: TableLocale = ZH_LOCALE,
 ) -> tuple[str, str, str, str]:
-    """Render cells for a repository that is archived or removed (hard-deprecated).
+    """Render cells for an archived or publicly inaccessible repository.
 
     Old metadata is intentionally cleared so reviewers are forced to re-check the
     entry instead of trusting possibly-stale values.
     """
-    marker = f"🗄️ {locale.deprecated}"
+    inaccessible = metadata.status is RepositoryStatus.REMOVED
+    status = locale.unavailable if inaccessible else locale.deprecated
+    marker = f"🔒 {status}" if inaccessible else f"🗄️ {status}"
     stars = (
         str(metadata.stargazers_count)
         if metadata.stargazers_count is not None
         else "—"
     )
-    return marker, locale.deprecated, locale.no_release, stars
+    return marker, status, locale.no_release, stars
 
 
 def replace_repository_url(cell: str, old: tuple[str, str], new_full_name: str) -> str:
@@ -567,12 +572,12 @@ def write_step_summary(
             sections.append(f"- `{owner}/{repo}` — repository URL rewritten")
         sections.append("")
     if deprecated_repos:
-        sections.append("#### Deprecated repositories")
+        sections.append("#### Archived or inaccessible repositories")
         for (owner, repo), metadata in deprecated_repos:
             label = (
                 "archived"
                 if metadata.status is RepositoryStatus.ARCHIVED
-                else "removed"
+                else "not publicly accessible (HTTP 404)"
             )
             sections.append(f"- `{owner}/{repo}` — {label}")
         sections.append("")
@@ -661,7 +666,7 @@ def main() -> int:
         if metadata.release_fetch_failed
     ]
 
-    # Always return 0: deprecated markers must be written AND committed so
+    # Always return 0: status markers must be written AND committed so
     # reviewers see them in the README. Surfacing happens via stderr + the
     # GitHub Actions step summary, not via a failing exit code (which would
     # skip the commit step in the workflow).
@@ -689,15 +694,15 @@ def main() -> int:
 
     if deprecated_repos:
         print(
-            f"Flagged {len(deprecated_repos)} deprecated repository(ies); "
-            "markers written to README, please review and prune:",
+            f"Flagged {len(deprecated_repos)} archived or inaccessible repository(ies); "
+            "markers written to README, please review:",
             file=sys.stderr,
         )
         for (owner, repo), metadata in deprecated_repos:
             label = (
                 "archived"
                 if metadata.status is RepositoryStatus.ARCHIVED
-                else "removed"
+                else "not publicly accessible (HTTP 404)"
             )
             print(f"  - {owner}/{repo} ({label})", file=sys.stderr)
 
