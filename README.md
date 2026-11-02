@@ -284,6 +284,7 @@ Awesome AI Reverse Engineering 收集 AI 辅助逆向工具，覆盖 JavaScript 
 | --- | --- |
 | [awesome-ai-reverse-engineering](https://github.com/zhuyansen/awesome-ai-reverse-engineering) | AI 逆向项目发现目录；评级基于 README 与安装检查，不代表源码安全或任务验证 |
 | [awesome-reverse-engineering](https://github.com/morluto/awesome-reverse-engineering) | REA 作者整理的通用逆向工具与学习资源 |
+| [Awesome REA (AIshihzong)](https://github.com/AIshihzong/awesome-reverse-engineer-anything) | AI 逆向与重建案例列表；逐条按出处标注是否真的用了 REA，附按被替代软件查找的索引和 REA 对照实验汇总；标签依据引用来源，未复现 |
 | [REA workflows](https://github.com/morluto/rea/blob/main/.agents/skills/reverse-engineer-anything/references/evidence-workflows.md) | REA 随附的证据整理、版本比较与重建工作流参考 |
 | [DX-Ball 重建案例](https://github.com/N0zoM1z0/dx-ball) | 固定编译器与原程序差分验证记录；仍依赖原始资源及部分 CRT 对象，并有待验证行为 |
 

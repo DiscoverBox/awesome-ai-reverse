@@ -286,6 +286,7 @@ The list includes MCP servers, skills, plugins for IDA Pro, Ghidra, Binary Ninja
 | --- | --- |
 | [awesome-ai-reverse-engineering](https://github.com/zhuyansen/awesome-ai-reverse-engineering) | AI reversing project discovery; ratings use README and installation checks, not source-security or task validation |
 | [awesome-reverse-engineering](https://github.com/morluto/awesome-reverse-engineering) | General reversing tools and learning resources curated by the REA authors |
+| [Awesome REA (AIshihzong)](https://github.com/AIshihzong/awesome-reverse-engineer-anything) | AI reverse-engineering and rebuild cases, each tagged by whether its sources show REA was actually used, with an index by the replaced application and a summary of controlled REA comparisons; tags follow cited sources, not reproductions |
 | [REA workflows](https://github.com/morluto/rea/blob/main/.agents/skills/reverse-engineer-anything/references/evidence-workflows.md) | REA companion references for evidence organization, version comparison, and reconstruction |
 | [DX-Ball reconstruction case](https://github.com/N0zoM1z0/dx-ball) | Pinned compiler and differential checks against the original; still relies on original assets and some CRT objects, with behavior left to validate |
 
