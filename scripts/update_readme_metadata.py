@@ -103,7 +103,7 @@ class RepositoryMetadata:
 def github_request(url: str, token: str | None = None) -> Any:
     headers = {
         "Accept": "application/vnd.github+json",
-        "User-Agent": "awesome-ai-reverse-readme-updater",
+        "User-Agent": "awesome-ai-reverse-engineering-readme-updater",
         "X-GitHub-Api-Version": "2022-11-28",
     }
     if token:
